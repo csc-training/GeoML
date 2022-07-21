@@ -1,0 +1,4 @@
+data/*
+notebooks/cache/*
+*.vrt
+notebooks/.ipynb_checkpoints/*
