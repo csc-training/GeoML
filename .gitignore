@@ -4,3 +4,4 @@ notebooks/cache/*
 notebooks/.ipynb_checkpoints/*
 *.tif
 *.sav
+notebooks/leftovers.ipynb
