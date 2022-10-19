@@ -1,3 +1,6 @@
-# Course material for "Practical machine learning for spatial data"
+# Course material for "Practical machine learning for spatial data" at CSC
 
-Coming soon :)
+authors: Kylli Ek, Samantha Wittke, Johannes Nyman
+
+
+Coming soon! :)
