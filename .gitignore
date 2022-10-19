@@ -6,3 +6,4 @@ notebooks/cache/*
 *.sav
 notebooks/leftovers.ipynb
 old_stuff/*
+*.gpkg
