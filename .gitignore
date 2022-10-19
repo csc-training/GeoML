@@ -5,3 +5,4 @@ notebooks/.ipynb_checkpoints/*
 *.tif
 *.sav
 notebooks/leftovers.ipynb
+old_stuff/*
