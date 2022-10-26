@@ -2,5 +2,4 @@
 
 authors: Kylli Ek, Samantha Wittke, Johannes Nyman
 
-
-Coming soon! :)
+This repository is work in progess; full readme and instructions to use coming soon :)
