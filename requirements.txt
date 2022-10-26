@@ -1,0 +1,18 @@
+# for visualizing and running the course notebooks
+jupyterlab == 3.4.7
+
+# plotting packages
+matplotlib == 3.6.0 #basic plotting
+seaborn == 0.12.0 # more fancy plotting
+
+# packages for spatial data handling
+rasterio == 1.3.2 # raster data handling
+geopandas == 0.11.1 #vector data handling
+
+# machine learning
+scikit-learn == 1.1.2 #basic machine learning and data science
+tensorflow == 2.10.0 #advanced deep learning
+imbalanced-learn == 0.9.1 #for imbalanced classes
+
+#(optional)Jupyterlab extension for git
+jupyterlab-git == 0.39.3

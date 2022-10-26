@@ -1,7 +1,9 @@
-data/*
+*data/*
 notebooks/cache/*
 *.vrt
-notebooks/.ipynb_checkpoints/*
+*/.ipynb_checkpoints/*
 *.tif
 *.sav
 notebooks/leftovers.ipynb
+old_stuff/*
+*.gpkg
