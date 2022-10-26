@@ -1,4 +1,4 @@
-data/*
+*data/*
 notebooks/cache/*
 *.vrt
 */.ipynb_checkpoints/*
