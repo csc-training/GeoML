@@ -23,6 +23,7 @@ Labeled data:
 * https://github.com/Seyed-Ali-Ahmadi/Awesome_Satellite_Benchmark_Datasets
 * https://github.com/chrieke/awesome-satellite-imagery-datasets
 * https://github.com/robmarkcole/satellite-image-deep-learning/blob/master/assets/datasets.md
+* Public tree pointcloud dataset: https://data.mendeley.com/datasets/4gbzk9sy24/1 , publication: https://www.sciencedirect.com/science/article/pii/S0924271620302094
 
 Spatial data:
 * [Open GIS data](https://research.csc.fi/open-gis-data), global and Finnish
