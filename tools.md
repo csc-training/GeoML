@@ -38,13 +38,14 @@ https://fromgistors.blogspot.com/
 * A few new / little used ones, also for data preparation: [machine-learning](https://plugins.qgis.org/plugins/tags/machine-learning/), [deep-learning](https://plugins.qgis.org/plugins/tags/deep-learning/)
 
 ### Other
+* [ERDAS imagine](https://bynder.hexagon.com/m/5d441e34a685b634/original/Hexagon_GSP_Machine_-Learning_Deep_Learning_white_paper.pdf)
+* [Google Earth Engine](https://developers.google.com/earth-engine/guides/machine-learning)
+* GRASS, [r.learn.ml](https://grass.osgeo.org/grass82/manuals/addons/r.learn.ml.html), supervised classification and regression of GRASS rasters using the python scikit-learn package
+* [McFly](https://blog.esciencecenter.nl/mcfly-an-easy-to-use-tool-for-deep-learning-for-time-series-classification-b2ee6b9419c2), build and compare different DL models for timeseries classification task
+* [PyspatialML](https://github.com/stevenpawley/Pyspatialml), for applying scikit-learn machine learning models to 'stacks' of raster datasets. 
 * [Orfeo Toolbox](https://www.orfeo-toolbox.org/CookBook/Applications/Learning.html). Looks good from documentation, but in practice had several problems...
 * [OTBTF: Orfeo ToolBox meets TensorFlow](https://github.com/remicres/otbtf)
 * [Torchgeo](https://www.microsoft.com/en-us/research/publication/torchgeo-deep-learning-with-geospatial-data/)
-* [PyspatialML](https://github.com/stevenpawley/Pyspatialml), for applying scikit-learn machine learning models to 'stacks' of raster datasets.
-* McFly, build and compare different DL models for timeseries classification task: https://blog.esciencecenter.nl/mcfly-an-easy-to-use-tool-for-deep-learning-for-time-series-classification-b2ee6b9419c2
-* [Google Earth Engine](https://developers.google.com/earth-engine/guides/machine-learning)
-* [ERDAS imagine](https://bynder.hexagon.com/m/5d441e34a685b634/original/Hexagon_GSP_Machine_-Learning_Deep_Learning_white_paper.pdf)
 * More links: https://github.com/sacridini/Awesome-Geospatial#deep-learning
 
 ## GIS ML tools in CSC Puhti HPC
@@ -52,8 +53,8 @@ https://fromgistors.blogspot.com/
 * geoconda: scikit-learn + a lot of Python GIS packages
 * tensorflow: keras, tensorflow, geopandas, rasterio
 * pytorch: pytorch, geopandas, rasterio
-* r-env: caret, CAST, [sf, terra other R GIS packages](https://docs.csc.fi/apps/r-env-for-gis/ )
-* GRASS, [r.learn.ml](https://grass.osgeo.org/grass82/manuals/addons/r.learn.ml.html), supervised classification and regression of GRASS rasters using the python scikit-learn package
+* r-env: caret, CAST + a lot of Python GIS packages
+* GRASS
 * QGIS 
 * OrteoToolBox 
 
