@@ -2,75 +2,83 @@
 
 ## Other interesting courses
 
-* Geospatial Python course: https://ssl.eventilla.com/event/pENQa
-* Fundamentals of Machine Learning
-* Practical Deep Learning
-* Elements of AI: https://www.elementsofai.com/ 
-* Coursera, Udacity
+* CSC courses:
+	* Fundamentals of Machine Learning
+	* [Practical Deep Learning](https://ssl.eventilla.com/event/aqew6)
+	* [CSC Computing Environment - Self Learning](https://ssl.eventilla.com/csccompenvselflearn)
+	* [Geocomputing in CSC computing environment learning materials](https://research.csc.fi/gis-learning-materials)
+	* [Introduction to Python GIS](https://research.csc.fi/gis-learning-materials)
+	* [Spatial data analysis with R](https://research.csc.fi/gis-learning-materials)
+* [University of Helsinki, Elements of AI](https://www.elementsofai.com/)
+* [Coursera](https://www.coursera.org/), several courses
+* [Udacity](https://www.udacity.com/), several courses
 * Andrew Ng’s Machine Learning (lectures at Youtube)
-* https://developers.google.com/machine-learning/crash-course/
-* Introduction to machine learning for coders: http://course18.fast.ai/ml 
-* SYKE ML course by Eero Siivola: https://github.com/esiivola/syke-machine-learning-course
+* [Google AI, Machine Learning Crash Course with TensorFlow APIs](https://developers.google.com/machine-learning/crash-course/)
+* [University of San Francisco, Introduction to machine learning for coders](http://course18.fast.ai/ml)
+* [SYKE, ML course by Eero Siivola](https://github.com/esiivola/syke-machine-learning-course)
 
-## Data
+## Data link lists
 
--> where to get labeled data
-* general GIS data https://github.com/sacridini/Awesome-Geospatial#data-sources
-* benchmark datasets: https://github.com/Seyed-Ali-Ahmadi/Awesome_Satellite_Benchmark_Datasets
-* labeled satellite imagery datasets: https://github.com/chrieke/awesome-satellite-imagery-datasets
+Labeled data: 
+* https://github.com/Seyed-Ali-Ahmadi/Awesome_Satellite_Benchmark_Datasets
+* https://github.com/chrieke/awesome-satellite-imagery-datasets
+* https://github.com/robmarkcole/satellite-image-deep-learning/blob/master/assets/datasets.md
 
-## Books we like
+Spatial data:
+* [Open GIS data](https://research.csc.fi/open-gis-data), global and Finnish
+* https://github.com/sacridini/Awesome-Geospatial#data-sources
 
+## Books
+
+* Rémi Cresson: [Deep Learning for Remote Sensing Images with Open Source Software](https://www.taylorfrancis.com/books/mono/10.1201/9781003020851/deep-learning-remote-sensing-images-open-source-software-r%C3%A9mi-cresson)
 * Géron: Hands-on machine learning with Scikit-Learn & Tensorflow
 * Murphy: Machine learning: a probabilistic perspective
 * Bishop: Pattern recognition and machine learning
-* Hastie, Tibshirani & Friedman: Elements of statistical learning (free PDF) 
-* Mohri, Rostamizadeh & Talwalkar: Foundations of machine learning (free PDF)
-* Goodfellow, Bengio, Courville: Deep learning (free HTML)
+* Hastie, Tibshirani & Friedman: [Elements of statistical learning](https://hastie.su.domains/Papers/ESLII.pdf) (free PDF)
+* Mohri, Rostamizadeh & Talwalkar: [Foundations of machine learning](https://cs.nyu.edu/~mohri/mlbook/) (free PDF and HTML)
+* Goodfellow, Bengio, Courville: [Deep learning](https://www.deeplearningbook.org/) (free HTML)
 
 
-## GeoML publications with code to try
+## GeoML public code
 
-* SpaceNet challenges, https://spacenet.ai/ 
-* Patrick Gray, Using Neural Networks for Classification and Land Cover Mapping, CNN classification of 32x32 tiles, Keras, http://patrickgray.me/open-geo-tutorial/chapter_6_neural_networks.html 
+* [SpaceNet challenges](https://spacenet.ai/)
+* Patrick Gray, [Using Neural Networks for Classification and Land Cover Mapping](http://patrickgray.me/open-geo-tutorial/chapter_6_neural_networks.html), CNN classification of 32x32 tiles, Keras.
+* Elias Ayrey, [3D Convolutional Neural Networks with LiDAR, CNN regression of 3D tensors created from lidar data](https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/I
+nceptionV3-3D_Neural_Network/InceptionV3.py), Tensorflow.  
+* Christoph Rieke, [Deep Learning for Instance Segmentation of Agricultural Fields](https://github.com/chrieke/InstanceSegmentation_Sentinel2 ), MXNet.
+* [The Environmental Data Science book](https://the-environmental-ds-book.netlify.app/gallery/modelling.html) has 4 deep learning models presented: 2 for tree crown detection from RGB images, sea ice forecasting and floating objects from Sentinel-2 images.
+* Caleb Robinson, [Building damage assessment](https://github.com/microsoft/building-damage-assessment-cnn-siamese)
+* Kris Sankaran, [Glacier mapping From Satellite Imagery](https://github.com/krisrs1128/glacier_mapping) UNET
+* Jens Leitloff, [Analyzing Sentinel-2 satellite data in Python with TensorFlow.Keras](https://github.com/jensleitloff/CNN-Sentinel), CNN
 
-* Elias Ayrey, 3D Convolutional Neural Networks with LiDAR, CNN regression of 3D tensors created from lidar data, Tensorflow, https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/I
-nceptionV3-3D_Neural_Network/InceptionV3.py 
+## Publications
 
-* Christoph Rieke, Deep Learning for Instance Segmentation of Agricultural Fields, MXNet, https://github.com/chrieke/InstanceSegmentation_Sentinel2 
+* Katarzyna Kopczewska / University of Warsaw, [Spatial machine learning: new opportunities for regional science](https://link.springer.com/article/10.1007/s00168-021-01101-x)
+* Ava Vali / Politecnico di Milano, [Deep Learning for Land Use and Land Cover Classification Based on Hyperspectral and Multispectral Earth Observation Data: A Review](https://www.researchgate.net/publication/343419901_Deep_Learning_for_Land_Use_and_Land_Cover_Classification_Based_on_Hyperspectral_and_Multispectral_Earth_Observation_Data_A_Review)
+* Monia Digra / Monia Digra Shri Mata Vaishno Devi University, [Land use land cover classification of remote sensing images based on the deep learning approaches: a statistical analysis and review](https://www.researchgate.net/publication/360662937_Land_use_land_cover_classification_of_remote_sensing_images_based_on_the_deep_learning_approaches_a_statistical_analysis_and_review)
+* Jürgen Döllner / University of Potsdam, [Geospatial Artificial Intelligence: Potentials of Machine Learning for 3D Point Clouds and Geospatial Digital Twins](https://link.springer.com/article/10.1007/s41064-020-00102-3)
+* Marvin Mc Cutchan / TU Wien, [Encoding Geospatial Vector Data for Deep Learning: LULC as a Use Case](https://www2.mdpi.com/2072-4292/14/12/2812/htm)
+* Younes Charfaoui, [Working with Geospatial Data in Machine Learning](https://heartbeat.comet.ml/working-with-geospatial-data-in-machine-learning-ad4097c7228d) , feature extration from geospatial data for ML
+* Behnam Nikparvar / University of North Carolina at Charlotte, [Machine Learning of Spatial Data](https://www.mdpi.com/2220-9964/10/9/600/htm)
+* Aaron E. Maxwell /  West Virginia University, [Implementation of machine-learning classification
+in remote sensing: an applied review](https://www.tandfonline.com/doi/pdf/10.1080/01431161.2018.1433343)
 
-* https://the-environmental-ds-book.netlify.app/gallery/modelling.html has 4 DL models presented
+
+## Finnish publications / projects
+
+* [ATMU / NLS/FGI](https://www.maanmittauslaitos.fi/en/about-nls/organisation/projects/development-projects-for-core-geospatial-data), detecting buildings, roads and water-courses, aim to support updating NLS topographic database.
+* [Andras Balazs / LUKE](https://www.luke.fi/fi/asiantuntijat/andras-balazs/julkaisut), lidar, forest
+* Joone Laine / Aalto, [Crop identification with Sentinel-2satellite imagery in Finland](https://aaltodoc.aalto.fi/bitstream/handle/123456789/33726/master_Laine_Joona_2018.pdf), SVM, RF, MLP and ConvRNN.
+* [Matthieu Molinier / VTT](https://cris.vtt.fi/en/persons/matthieu-molinier/publications/), cloud detection
+* [Matti Mõttus / VTT](https://cris.vtt.fi/en/persons/matti-m%C3%B5ttus/publications/), hyperspectral data, forest
+* [Janne Mäyrä / SYKE](https://www.researchgate.net/profile/Janne-Maeyrae), detetecting tree species from hyperspectral and lidar data, CNN.
+* Olli Rantanen / University of Helsinki, [Liikennemerkkienautomaattinen tunnista-minen panoraamakuvilta](https://helda.helsinki.fi/bitstream/handle/10138/315176/Olli_Rantanen_Pro_Gradu.pdf), object instance segmentation, YOLO. 
+* [Maria Yli-Heikkilä / LUKE](https://www.luke.fi/fi/asiantuntijat/maria-yliheikkila/julkaisut), crop prediction based on time-series.
 
 
-## Some interesting links
-
+## Links to more links
+* https://github.com/deepVector/geospatial-machine-learning
 * https://github.com/robmarkcole/satellite-image-deep-learning
-* https://github.com/sshuair/awesome-gis#deep-learning
 * https://github.com/sacridini/Awesome-Geospatial#deep-learning
+* https://github.com/sshuair/awesome-gis#deep-learning
 * https://github.com/wenhwu/awesome-remote-sensing-change-detection
-
-## Examples and publications
-
-* https://link.springer.com/article/10.1007/s00168-021-01101-x
-* https://www.researchgate.net/publication 360662937_Land_use_land_cover_classification_of_remote_sensing_images_based_on_the_deep_learning_approaches_a_statistical_analysis_and_review
-* Mäyrä et al; tree species classification from airborne lidar: https://www.sciencedirect.com/science/article/pii/S0034425721000407
-* Building damage assessment: https://github.com/microsoft/building-damage-assessment-cnn-siamese
-* Glacier mapping (unet): https://github.com/krisrs1128/glacier_mapping
-* AI for 3D point cloud and geospatial DT: https://link.springer.com/article/10.1007/s41064-020-00102-3
-
-* Joone Laine, Crop identification with Sentinel-2satellite imagery in Finland, SVM, RF, MLP and ConvRNN,
-https://aaltodoc.aalto.fi/bitstream/handle/123456789/33726/master_Laine_Joona_2018.pdf 
-* Janne Mäyrä,  Land cover classification from multispectral data using convolutional autoencoder networks, CNN
-https://jyx.jyu.fi/handle/123456789/60705 
-* Olli Rantanen, Liikennemerkkienautomaattinen tunnista-minen panoraamakuvilta, object instance segmentation, YOLO, https://helda.helsinki.fi/bitstream/handle/10138/315176/Olli_Rantanen_Pro_Gradu.pdf 
-* Maria Yli-Heikkilä, Machine Learning for crop yield prediction over Finland using Sentinel-2: https://www.mdpi.com/2072-4292/14/17/4193  
-
-
-* Encoding vector data for DL: https://www2.mdpi.com/2072-4292/14/12/2812/htm
-* https://towardsdatascience.com/geopandas-hands-on-building-geospatial-machine-learning-pipeline-9ea8ae276a15
-* Feature extration from geospatial data for ML:https://heartbeat.comet.ml/working-with-geospatial-data-in-machine-learning-ad4097c7228d
-* spatial data ML:https://www.mdpi.com/2220-9964/10/9/600/htm
-* old but still some examples: https://github.com/deepVector/geospatial-machine-learning
-* Applied GeoML: https://www.tandfonline.com/doi/pdf/10.1080/01431161.2018.1433343
-* (unrelated but nice: https://forrest.nyc/75-geospatial-python-and-spatial-data-science-resources-and-guides/)
-* https://github.com/jensleitloff/CNN-Sentinel
