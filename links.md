@@ -43,8 +43,7 @@ Spatial data:
 
 * [SpaceNet challenges](https://spacenet.ai/)
 * Patrick Gray, [Using Neural Networks for Classification and Land Cover Mapping](http://patrickgray.me/open-geo-tutorial/chapter_6_neural_networks.html), CNN classification of 32x32 tiles, Keras.
-* Elias Ayrey, [3D Convolutional Neural Networks with LiDAR, CNN regression of 3D tensors created from lidar data](https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/I
-nceptionV3-3D_Neural_Network/InceptionV3.py), Tensorflow.  
+* Elias Ayrey, [3D Convolutional Neural Networks with LiDAR, CNN regression of 3D tensors created from lidar data](https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/InceptionV3-3D_Neural_Network/InceptionV3.py), Tensorflow.  
 * Christoph Rieke, [Deep Learning for Instance Segmentation of Agricultural Fields](https://github.com/chrieke/InstanceSegmentation_Sentinel2 ), MXNet.
 * [The Environmental Data Science book](https://the-environmental-ds-book.netlify.app/gallery/modelling.html) has 4 deep learning models presented: 2 for tree crown detection from RGB images, sea ice forecasting and floating objects from Sentinel-2 images.
 * Caleb Robinson, [Building damage assessment](https://github.com/microsoft/building-damage-assessment-cnn-siamese)
