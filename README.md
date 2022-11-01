@@ -1,7 +1,5 @@
 # Course material for "Practical machine learning for spatial data" at CSC
 
-authors: Kylli Ek, Samantha Wittke, Johannes Nyman
-
 ## Content of this repository
 
 This repository contains all Jupyter notebooks used in the course.
@@ -145,3 +143,6 @@ Course participants will be provided with a temporary account (training_xxx); it
 We will use the Jupyter for courses environment on Day 1 and 2, on day 3 we will use Jupyter and the batch job submission system "the normal way" (the same way that you can also use Puhti after the course).
 
 ... to be continued within intro.ipynb
+
+## Authors
+Kylli Ek, Samantha Wittke, Johannes Nyman
