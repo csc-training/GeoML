@@ -1,32 +1,5 @@
 # Course material for "Practical machine learning for spatial data" at CSC
 
-## Content of this repository
-
-This repository contains all Jupyter notebooks used in the course.
-
-### 01_clustering
-### 02_vector_data_preparation
-* Preparation of Paavo zip code dataset for machine learning
-* Input:
-    * Paavo zip code dataset
-    * counties dataset
-* Output:
-    * scaled and unscaled train, test validation datasets and labels
-### 03_raster_data_preparation
-### 04_shallow_regression
-* Runnning some shallow regression models on Paavo zip code dataset
-* Input:
-    *  scaled and unscaled train, test validation datasets and labels
-* Output:
-    * Regression error metrics for validation dataset
-### 05_shallow_classification
-### 06_deep_regression
-* Building and Runnning some deep regression models on Paavo zip code dataset
-* Input:
-    *  scaled train, test validation datasets and labels
-### 07_deep_classification
-### 08_cnn_segmentation 
-
 # Course introduction
 
 ## Welcome 
@@ -146,3 +119,30 @@ We will use the Jupyter for courses environment on Day 1 and 2, on day 3 we will
 
 ## Authors
 Kylli Ek, Samantha Wittke, Johannes Nyman
+
+## Content of this repository
+
+This repository contains all Jupyter notebooks used in the course.
+
+**01_clustering**
+**02_vector_data_preparation**
+* Preparation of Paavo zip code dataset for machine learning
+* Input:
+    * Paavo zip code dataset
+    * counties dataset
+* Output:
+    * scaled and unscaled train, test validation datasets and labels
+**03_raster_data_preparation**
+**04_shallow_regression**
+* Runnning some shallow regression models on Paavo zip code dataset
+* Input:
+    *  scaled and unscaled train, test validation datasets and labels
+* Output:
+    * Regression error metrics for validation dataset
+**05_shallow_classification**
+**06_deep_regression**
+* Building and Runnning some deep regression models on Paavo zip code dataset
+* Input:
+    *  scaled train, test validation datasets and labels
+**07_deep_classification**
+**08_cnn_segmentation** 
