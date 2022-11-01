@@ -1,6 +1,7 @@
 *data/*
 notebooks/cache/*
 *.vrt
+*.ipynb_checkpoints*
 */.ipynb_checkpoints/*
 *.tif
 *.sav

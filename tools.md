@@ -38,6 +38,7 @@ https://fromgistors.blogspot.com/
 * A few new / little used ones, also for data preparation: [machine-learning](https://plugins.qgis.org/plugins/tags/machine-learning/), [deep-learning](https://plugins.qgis.org/plugins/tags/deep-learning/)
 
 ### Other
+* pointnet (++) → Deep Learning for pointclouds directly:https://github.com/charlesq34/pointnet 
 * [RAPIDS](https://rapids.ai/) - GPU accelerated data science, including cuspatial (point-in-polygon, spatial join, coordinate systems, shape primitives, distances, and trajectory analysis) -> check out their [example notebook](https://github.com/rapidsai/cuspatial/tree/branch-22.12/notebooks)
 * [ERDAS imagine](https://bynder.hexagon.com/m/5d441e34a685b634/original/Hexagon_GSP_Machine_-Learning_Deep_Learning_white_paper.pdf)
 * [Google Earth Engine](https://developers.google.com/earth-engine/guides/machine-learning)
@@ -48,6 +49,7 @@ https://fromgistors.blogspot.com/
 * [OTBTF: Orfeo ToolBox meets TensorFlow](https://github.com/remicres/otbtf)
 * [Torchgeo](https://www.microsoft.com/en-us/research/publication/torchgeo-deep-learning-with-geospatial-data/)
 * More links: https://github.com/sacridini/Awesome-Geospatial#deep-learning
+* Point cloud voxelizer example: https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/point_cloud_voxelizer.py 
 
 ## GIS ML tools in CSC Puhti HPC
 
