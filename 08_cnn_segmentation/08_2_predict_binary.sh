@@ -8,4 +8,7 @@
 #SBATCH --gres=gpu:v100:1
 
 module load tensorflow
-srun python3 08_2_predict.py 'model_best_binary_05_001' 2
+# Run the Python code, give model path and number of classes in labels as arguments
+# Use the previously trained model.
+# If you want to see what the model can do after 2 minutest training, you ofcourse can change here your own model too.
+srun python3 08_2_predict.py '/scratch/project_2002044/model_best_binary_kylli.h5' 2

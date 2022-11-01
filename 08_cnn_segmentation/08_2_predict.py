@@ -26,7 +26,7 @@ if len(sys.argv) != 3:
    print('Please give the data directory and number of classes')
    sys.exit()
 
-model_name=sys.argv[1]
+model_path=sys.argv[1]
 
 no_of_classes=int(sys.argv[2])
 print(no_of_classes)
@@ -36,15 +36,10 @@ cnn_dir = os.path.join('/scratch/project_2002044', user, '2022/GeoML/08_cnn_segm
 
 # Paths for INPUTS: data and model
 prediction_data_dir = os.path.join(cnn_dir, 'imageTiles_512')
-model_final = os.path.join(cnn_dir, model_name+'.h5')
-
-#Pretrained models, that can be used during course
-#model_final = '/scratch/project_2002044/data/GIS_ML_COURSE_DATA/data/forest/model_best_spruce_05_001.h5'
-#model_final = '/scratch/project_2002044/data/GIS_ML_COURSE_DATA/data/forest/model_best_multiclass_05_001.h5'
 
 #Paths for RESULTS
-predicted_tiles_folder = os.path.join(cnn_dir, 'precitions512_'+model_name)
-prediction_image_file = os.path.join(cnn_dir,'CNN_'+model_name+'.tif')
+predicted_tiles_folder = os.path.join(cnn_dir, 'predictions512_'+str(no_of_classes))
+prediction_image_file = os.path.join(cnn_dir,'CNN_'+str(no_of_classes)+'.tif')
 
 #Setting of the data
 img_size = 512
@@ -119,7 +114,7 @@ def  mergeTiles():
 def main():    
     
     # Load the previously trained model
-    model = load_model(model_final)
+    model = load_model(model_path)
     
     # Find all data tiles for prediction
     all_frames = glob.glob(prediction_data_dir+"/*.tif")

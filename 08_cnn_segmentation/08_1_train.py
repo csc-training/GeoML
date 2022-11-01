@@ -67,13 +67,13 @@ train_data_file_name='image_'
 if no_of_classes == 2: 
     labels_data_dir = os.path.join(data_dir, 'binaryLabelTiles_1024')  
     label_file_name = 'labels_forest_'
-    model_best = os.path.join(results_dir, 'model_best_binary_05_001.h5')
-    training_log_file = os.path.join(results_dir, 'log_binary_05_001.csv')
+    model_best = os.path.join(results_dir, 'model_best_binary.h5')
+    training_log_file = os.path.join(results_dir, 'log_binary.csv')
 else:
     labels_data_dir = os.path.join(data_dir, 'multiclassLabelTiles_1024')
     label_file_name = 'labels_multiclass_'
-    model_best = os.path.join(results_dir, 'model_best_multiclass_rmsprop_sparse_sample_weights.h5')
-    training_log_file = os.path.join(results_dir, 'log_multiclass_rmsprop_sparse_sample_weights.csv')    
+    model_best = os.path.join(results_dir, 'model_best_multiclass.h5')
+    training_log_file = os.path.join(results_dir, 'log_multiclass.csv')    
 
 #Image sizes
 # Training data size after tiling
@@ -99,14 +99,13 @@ no_of_epochs = 5000
 #optimizer = Adam(learning_rate=0.0001, epsilon=1.0)
 optimizer = "rmsprop"
 
-# Set loss according to the number of classes.
+# Set loss and metrics shown during training according to the number of classes.
 if no_of_classes == 2: 
     loss='binary_crossentropy'  
     metrics=['accuracy']
 else:
     loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False) 
-    #loss='categorical_crossentropy'    
-    # Select metrics shown during training.    
+   
     metrics=['sparse_categorical_accuracy']    
 
 # Read all the training files and randomly assign to training and validation sets
@@ -129,6 +128,7 @@ def prepareData():
     # Generate train, val, and test sets for frames
     # In the exercies we have so little data, so we skip the test set.
     # Here we use 70% of frames for training and 30% for validation.
+    # Because of tile overlap this is far from ideal. 
     train_split = int(0.7*len(all_frames_df))
     train_frames = all_frames_df[:train_split]
     val_frames = all_frames_df[train_split:]
@@ -247,6 +247,7 @@ def trainModel(train_gen, val_gen, no_of_training_tiles, no_of_validation_tiles)
     earlystopping = EarlyStopping(monitor = 'val_loss', verbose = 1,
                                   min_delta = 0.0001, patience = 100, mode = 'min')
     
+    # Enable writing logs suitable fro TensorBoard
     tensorboard_callback = TensorBoard(log_dir=logs_dir, histogram_freq=1)
 
     callbacks_list = [checkpoint, csv_logger, earlystopping, tensorboard_callback] #
