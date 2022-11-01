@@ -21,16 +21,10 @@ import numpy as np
 import pandas as pd
 import rasterio
 
-
-
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.callbacks import CSVLogger
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.optimizers import Adam
-#from tensorflow_addons.optimizers import AdamW
-
-#from tensorflow.keras.optimizers.experimental import AdamW
-
 from tensorflow.keras.models import load_model
 from tensorflow.keras.metrics import Recall
 from tensorflow.keras.metrics import Precision
@@ -50,24 +44,20 @@ import model_solaris
 # Check that Python is given exactly two arguments:
 #  - first is script name, has index 0
 #  - second is the path to training data, has index 1
-if len(sys.argv) != 2:
-   print('Please give the data directory')
+if len(sys.argv) != 3:
+   print('Please give the data directory and number of classes')
    sys.exit()
 
 data_dir=sys.argv[1]
-
-#data_dir='/scratch/project_2002044/geoml/04_cnn_keras'
+# The number of classes in labels
+no_of_classes=int(sys.argv[2])
+print(no_of_classes)
 
 # The results are written to Puhti scratch disk
-# TOFIX: Change the path according to your own username
-#results_dir='/scratch/project_2002044/students/ekkylli'
-results_dir='/scratch/project_2002044/geoml/04_cnn_keras'
+user = os.environ.get('USER')
+results_dir = os.path.join('/scratch/project_2002044', user, '2022/GeoML/08_cnn_segmentation')
 logs_dir= os.path.join(results_dir, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
-# The number of classes in labels
-# TOFIX: Change the number according to the used data
-#no_of_classes=2 #For binary classification
-no_of_classes=5 # n for multiclass
 no_of_image_bands=8
 
 # Folders with data and labels and for results and log
@@ -75,13 +65,13 @@ no_of_image_bands=8
 train_data_dir = os.path.join(data_dir, 'imageTiles_1024')
 train_data_file_name='image_'
 if no_of_classes == 2: 
-    labels_data_dir = os.path.join(data_dir, 'label_tiles_650')  
-    label_file_name = 'forest_spruce_clip_'
-    model_best = os.path.join(results_dir, 'model_best_spruce_05_001.h5')
-    training_log_file = os.path.join(results_dir, 'log_spruce_05_001.csv')
+    labels_data_dir = os.path.join(data_dir, 'binaryLabelTiles_1024')  
+    label_file_name = 'labels_forest_'
+    model_best = os.path.join(results_dir, 'model_best_binary_05_001.h5')
+    training_log_file = os.path.join(results_dir, 'log_binary_05_001.csv')
 else:
-    labels_data_dir = os.path.join(data_dir, 'labelTiles_1024')
-    label_file_name = 'labels_'
+    labels_data_dir = os.path.join(data_dir, 'multiclassLabelTiles_1024')
+    label_file_name = 'labels_multiclass_'
     model_best = os.path.join(results_dir, 'model_best_multiclass_rmsprop_sparse_sample_weights.h5')
     training_log_file = os.path.join(results_dir, 'log_multiclass_rmsprop_sparse_sample_weights.csv')    
 
@@ -107,21 +97,17 @@ no_of_epochs = 5000
 # By default Adam epsilon is much smaller, but for image segmentation tasks bigger epsilon like here could work better.
 # Lower learning rate could also be often better. 
 #optimizer = Adam(learning_rate=0.0001, epsilon=1.0)
-#optimizer = AdamW(weight_decay=1e-4)
 optimizer = "rmsprop"
-
 
 # Set loss according to the number of classes.
 if no_of_classes == 2: 
     loss='binary_crossentropy'  
+    metrics=['accuracy']
 else:
-    #loss=focal_tversky_loss
-    #loss=DiceBCELoss
-    #loss='categorical_crossentropy'
-    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False) #, reduction=tf.keras.losses.Reduction.NONE
-
-# Select metrics shown during training.    
-metrics=['sparse_categorical_accuracy']    
+    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False) 
+    #loss='categorical_crossentropy'    
+    # Select metrics shown during training.    
+    metrics=['sparse_categorical_accuracy']    
 
 # Read all the training files and randomly assign to training and validation sets
 def prepareData():

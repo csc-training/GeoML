@@ -38,7 +38,8 @@ https://fromgistors.blogspot.com/
 * A few new / little used ones, also for data preparation: [machine-learning](https://plugins.qgis.org/plugins/tags/machine-learning/), [deep-learning](https://plugins.qgis.org/plugins/tags/deep-learning/)
 
 ### Other
-* pointnet (++) → Deep Learning for pointclouds directly: https://colab.research.google.com/github/keras-team/keras-io/blob/master/examples/vision/ipynb/pointnet.ipynb#scrollTo=DavtLCfWdZ7n 
+* pointnet (++) → Deep Learning for pointclouds directly:https://github.com/charlesq34/pointnet 
+* [RAPIDS](https://rapids.ai/) - GPU accelerated data science, including cuspatial (point-in-polygon, spatial join, coordinate systems, shape primitives, distances, and trajectory analysis) -> check out their [example notebook](https://github.com/rapidsai/cuspatial/tree/branch-22.12/notebooks)
 * [ERDAS imagine](https://bynder.hexagon.com/m/5d441e34a685b634/original/Hexagon_GSP_Machine_-Learning_Deep_Learning_white_paper.pdf)
 * [Google Earth Engine](https://developers.google.com/earth-engine/guides/machine-learning)
 * GRASS, [r.learn.ml](https://grass.osgeo.org/grass82/manuals/addons/r.learn.ml.html), supervised classification and regression of GRASS rasters using the python scikit-learn package

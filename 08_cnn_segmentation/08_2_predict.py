@@ -9,7 +9,7 @@ Created on Fri Mar  6 12:46:58 2020
 
 @author: ekkylli
 """
-import os, time, glob
+import os, time, glob, sys
 import numpy as np
 import rasterio
 import rasterio.merge
@@ -17,26 +17,34 @@ from tensorflow.keras.models import load_model
 
 #SETTINGS
 
-# The number of classes in labels
-# TOFIX: Change the number according to the used data
-#no_of_classes=2 #For binary classification
-no_of_classes=5 # n for multiclass
+# In Puhti the training data is moved to local disk of GPU, 
+# so the path to data has to be given as argument from batch job.
+# Check that Python is given exactly two arguments:
+#  - first is script name, has index 0
+#  - second is the path to training data, has index 1
+if len(sys.argv) != 3:
+   print('Please give the data directory and number of classes')
+   sys.exit()
+
+model_name=sys.argv[1]
+
+no_of_classes=int(sys.argv[2])
+print(no_of_classes)
+
+user = os.environ.get('USER')
+cnn_dir = os.path.join('/scratch/project_2002044', user, '2022/GeoML/08_cnn_segmentation')
 
 # Paths for INPUTS: data and model
-prediction_data_dir='imageTiles_512'
-results_dir='/scratch/project_2002044/students/ekkylli'
+prediction_data_dir = os.path.join(cnn_dir, 'imageTiles_512')
+model_final = os.path.join(cnn_dir, model_name+'.h5')
 
-# TOFIX: Change your model name here or use a pretrained model
-#model_name='spruce_05_001'
-model_name='multiclass_rmsprop_sparse'
-model_final = 'model_best_'+model_name+'.h5'
 #Pretrained models, that can be used during course
 #model_final = '/scratch/project_2002044/data/GIS_ML_COURSE_DATA/data/forest/model_best_spruce_05_001.h5'
 #model_final = '/scratch/project_2002044/data/GIS_ML_COURSE_DATA/data/forest/model_best_multiclass_05_001.h5'
 
 #Paths for RESULTS
-predicted_tiles_folder = 'precitions512_'+model_name
-prediction_image_file = 'CNN_'+model_name+'.tif'
+predicted_tiles_folder = os.path.join(cnn_dir, 'precitions512_'+model_name)
+prediction_image_file = os.path.join(cnn_dir,'CNN_'+model_name+'.tif')
 
 #Setting of the data
 img_size = 512
@@ -61,7 +69,7 @@ def predictTile(model, dataImage):
         image_data3 = image_data2.reshape(1, img_size, img_size, img_channels)
         
         # predicting the probability of each pixel
-        prediction = model.predict(image_data3)
+        prediction = model.predict(image_data3, verbose=0)
 
         # If multi-class, find the class with best probability
         if no_of_classes > 2: 
