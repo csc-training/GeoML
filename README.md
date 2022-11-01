@@ -41,7 +41,9 @@ We strive to follow the [Code of Conduct developed by The Carpentries organisati
 - Show courtesy and respect towards other community members
 
 And please let us know if there is any accessibility issues; fontsize, sound, etc.
+
 Terminology can be confusing , e.g. Cartographic label != ML label, please ask if unclear :)
+
 -> **How to ask questions:** by hand-raising (physically/in zoom) and ask by voice (we have a backup solution in case there is too many questions)
 
 ## This course
@@ -117,32 +119,42 @@ We will use the Jupyter for courses environment on Day 1 and 2, on day 3 we will
 
 ... to be continued within intro.ipynb
 
-## Authors
-Kylli Ek, Samantha Wittke, Johannes Nyman
-
 ## Content of this repository
 
 This repository contains all Jupyter notebooks used in the course.
 
 **01_clustering**
+
 **02_vector_data_preparation**
+
 * Preparation of Paavo zip code dataset for machine learning
 * Input:
     * Paavo zip code dataset
     * counties dataset
 * Output:
     * scaled and unscaled train, test validation datasets and labels
+
 **03_raster_data_preparation**
+
 **04_shallow_regression**
+
 * Runnning some shallow regression models on Paavo zip code dataset
 * Input:
     *  scaled and unscaled train, test validation datasets and labels
 * Output:
     * Regression error metrics for validation dataset
+    
 **05_shallow_classification**
+
 **06_deep_regression**
+
 * Building and Runnning some deep regression models on Paavo zip code dataset
 * Input:
     *  scaled train, test validation datasets and labels
+    
 **07_deep_classification**
+
 **08_cnn_segmentation** 
+
+## Authors
+Kylli Ek, Samantha Wittke, Johannes Nyman
