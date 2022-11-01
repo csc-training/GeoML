@@ -39,7 +39,7 @@ This repository contains all Jupyter notebooks used in the course.
 ## Important links
 
 
-**This document:** https://github.com/csc-training/GeoML/intro.ipynb
+**This document:** https://github.com/csc-training/GeoML/README.md
 
 **[Slides](https://drive.google.com/drive/folders/1q0-eSCFKcApzTql828Z2ZfDe8xFeFjXd?usp=sharing)**
 
