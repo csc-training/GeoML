@@ -6,6 +6,7 @@
 #SBATCH --mem=10G
 #SBATCH --time=00:00:02
 #SBATCH --gres=gpu:v100:1,nvme:20 #Local disk in Gb
+#SBATCH --reservation geoml-gpu
 
 module load tensorflow
 echo $LOCAL_SCRATCH

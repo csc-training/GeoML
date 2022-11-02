@@ -6,6 +6,7 @@
 #SBATCH --mem=4G
 #SBATCH --time=0:14:00
 #SBATCH --gres=gpu:v100:1
+#SBATCH --reservation geoml-gpu
 
 module load tensorflow
 # Run the Python code, give model path and number of classes in labels as arguments
