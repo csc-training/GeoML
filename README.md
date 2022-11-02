@@ -7,17 +7,6 @@
 * Introduction round; course expectations
     * in class: knowledge level geospatial data analysis, vector, raster, ML, DL
 
-## Important links
-
-
-**This document:** https://github.com/csc-training/GeoML/README.md
-
-**[Slides](https://drive.google.com/drive/folders/1q0-eSCFKcApzTql828Z2ZfDe8xFeFjXd?usp=sharing)**
-
-**[Exercise material](https://github.com/csc-training/GeoML)**
-
-**Computing environment:** https://puhti.csc.fi
-
 ## Practicalities Dogmi
 
 * Visitor badge
