@@ -5,7 +5,8 @@
 1. Tile data for CNN: [08_0_CNN_tiling.ipynb](08_0_CNN_tiling.ipynb). Must be opened with geoconda module as usual Notebook.
     * In Puhti web interface open the Jupyter app (not Jupyter for courses).
     * Select following settings:
-        * Project: project_2002044 /
+        * Project: project_2002044 
+		* Reservation: geoml
         * Partition: interactive
         * CPU cores: 1
         * Memory (Gb): 8 
