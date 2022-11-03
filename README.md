@@ -1,14 +1,14 @@
 # Course material for "Practical machine learning for spatial data" at CSC
 
-## Course goals: 
- * General overview
- * Give vocabulary
- * Practical examples
+## Course goals
+ * General overview of machine learning for spatial data
+ * Give vocabulary to continue with own experiments
+ * Show and run some practical examples
 
-### Out of scope
- * Feature engineering (geospatial analysis; problem dependent),
- * Result interpretation in depth(problem and model dependent),
- * Working with pointclouds
+## Out of scope
+ * Feature engineering 
+ * In depth result interpretation
+ * Working with pointclouds (let us know if this would be interesting for the next iteration)
 
 ## Schedule
 https://ssl.eventilla.com/event/VDK2b
@@ -65,8 +65,8 @@ This repository contains all Jupyter Notebooks and other code used in the course
 Extra material:
 * [Links to further resources](links.md)
 * [Optional tools for machine learning with spatial data](tools.md)
-* [Links to machine learning with point clouds](point_cloud.md)
-* [Links to machine learning with time series](timeseries.md)
+* [Hints for machine learning with point clouds; Work in progress](point_cloud.md)
+* [Hints for machine learning with time series; Work in progress](timeseries.md)
 
 
 ## Authors
