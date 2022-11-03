@@ -14,6 +14,6 @@ ada_boost_predictions = ada_boost.predict(x_val)
 print_error_metrics(calculate_error_metrics(y_val,ada_boost_predictions, ada_boost_name), ada_boost_name, 'vaidation')
 
 # and store the results on the test dataset for later model comparison, after we are done optimizing the parameters
-ada_boost_predictions = ada_boost.predict(x_test)
-print_error_metrics(calculate_error_metrics(y_test,ada_boost_predictions, ada_boost_name), ada_boost_name, 'test')
-metrics_collection = store_error_metrics(y_test,ada_boost_predictions, ada_boost_name, metrics_collection)
+#ada_boost_predictions = ada_boost.predict(x_test)
+#print_error_metrics(calculate_error_metrics(y_test,ada_boost_predictions, ada_boost_name), ada_boost_name, 'test')
+#metrics_collection = store_error_metrics(y_test,ada_boost_predictions, ada_boost_name, metrics_collection)
