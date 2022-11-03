@@ -15,7 +15,7 @@ https://ssl.eventilla.com/event/VDK2b
 
 ## Course computing enviroment
 
-First 2 days the exercises are done in "Jupyter notebooks for courses" in the [Puhti webinterface](https://www.puhti.csc.fi) . 
+First two days the exercises are done in "Jupyter notebooks for courses" in the [Puhti webinterface](https://www.puhti.csc.fi) . 
 Puhti is one of CSCs supercomputers providing researchers in Finland with High Performance Computing resources.
 Course participants will be provided with a temporary account (training_xxx); it is not possible to use your own CSC account. 
 
@@ -32,7 +32,7 @@ Course participants will be provided with a temporary account (training_xxx); it
    * Working directory: "/scratch/project_2002044"
 * Click launch and wait until granted resources
 * Click "Connect to Jupyter" 
-* ... to be continued within intro.ipynb
+* ... to be continued within [Introduction notebook](intro.ipynb)
 
 ### QGIS
 * Click "Desktop" on dashboard
