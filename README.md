@@ -1,41 +1,5 @@
 # Course material for "Practical machine learning for spatial data" at CSC
 
-## Course introduction
-
-### Welcome 
-
-* Introduction round; course expectations
-    * In class: knowledge level geospatial data analysis, vector, raster, ML, DL
-
-### Practicalities Dogmi
-
-* Visitor badge
-* parking
-* WC
-* list on wall
-* Wifi/Ethernet cable
-    * Eduroam 
-        * Temporary access via SMS 
-    * Grey ethernet cable
-* Dogmi computers, CentOS, web browser, QGIS
-    * **DO NOT RESTART!**
-
-### Code of conduct
-
-We strive to follow the [Code of Conduct developed by The Carpentries organisation](https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html) to foster a welcoming environment for everyone. In short:
-- Use welcoming and inclusive language
-- Be respectful of different viewpoints and experiences
-- Gracefully accept constructive criticism
-- Focus on what is best for the community
-- Show courtesy and respect towards other community members
-
-And please let us know if there is any accessibility issues; fontsize, sound, etc.
-
-Terminology can be confusing , e.g. Cartographic label != ML label, please ask if unclear :)
-
--> **How to ask questions:** by hand-raising (physically/in zoom) and ask by voice (we have a backup solution in case there is too many questions)
-
-
 ## Course goals: 
  * General overview
  * Give vocabulary
