@@ -1,5 +1,7 @@
 # Pointcloud ML 
 
+**This document is work in progress**
+
 If not using pointcloud specific models, pointcloud can be turned into features.
 * geometric features → scanner agnostic
 * reflectance and other scanner specific features are tricky but can help filtering noise
