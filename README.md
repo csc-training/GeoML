@@ -62,6 +62,11 @@ This repository contains all Jupyter Notebooks and other code used in the course
 * [07_deep_classification](07_deep_classification)
 * [08_cnn_segmentation](08_cnn_segmentation)
 
+In Puhti:
+* Exercises 03 and 08_0 (CNN data preparation) require geoconda module. 
+* Exercises 6, 7 and 08_1-2 (CNN training and interference) require tensorflow module.
+* Exercises 1, 2, 4, 5 and 8_03 can be done both geoconda and tensorflow module.
+
 Extra material:
 * [Links to further resources](links.md)
 * [Optional tools for machine learning with spatial data](tools.md)
