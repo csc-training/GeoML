@@ -51,7 +51,7 @@
         * Predicted tiles in folder `predictions512_2`
         * Merged big .tif file: `CNN_2.tif`
 
-4. Estimate the bianry class model visually.
+4. Evaluate the bianry class model visually.
     * Open the .tif file with QGIS.
    * If you want to try different prediction threshold values, we can restyle the layer:
        * Properites -> Symbology
@@ -61,7 +61,7 @@
        * Compare to labels and Sentinel image.
        * If you want you can add also orthoimage WMS: `https://tiles.kartat.kapsi.fi/ortokuva?`
 
-5. Estimate the binary model with scikit-learn
+5. Evaluate the binary model with scikit-learn
     * Open [08_3_evaluate.ipynb](08_3_evaluate.ipynb)
     * Do not run the multi-class cells yet.
     
@@ -82,8 +82,8 @@
         * Predicted tiles in folder `predictions512_5`
         * Merged big .tif file: `CNN_5.tif`    
     
-8. Estimate the multi-class model visually with QGIS.
+8. Evaluate the multi-class model visually with QGIS.
     
-9. Estimate the multi-class model with scikit-learn
+9. Evaluate the multi-class model with scikit-learn
     * Open again [08_3_evaluate.ipynb](08_3_evaluate.ipynb)
     * Run also the multi-class cells.
