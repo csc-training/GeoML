@@ -48,18 +48,19 @@ https://fromgistors.blogspot.com/
 * [Orfeo Toolbox](https://www.orfeo-toolbox.org/CookBook/Applications/Learning.html). Looks good from documentation, but in practice had several problems...
 * [OTBTF: Orfeo ToolBox meets TensorFlow](https://github.com/remicres/otbtf)
 * [Torchgeo](https://www.microsoft.com/en-us/research/publication/torchgeo-deep-learning-with-geospatial-data/)
+* [Geotorch](https://geotorch.readthedocs.io/en/latest/index.html)
 * More links: https://github.com/sacridini/Awesome-Geospatial#deep-learning
 * Point cloud voxelizer example: https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/point_cloud_voxelizer.py 
 
 ## GIS ML tools in CSC Puhti HPC
 
-* geoconda: scikit-learn + a lot of Python GIS packages
-* tensorflow: keras, tensorflow, geopandas, rasterio
-* pytorch: pytorch, geopandas, rasterio
-* r-env: caret, CAST + a lot of Python GIS packages
-* GRASS
-* QGIS 
-* OrteoToolBox 
+* [geoconda module](https://docs.csc.fi/apps/geoconda/): scikit-learn + a lot of Python GIS packages
+* [tensorflow module](https://docs.csc.fi/apps/tensorflow/): keras, tensorflow, geopandas, rasterio
+* [pytorch module](https://docs.csc.fi/apps/pytorch/): pytorch, geopandas, rasterio
+* [r-env module](https://docs.csc.fi/apps/r-env/): caret, CAST + a lot of Python GIS packages
+* [GRASS](https://docs.csc.fi/apps/grass/) (in [QGIS module](https://docs.csc.fi/apps/qgis/))
+* [QGIS module](https://docs.csc.fi/apps/qgis/)
+* [OrfeoToolBox module](https://docs.csc.fi/apps/otb/)
 
 Puhti documentation: 
 * [machine-learning](https://docs.csc.fi/apps/#data-analytics-and-machine-learning)
