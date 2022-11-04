@@ -1,5 +1,5 @@
 # Optional tools
-## Widely used mainstream general ML tools
+## Widely used general ML tools
 
 * [R, caret](http://topepo.github.io/caret/index.html ) - general ML library, similar to scikit-learn. Supports also Keras as back-end for deep learning. Supports parallel computing.
 * [PyTorch](https://pytorch.org/), deep learning framework
