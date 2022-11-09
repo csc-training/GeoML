@@ -11,7 +11,7 @@
         * CPU cores: 1
         * Memory (Gb): 8 
         * Local disk: 0
-        * Time: 1:00:00
+        * Time: 5:00:00
         * Python: geoconda
         * Jupyter type: Lab
         * Working directory: /scratch/project_2002044
