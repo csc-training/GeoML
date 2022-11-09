@@ -18,6 +18,7 @@
         
 2. Train the model for binary classes. 
     * Open these files, we will go through it in details.
+    	* Model definition file: [model_solaris.py](model_solaris.py)	
         * Python file with Tensorflow code: [08_1_train.py](08_1_train.py)
         * HPC batch job file: [08_1_train_binary.sh](08_1_train_binary.sh)
     * No modifications are needed to the files.
