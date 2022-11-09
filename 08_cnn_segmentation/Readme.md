@@ -25,7 +25,7 @@
     * Open in another tab of web-browser, Puhti web interface -> Login node shell
     * A black window with SSH connection to Puhti opens, now Linux commands must be used.
     * The shell opens in everybody's home directory, to access the files, change working 
-    directory: `cd /scratch/project_2002044/training_0xx/2022/GeoML/08_cnn_segmentation`
+    directory: `cd /scratch/project_2002044/training1xx/2022/GeoML/08_cnn_segmentation`
     * See that you are in the right folder: `ls -l`. It should list the files that you see also in Jupyter File panel.
     * Training proper CNN models takes hours even on GPU-machine, so during the course we run only a mini-test for 2 minutes (limit set in the batch job file).
     * Submit a batch job: `sbatch 08_1_train_binary.sh`
