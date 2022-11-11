@@ -1,12 +1,14 @@
 #!/bin/bash
+# Change to own project, if used outside of the course
 #SBATCH --account=project_2002044
 #SBATCH --partition=gpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=5
 #SBATCH --mem=10G
-#SBATCH --time=00:00:02
+#SBATCH --time=02:00:00
 #SBATCH --gres=gpu:v100:1,nvme:20 #Local disk in Gb
-#SBATCH --reservation geoml-gpu
+# Reservation needed only during course
+# SBATCH --reservation geoml-gpu
 
 module load tensorflow
 echo $LOCAL_SCRATCH

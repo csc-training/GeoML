@@ -67,7 +67,7 @@ During the course exercises are done in Puhti, which is one of CSCs supercompute
 * Click "Desktop" on dashboard
 * Select:
    * Project: project_2002044 during course, own project later
-   * Partition: small
+   * Partition: interactive
    * Number of CPU cores: 1
    * Memory (GB): 10
    * Local disk: 0

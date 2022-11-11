@@ -1,12 +1,14 @@
 #!/bin/bash
+# Change to own project, if used outside of the course
 #SBATCH --account=project_2002044
 #SBATCH --partition=gputest
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --mem=4G
-#SBATCH --time=0:14:00
+#SBATCH --cpus-per-task=5
+#SBATCH --mem=5G
+#SBATCH --time=0:02:00
 #SBATCH --gres=gpu:v100:1
-#SBATCH --reservation geoml-gpu
+# Reservation needed only during course
+# SBATCH --reservation geoml-gpu
 
 module load tensorflow
 # Run the Python code, give model path and number of classes in labels as arguments
