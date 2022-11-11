@@ -16,3 +16,9 @@ imbalanced-learn == 0.9.1 #for imbalanced classes
 
 #(optional)Jupyterlab extension for git
 jupyterlab-git == 0.39.3
+
+# Raster data preparations
+pystac, pystac_client, stackstac, rioxarray, xarray
+
+# CNN tiling
+gdal_retile from GDAL commandline tools (included in most QGIS installations)
