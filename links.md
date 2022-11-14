@@ -50,6 +50,7 @@ Spatial data:
 * Caleb Robinson, [Building damage assessment](https://github.com/microsoft/building-damage-assessment-cnn-siamese)
 * Kris Sankaran, [Glacier mapping From Satellite Imagery](https://github.com/krisrs1128/glacier_mapping) UNET
 * Jens Leitloff, [Analyzing Sentinel-2 satellite data in Python with TensorFlow.Keras](https://github.com/jensleitloff/CNN-Sentinel), CNN
+* Martin Christen, [Semantic Segmentation](https://colab.research.google.com/drive/1czNKO_Z2iYBbp-31DfjmSus6BfLLgOJ6?usp=sharing), from GeoPython 20222 conference, CNN with PyTorch
 
 ## Publications
 
