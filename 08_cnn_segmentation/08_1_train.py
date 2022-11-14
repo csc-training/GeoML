@@ -104,8 +104,7 @@ if no_of_classes == 2:
     loss='binary_crossentropy'  
     metrics=['accuracy']
 else:
-    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False) 
-   
+    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)   
     metrics=['sparse_categorical_accuracy']    
 
 # Read all the training files and randomly assign to training and validation sets
@@ -221,7 +220,7 @@ def data_gen(img_df, augment):
 def trainModel(train_gen, val_gen, no_of_training_tiles, no_of_validation_tiles):
    
     # If CNN model already exist continue training
-    if 0: # os.path.exists(model_best):
+    if os.path.exists(model_best):
         #m = load_model(model_best, custom_objects={'focal_tversky_loss': focal_tversky_loss})
         m = load_model(model_best)
 
