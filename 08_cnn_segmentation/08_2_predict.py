@@ -60,7 +60,7 @@ def predictTile(model, dataImage):
         #Reorder axis for Keras, channel last
         image_data2 = np.transpose(image_data, (1, 2, 0)) 
         
-        #Reshape data for Keras, add extra dimension,  
+        #Reshape data for Keras, add extra dimension, that it would be similar to data coming from mini-batch.  
         image_data3 = image_data2.reshape(1, img_size, img_size, img_channels)
         
         # predicting the probability of each pixel
