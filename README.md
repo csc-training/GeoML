@@ -77,15 +77,17 @@ During the course exercises are done in Puhti, which is one of CSCs supercompute
 * Click launch and wait until granted resources
 * Click "Launch Desktop" 
 
-## Exercises on own laptop
+## Exercises on own computer
 
-Exercises 1-7 could be done on any laptop, required installations are described in [requirements.txt](requirements.txt), required data is downloaded in Notebooks. For exercise 8 (CNN) GPU resources are good to have, the batch jobs here are suitable for Puhti only.
+Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercise 8 (CNN), batch job scripts are Puhti specific as GPU resources are good to have for the exercise to run in reasonable time. However, the Python scripts can also be run on your own computer with some path adjustments.
 
-Extra steps for own laptop
-* Download the exercise material from Github
+To get started:
+* Get the exercise material from Github
 	* Clone this Github repository: `git clone https://github.com/csc-training/GeoML.git` 
-	* OR if unfamiliar with Github, download the files as a [zip-file](https://github.com/csc-training/GeoML/archive/refs/heads/main.zip)
-* Change the main path in beginning of each notebook.
+	* OR download the repository as a [zip-file](https://github.com/csc-training/GeoML/archive/refs/heads/main.zip)
+* Install all needed packages for running the notebooks. The dependencies are collected in [requirements.txt](requirements.txt) (package versions in comments are same as used for GeoML course 2022 on Puhti), which can be used with pip (`pip install -e requirements.txt`) OR conda (`conda create --name geoml -c conda-forge --file requirements.txt`; creates a conda environment; see [conda homepage](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) on how to use it) to install all needed packages for running the notebooks.
+* Adapt the main path in beginning of each notebook to your environment.
+* Have fun going through the notebooks and add an issue to this repository if something is not working.
 
 ## Extra material
 
