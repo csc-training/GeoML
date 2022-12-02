@@ -19,7 +19,6 @@ jupyterlab-git #>= 0.39.3
 
 # raster data preparation notebook requires the following packages in addition
 pystac
-pystac_client 
 stackstac 
 rioxarray
 xarray
