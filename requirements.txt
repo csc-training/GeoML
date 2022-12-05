@@ -17,11 +17,11 @@ imbalanced-learn #>= 0.9.1 #for imbalanced classes
 #(optional)Jupyterlab extension for git
 jupyterlab-git #>= 0.39.3
 
-# raster data preparation notebook requires the following packages in addition
-pystac
-pystac-client
-stackstac 
-rioxarray
+# raster data preparation notebook requires the following packages in addition for working with STAC
+pystac #>= 1.6.1
+pystac-client #>= 0.5.0
+stackstac #>= 0.4.1
+rioxarray #>= 0.12.0
 
 
 
