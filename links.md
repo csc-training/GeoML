@@ -78,6 +78,7 @@ in remote sensing: an applied review](https://www.tandfonline.com/doi/pdf/10.108
 
 
 ## Links to more links
+* https://github.com/satellite-image-deep-learning
 * https://github.com/deepVector/geospatial-machine-learning
 * https://github.com/robmarkcole/satellite-image-deep-learning
 * https://github.com/sacridini/Awesome-Geospatial#deep-learning
