@@ -78,12 +78,11 @@ Interpretable features vs complex features
       * PFHs (Rusu et al, ICRA 2009)
       * Shape distributions (Osada et al 2002)
 
-All features vs relevant features
+Selection of suitable features among relevant, irrelevant and redundant features:
 
-    * Selection of suitable features among relevant, irrelevant and redundant features:
-        * Filter based methods
-        * Wrapper based methods
-        * Embedded methods
+    * Filter based methods
+    * Wrapper based methods
+    * Embedded methods
 
 ### Models
 
