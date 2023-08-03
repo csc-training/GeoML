@@ -18,7 +18,6 @@
 * Segmentation: based on identifying 3D geometry features such as edges, planar facets or corners
 * Object detection: extension of classification to localize objects by bounding box
 
-
 ## Data structure
 
 Structured data: 
@@ -90,10 +89,11 @@ All features vs relevant features
 
 For example:
 
-* Random forest
-* Xdg boosting
-* Extratrees
-* SVM (support vector machines)
+* Nearest Neighbor (ninstance based learning) 
+* Decision tree (rule-based learning)
+* Naive Bayesian classifier (probabilistic learning)
+* Random forest, xdg boosting, extratrees (ensemble learning)
+* Support vector machines (max-margin learning)
 * ...
 
 ## Deep learning
@@ -205,6 +205,44 @@ Locality (interaction among local points in a neighborhood) can be exploited if 
 * Dynamic graph CNN, Wang et al, 2018
 * Point2Node, Han et al, 2020
 
+
+## Labeled point clouds
+
+* Manual labeling: 
+    * e.g. CloudCompare semi manual classification; noise filtering based on intensity; manual labeling based on relectance plus geometry (creating polygons spanning points in 3D space)
+    * Expesive and laborious
+* Synthetic data generation
+    * Labeling models is cheap
+    * Rescanning is cheap
+    * Various scan setups can be tested
+    * Intensity cannot be simulated
+* Labeled datasets
+    * Segmented from LiDAR
+        * Semantic3D, Hackel et al, 2017
+        * MIMP, Wang et al 2018
+        * KITTI, Geiger et al 2012
+        * Semantic KITTI, Behley et al, 2019
+        * ASL Dataset, Pomerleau et al, 2012
+        * iQmulus, Bredif et al, 2014
+        * Oxford Robotcar, Maddern et al, 2017
+        * NPM3D, Roynard et al, 2018
+    * Objects from LiDAR
+        * Apollo, Lu et al, 2019
+        * Whu-TLS, Dong et al, 2020
+
+## Recent trends
+
+* Large scale classification
+    * Improved effectiveness
+        * Information sampling
+        * Variations in scale
+        * Scene complexity
+    * Improved efficiency
+        * Lightweight models
+* Small amount of training data (weakly- self- semi-supervised classification)
+* Explainability 
+
+
 ## References and further reading
 
 * PointNet++ : https://towardsdatascience.com/understanding-machine-learning-on-point-clouds-through-pointnet-f8f3f2d53cc3
@@ -212,4 +250,4 @@ Locality (interaction among local points in a neighborhood) can be exploited if 
 * Papers with code: https://paperswithcode.com/task/3d-point-cloud-classification
 * Review article for point cloud deep learning: https://www.mdpi.com/2072-4292/12/11/1729 -> includes almost all references to the different methods and datasets mentioned here
 
-Thanks to Anna Shcherbacheva , FGI/NLS for sharing some insights.
+Thanks to Anna Shcherbacheva , FGI/NLS for sharing some insights. Also thanks to insights gained from presentations at the International Workshop on Point cloud processing 2023.
