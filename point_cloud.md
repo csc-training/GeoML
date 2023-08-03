@@ -53,36 +53,36 @@ Contextual classification; statistical models of context
 
 Single scale vs multi scale representation
 
-   * Single scale
-      * Spherical neighborhood with fixed radius
-      * Cylindrical neighborhood with fixed radius
-      * K-closest neighbors in 3D or 2D -> scale parameter?
-   * Multi scale
-      * Collection of cylindrical neighborhoods (Niemeyer et al, 2014)
-      * Collection of spherical neighborhoods (Brodu & Lague, 2012)
-      * Multiscale multi type neighborhood (Blomley & Weinmann, 2017)
+* Single scale
+    * Spherical neighborhood with fixed radius
+    * Cylindrical neighborhood with fixed radius
+    * K-closest neighbors in 3D or 2D -> scale parameter?
+* Multi scale
+    * Collection of cylindrical neighborhoods (Niemeyer et al, 2014)
+    * Collection of spherical neighborhoods (Brodu & Lague, 2012)
+    * Multiscale multi type neighborhood (Blomley & Weinmann, 2017)
 
 Interpretable features vs complex features
 
-   * Interpretable
-      * Eigenvalue/-vector based 
-        * Linearity, planarity, spericity, omnivariance, aniotropy, eigenentropy, sum of eigenvalues, change of curvature
-      * Geometric properties of local neighborhood, scanner agnostic
-        * Relfectance and other scanner specific features are tricky but can help with noise filtering
-        * Scaling for example by distance
-      * 2D projection based
-      * Additional attributes (e.g. intensity, ...)
-   * Complex
-      * 3D shape context descriptor (Frome et al, 2004)
-      * SHOT descriptor (Tombari et al, 2010)
-      * PFHs (Rusu et al, ICRA 2009)
-      * Shape distributions (Osada et al 2002)
+* Interpretable
+    * Eigenvalue/-vector based 
+    * Linearity, planarity, spericity, omnivariance, aniotropy, eigenentropy, sum of eigenvalues, change of curvature
+    * Geometric properties of local neighborhood, scanner agnostic
+    * Relfectance and other scanner specific features are tricky but can help with noise filtering
+    * Scaling for example by distance
+    * 2D projection based
+    * Additional attributes (e.g. intensity, ...)
+* Complex
+    * 3D shape context descriptor (Frome et al, 2004)
+    * SHOT descriptor (Tombari et al, 2010)
+    * PFHs (Rusu et al, ICRA 2009)
+    * Shape distributions (Osada et al 2002)
 
 Selection of suitable features among relevant, irrelevant and redundant features:
 
-    * Filter based methods
-    * Wrapper based methods
-    * Embedded methods
+* Filter based methods
+* Wrapper based methods
+* Embedded methods
 
 ### Models
 
