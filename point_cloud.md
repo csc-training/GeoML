@@ -12,27 +12,6 @@
 * Per-point attributes - each point can be attributed by additional per-point data, such as color or surface normal
 * Massiveness - depending on the capturing technology, 3D point clouds may consist of millions or billions of points
 
-
-## Labeled point clouds
-
-* self labeling: e.g. CloudCompare semi manual classification
-    * noise filtering based on intensity
-    * manual labeling based on relectance plus geometry (creating polygons spanning points in 3D space)
-* labeled datasets
-    * segmented from LiDAR
-        * Semantic3D, Hackel et al, 2017
-        * MIMP, Wang et al 2018
-        * KITTI, Geiger et al 2012
-        * Semantic KITTI, Behley et al, 2019
-        * ASL Dataset, Pomerleau et al, 2012
-        * iQmulus, Bredif et al, 2014
-        * Oxford Robotcar, Maddern et al, 2017
-        * NPM3D, Roynard et al, 2018
-    * objects from LiDAR
-        * Apollo, Lu et al, 2019
-        * Whu-TLS, Dong et al, 2020
-
-
 ## Applications
 
 * Classification: labels are attached to each point
@@ -141,7 +120,6 @@ Main approaches for dealing with point cloud data for deep learning:
 
 #### Structuring the point cloud 
 
-
 ##### Multiview
 
 Projection / Structured grid based approaches -> adaptation to 2D data for e.g. 2D CNN based approaches
@@ -150,6 +128,8 @@ Projection / Structured grid based approaches -> adaptation to 2D data for e.g. 
 2. Use 2D methods
 3. Back project results to 3D point cloud 
 
+
+Examples:
 
 * MVCNN (multi-view CNN), Su et al, 2015 
 * SLCAE (Stacked local convolutional autoencoder), Leng et al, 2015
@@ -164,6 +144,8 @@ Voxel based approaches -> adaptation of CNN to 3D data
 1. Define local neighborhood
 2. Derive voxel occupancy grid
 3. use 3D-CNN
+
+Examples:
 
 * VoxNet, Maturana et al, 2015: 3DCNN for object recognition based on 3D binary occupancy grid
 * VMCNN (volumentric and multi-view CNN) Qui et al, 2016
