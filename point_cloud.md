@@ -210,9 +210,9 @@ Locality (interaction among local points in a neighborhood) can be exploited if 
 * Manual labeling: 
     * e.g. CloudCompare semi manual classification; noise filtering based on intensity; manual labeling based on relectance plus geometry (creating polygons spanning points in 3D space)
     * Expesive and laborious
-* Synthetic data generation
-    * Labeling models is cheap
-    * Rescanning is cheap
+* Synthetic data generation, 
+    * e.g. [Helios++](https://github.com/3dgeo-heidelberg/helios)
+    * possibility to rescan same scene
     * Various scan setups can be tested
     * Intensity cannot be simulated
 * Labeled datasets
