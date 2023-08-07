@@ -248,12 +248,11 @@ Locality (interaction among local points in a neighborhood) can be exploited if 
 
 ## References and further reading
 
-* PointNet++ : https://towardsdatascience.com/understanding-machine-learning-on-point-clouds-through-pointnet-f8f3f2d53cc3
-* Point cloud completion with DL - Review: https://arxiv.org/abs/2203.03311
-* Papers with code: https://paperswithcode.com/task/3d-point-cloud-classification
-* Review article for point cloud deep learning: https://www.mdpi.com/2072-4292/12/11/1729 -> includes almost all references to the different methods and datasets mentioned here
+* [Tutorial on PointNet++](https://towardsdatascience.com/understanding-machine-learning-on-point-clouds-through-pointnet-f8f3f2d53cc3)
+* [Papers with code on 3D point cloud classification](https://paperswithcode.com/task/3d-point-cloud-classification)
+* Review article for point cloud deep learning, [Bello et al, 2020](https://www.mdpi.com/2072-4292/12/11/1729) -> includes almost all references to the different methods and datasets mentioned here
 * Deep Learning for 3D Point Clouds: A survey, [Guo et al, 2020](https://ieeexplore-ieee-org.libproxy.aalto.fi/abstract/document/9127813)
 * Deep learning-based 3D point cloud classification: A systematic survey and outlook, [Zhang et al, 2023](https://www.sciencedirect.com/science/article/abs/pii/S0141938223000896)
-
+* Point cloud completion with DL - [Review, Fei et al, 2022](https://arxiv.org/abs/2203.03311)
 
 Thanks to Anna Shcherbacheva , FGI/NLS for sharing some insights. Also thanks to insights gained from presentations at the International Workshop on Point cloud processing 2023.
