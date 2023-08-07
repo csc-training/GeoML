@@ -58,9 +58,9 @@ Single scale vs multi scale representation
     * Cylindrical neighborhood with fixed radius
     * K-closest neighbors in 3D or 2D -> scale parameter?
 * Multi scale
-    * Collection of cylindrical neighborhoods (Niemeyer et al, 2014)
-    * Collection of spherical neighborhoods (Brodu & Lague, 2012)
-    * Multiscale multi type neighborhood (Blomley & Weinmann, 2017)
+    * Collection of cylindrical neighborhoods ([Niemeyer et al, 2014](https://www.sciencedirect.com/science/article/pii/S0924271613002359))
+    * Collection of spherical neighborhoods ([Brodu & Lague, 2012](https://www.sciencedirect.com/science/article/pii/S0924271612000330))
+    * Multiscale multi type neighborhood ([Blomley & Weinmann, 2017](https://isprs-annals.copernicus.org/articles/IV-2-W4/43/2017/isprs-annals-IV-2-W4-43-2017.html))
 
 Interpretable features vs complex features
 
@@ -73,10 +73,10 @@ Interpretable features vs complex features
     * 2D projection based
     * Additional attributes (e.g. intensity, ...)
 * Complex
-    * 3D shape context descriptor (Frome et al, 2004)
-    * SHOT descriptor (Tombari et al, 2010)
-    * PFHs (Rusu et al, ICRA 2009)
-    * Shape distributions (Osada et al 2002)
+    * 3D shape context descriptor ([Frome et al, 2004](https://link.springer.com/chapter/10.1007/978-3-540-24672-5_18)
+    * SHOT descriptor ([Tombari et al, 2010](https://link-springer-com.libproxy.aalto.fi/chapter/10.1007/978-3-642-15558-1_26))
+    * Point Feature Histograms (PFHs) ([Rusu et al, 2009](https://ieeexplore.ieee.org/document/5152473)
+    * Shape distributions ([Osada et al 2002](https://dl-acm-org.libproxy.aalto.fi/doi/abs/10.1145/571647.571648))
 
 Selection of suitable features among relevant, irrelevant and redundant features:
 
