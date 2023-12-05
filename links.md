@@ -76,6 +76,8 @@ in remote sensing: an applied review](https://www.tandfonline.com/doi/pdf/10.108
 
 * [ATMU / NLS/FGI](https://www.maanmittauslaitos.fi/en/about-nls/organisation/projects/development-projects-for-core-geospatial-data), detecting buildings, roads and water-courses, aim to support updating NLS topographic database.
 * [Andras Balazs / LUKE](https://www.luke.fi/fi/asiantuntijat/andras-balazs/julkaisut), lidar, forest
+* Alireza Hamedianfar et al, University of Helsinki, [Review of Deep Learning for forest inventory and planning with remote sensing](
+https://academic.oup.com/forestry/article/95/4/451/6518266)
 * Joone Laine / Aalto, [Crop identification with Sentinel-2satellite imagery in Finland](https://aaltodoc.aalto.fi/bitstream/handle/123456789/33726/master_Laine_Joona_2018.pdf), SVM, RF, MLP and ConvRNN.
 * [Matthieu Molinier / VTT](https://cris.vtt.fi/en/persons/matthieu-molinier/publications/), cloud detection
 * [Matti Mõttus / VTT](https://cris.vtt.fi/en/persons/matti-m%C3%B5ttus/publications/), hyperspectral data, forest
