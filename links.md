@@ -27,6 +27,7 @@ Labeled data:
 * [AI datasets by NASA](https://search.earthdata.nasa.gov/search?portal=ai-ml&lat=-0.140625)
 * [FLAIR: a Country-Scale Land Cover Semantic Segmentation Dataset From Multi-Source Optical Imagery](https://arxiv.org/abs/2310.13336) and [code](https://github.com/IGNF/FLAIR-2-AI-Challenge)
 * [OpenForest catalog for machine learning in forest monitoring](https://github.com/RolnickLab/OpenForest)
+* GLanCE - Global land cover training dataset from 1984 to 2020, [publication](https://www.nature.com/articles/s41597-023-02798-5) and [dataset](https://beta.source.coop/repositories/boston-university/bu-glance/)
 
 Spatial data:
 * [Open GIS data](https://research.csc.fi/open-gis-data), global and Finnish
