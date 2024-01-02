@@ -58,6 +58,7 @@ Spatial data:
 * Jens Leitloff, [Analyzing Sentinel-2 satellite data in Python with TensorFlow.Keras](https://github.com/jensleitloff/CNN-Sentinel), CNN
 * Martin Christen, [Semantic Segmentation](https://colab.research.google.com/drive/1czNKO_Z2iYBbp-31DfjmSus6BfLLgOJ6?usp=sharing), from GeoPython 20222 conference, CNN with PyTorch
 * [Point cloud semantic segmentation and individual tree segmentation](https://github.com/tls-tools-ucl/TLS2trees)
+* [Estimating tree species composition from airborne laser scanning data using point-based deep learning models](https://github.com/Brent-Murray/point-dl/tree/main/Pytorch/models/PointAugment) with [publication](https://www.mdpi.com/2072-4292/12/4/719)
 
 ## Publications
 
