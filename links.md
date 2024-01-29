@@ -28,6 +28,7 @@ Labeled data:
 * [FLAIR: a Country-Scale Land Cover Semantic Segmentation Dataset From Multi-Source Optical Imagery](https://arxiv.org/abs/2310.13336) and [code](https://github.com/IGNF/FLAIR-2-AI-Challenge)
 * [OpenForest catalog for machine learning in forest monitoring](https://github.com/RolnickLab/OpenForest)
 * GLanCE - Global land cover training dataset from 1984 to 2020, [publication](https://www.nature.com/articles/s41597-023-02798-5) and [dataset](https://beta.source.coop/repositories/boston-university/bu-glance/)
+* Schmitt et al / Department of Aerospace Engineering, University of the Bundeswehr Munich, Neubiberg, Germany ,[There Are No Data Like More Data: Datasets for deep learning in Earth observation](https://ieeexplore.ieee.org/document/10213439)
 
 Spatial data:
 * [Open GIS data](https://research.csc.fi/open-gis-data), global and Finnish
@@ -72,6 +73,7 @@ Spatial data:
 * Aaron E. Maxwell /  West Virginia University, [Implementation of machine-learning classification
 in remote sensing: an applied review](https://www.tandfonline.com/doi/pdf/10.1080/01431161.2018.1433343)
 * Safonova et al / Leibniz Centre for Agricultural Landscape Research (ZALF), Müncheberg, Germany, [Deep Learning techniques for adressing small data problems in remote sensing](https://www.sciencedirect.com/science/article/pii/S156984322300393X)
+
 
 
 ## Finnish publications / projects
