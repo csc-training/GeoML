@@ -92,6 +92,7 @@ https://academic.oup.com/forestry/article/95/4/451/6518266)
 ## Tools
 
 * Torchgeo: [paper](https://arxiv.org/abs/2111.08872) , [pypi](https://pypi.org/project/torchgeo/) , [docs](https://torchgeo.readthedocs.io/en/stable/) , [blog](https://pytorch.org/blog/geospatial-deep-learning-with-torchgeo/)
+* [Detectree2](https://github.com/PatBall1/detectree2)
 
 ## Links to more links
 * https://github.com/satellite-image-deep-learning
