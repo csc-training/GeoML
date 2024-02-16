@@ -73,6 +73,7 @@ Spatial data:
 * Aaron E. Maxwell /  West Virginia University, [Implementation of machine-learning classification
 in remote sensing: an applied review](https://www.tandfonline.com/doi/pdf/10.1080/01431161.2018.1433343)
 * Safonova et al / Leibniz Centre for Agricultural Landscape Research (ZALF), Müncheberg, Germany, [Deep Learning techniques for adressing small data problems in remote sensing](https://www.sciencedirect.com/science/article/pii/S156984322300393X)
+* Calyan Chen  et al ,[Using time-series imagery and 3DLSTM model to classify individual tree species](https://www.tandfonline.com/doi/full/10.1080/17538947.2024.2308728)
 
 
 
