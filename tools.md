@@ -1,16 +1,26 @@
 # Optional tools
 ## Widely used general ML tools
 
-* [R, caret](http://topepo.github.io/caret/index.html ) - general ML library, similar to scikit-learn. Supports also Keras as back-end for deep learning. Supports parallel computing.
 * [PyTorch](https://pytorch.org/), deep learning framework
+* [R, caret](http://topepo.github.io/caret/index.html ) - general ML library, similar to scikit-learn. Supports also Keras as back-end for deep learning. Supports parallel computing.
 * [Dask-ML](https://ml.dask.org/), scalable machine learning with Scikit-Learn, XGBoost, and others.
    * [Dask+ scikit-learn example](https://examples.dask.org/machine-learning/scale-scikit-learn.html)
 
 ## Spatial data specific ML tools
+### Python
+* [Torchgeo](https://torchgeo.readthedocs.io/)
+* [RasterVision](https://docs.rastervision.io/)
+* [geoai](https://github.com/opengeos/geoai)
+* [segment-geospatial](https://samgeo.gishub.org/)
+* More options:
+  * [Torchgeo related libraries table](https://torchgeo.readthedocs.io/en/stable/user/alternatives.html)
+  * [Awesome-Geospatial listing](https://github.com/sacridini/Awesome-Geospatial#deep-learning)
+
 ### R
 
 * [CAST](https://rdrr.io/cran/CAST/src/R/CAST-package.R) - improve spatial-temporal modelling tasks using 'caret'. 
    * OpenGeoHub, [Spatial machine learning for GIS with R course materials](http://www.opengeohub.org/machine-learning-spatial-data)
+* [SITS](https://e-sensing.github.io/sitsbook/)
 
 ### ArcGIS
 
@@ -38,33 +48,19 @@ https://fromgistors.blogspot.com/
 * A few new / little used ones, also for data preparation: [machine-learning](https://plugins.qgis.org/plugins/tags/machine-learning/), [deep-learning](https://plugins.qgis.org/plugins/tags/deep-learning/)
 
 ### Other
-* pointnet (++) → Deep Learning for pointclouds directly:https://github.com/charlesq34/pointnet 
-* [RAPIDS](https://rapids.ai/) - GPU accelerated data science, including cuspatial (point-in-polygon, spatial join, coordinate systems, shape primitives, distances, and trajectory analysis) -> check out their [example notebook](https://github.com/rapidsai/cuspatial/tree/branch-22.12/notebooks)
-* [ERDAS imagine](https://bynder.hexagon.com/m/5d441e34a685b634/original/Hexagon_GSP_Machine_-Learning_Deep_Learning_white_paper.pdf)
-* [Google Earth Engine](https://developers.google.com/earth-engine/guides/machine-learning)
-* GRASS, [r.learn.ml](https://grass.osgeo.org/grass82/manuals/addons/r.learn.ml.html), supervised classification and regression of GRASS rasters using the python scikit-learn package
-* [McFly](https://blog.esciencecenter.nl/mcfly-an-easy-to-use-tool-for-deep-learning-for-time-series-classification-b2ee6b9419c2), build and compare different DL models for timeseries classification task
-* [PyspatialML](https://github.com/stevenpawley/Pyspatialml), for applying scikit-learn machine learning models to 'stacks' of raster datasets. 
-* [Orfeo Toolbox](https://www.orfeo-toolbox.org/CookBook/Applications/Learning.html). Looks good from documentation, but in practice had several problems...
-* [OTBTF: Orfeo ToolBox meets TensorFlow](https://github.com/remicres/otbtf)
-* [Torchgeo](https://www.microsoft.com/en-us/research/publication/torchgeo-deep-learning-with-geospatial-data/)
-* [Geotorch](https://geotorch.readthedocs.io/en/latest/index.html)
-* More links: https://github.com/sacridini/Awesome-Geospatial#deep-learning
+
 * Point cloud voxelizer example: https://github.com/Eayrey/3D-Convolutional-Neural-Networks-with-LiDAR/blob/master/point_cloud_voxelizer.py 
 
-## GIS ML tools in CSC Puhti HPC
+## GIS ML tools in CSC Puhti supercomputer
 
 * [geoconda module](https://docs.csc.fi/apps/geoconda/): scikit-learn + a lot of Python GIS packages
-* [tensorflow module](https://docs.csc.fi/apps/tensorflow/): keras, tensorflow, geopandas, rasterio
 * [pytorch module](https://docs.csc.fi/apps/pytorch/): pytorch, geopandas, rasterio
-* [r-env module](https://docs.csc.fi/apps/r-env/): caret, CAST + a lot of Python GIS packages
-* [GRASS](https://docs.csc.fi/apps/grass/) (in [QGIS module](https://docs.csc.fi/apps/qgis/))
-* [QGIS module](https://docs.csc.fi/apps/qgis/)
-* [OrfeoToolBox module](https://docs.csc.fi/apps/otb/)
+* [tensorflow module](https://docs.csc.fi/apps/tensorflow/): keras, tensorflow, geopandas, rasterio
+* [r-env module](https://docs.csc.fi/apps/r-env/): caret, CAST + a lot of R GIS packages
 
 Puhti documentation: 
 * [machine-learning](https://docs.csc.fi/apps/#data-analytics-and-machine-learning)
-* [tools for spatial data](https://docs.csc.fi/apps/#geosciences)
+* [Tools for spatial data analysis](https://docs.csc.fi/apps/#geosciences), inc QGIS, GRASS, OrfeoToolbox
 
 
 
