@@ -34,6 +34,15 @@ Spatial data:
 * [Open GIS data](https://research.csc.fi/open-gis-data), global and Finnish
 * https://github.com/sacridini/Awesome-Geospatial#data-sources
 
+## Point clouds
+
+* [Tutorial on PointNet++](https://towardsdatascience.com/understanding-machine-learning-on-point-clouds-through-pointnet-f8f3f2d53cc3)
+* [Papers with code on 3D point cloud classification](https://paperswithcode.com/task/3d-point-cloud-classification)
+* A comprehensive overview of deep learning techniques for 3D point cloud classification and semantic segmentation, [Sarker et al, 2023](https://arxiv.org/abs/2405.11903)
+
+* Deep learning-based 3D point cloud classification: A systematic survey and outlook, [Zhang et al, 2023](https://www.sciencedirect.com/science/article/abs/pii/S0141938223000896)
+* Point cloud completion with DL - [Review, Fei et al, 2022](https://arxiv.org/abs/2203.03311)
+
 ## Books and other resources
 
 * Rémi Cresson: [Deep Learning for Remote Sensing Images with Open Source Software](https://www.taylorfrancis.com/books/mono/10.1201/9781003020851/deep-learning-remote-sensing-images-open-source-software-r%C3%A9mi-cresson)
