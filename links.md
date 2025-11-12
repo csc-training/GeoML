@@ -1,6 +1,13 @@
 # Further reading material
 
-## Other GIS or AI courses
+## Huggingface
+* A general platform for sharing AI related info, but has also geoAI entries.
+* [Huggingface Torchgeo models](https://huggingface.co/models?sort=downloads&search=torchgeo), use search to find other models
+* [Huggingface papers](https://huggingface.co/papers)
+* [Hugginface Torchgeo datasets](https://huggingface.co/datasets?sort=downloads&search=torchgeo), use search to find other datasets
+* [Huggingface Learn](https://huggingface.co/learn)
+  
+## Courses
 
 * CSC:
 	* Fundamentals of Machine Learning
@@ -19,27 +26,14 @@
 	* [Elements of AI](https://www.elementsofai.com/)
 	* [Advanced remote sensing of environment](https://studies.helsinki.fi/courses/course-implementation/hy-opt-cur-2526-fed2206d-989a-4124-95fc-d2666df33db7/GEOG-322)
 * [SYKE, ML course](https://github.com/esiivola/syke-machine-learning-course)
-* [Huggingface Learn](https://huggingface.co/learn)
-
-
-
-## Publications
-* [Huggingface papers](https://huggingface.co/papers)
-* A comprehensive overview of deep learning techniques for 3D point cloud classification and semantic segmentation, [Sarker et al, 2023](https://arxiv.org/abs/2405.11903)
-* Deep learning-based 3D point cloud classification: A systematic survey and outlook, [Zhang et al, 2023](https://www.sciencedirect.com/science/article/abs/pii/S0141938223000896)
-* Point cloud completion with DL - [Review, Fei et al, 2022](https://arxiv.org/abs/2203.03311)
-* [A comprehensive GeoAI review: Progress, Challenges and Outlooks](https://arxiv.org/pdf/2412.11643), Boutayeb et al, 2024
-* Gwanggil Jeon: [Advanced Machine Learning and Deep Learning Approaches for Remote Sensing](https://www.mdpi.com/books/book/7482)
 
 ## Data
 ### Labeled spatial ML data
-
-* [Hugginface Torchgeo datasets](https://huggingface.co/datasets?sort=downloads&search=torchgeo), use search to find other datasets
 * https://github.com/Seyed-Ali-Ahmadi/Awesome_Satellite_Benchmark_Datasets
 * https://github.com/chrieke/awesome-satellite-imagery-datasets
 * [AI datasets by NASA](https://search.earthdata.nasa.gov/search?portal=ai-ml&lat=-0.140625)
-* [SpaceNet challenges](https://spacenet.ai/),
-* [FLAIR-HUB challenges](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub.html), multi-modal
+* [SpaceNet challenges](https://spacenet.ai/), also code examples
+* [FLAIR-HUB challenges](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub.html), multi-modal, also code examples
 * [OpenForest catalog for machine learning in forest monitoring](https://github.com/RolnickLab/OpenForest/blob/main/OpenForest.csv)
 
 #### Finnish spatial labeled ML data
@@ -55,30 +49,13 @@
 * [Segmented point cloud from forest](https://doi.org/10.23729/8d2d3765-b5a0-4998-82c1-13a6f8bc9de3), Harri Kaartinen et al, FGI/NLS
 * [Finnish Winter Driving Dataset, images and lidar data](https://doi.org/10.5281/zenodo.14856337), Eerik Alamikkotervo et al, Aalto
 
-### Spatial data
+## Overview articles and books
+* A comprehensive GeoAI review: Progress, Challenges and Outlooks, [Boutayeb et al, 2024](https://arxiv.org/pdf/2412.11643)
+* A comprehensive overview of deep learning techniques for 3D point cloud classification and semantic segmentation, [Sarker et al, 2023](https://arxiv.org/abs/2405.11903)
+* Deep learning-based 3D point cloud classification: A systematic survey and outlook, [Zhang et al, 2023](https://www.sciencedirect.com/science/article/abs/pii/S0141938223000896)
+* Point cloud completion with DL - [Review, Fei et al, 2022](https://arxiv.org/abs/2203.03311)
+* Gwanggil Jeon: [Advanced Machine Learning and Deep Learning Approaches for Remote Sensing](https://www.mdpi.com/books/book/7482)
 
-* [Paituli STAC](https://paituli.csc.fi/stac.html) - Finnish raster datasets via STAC
-* [Geoportti Geocubes](https://vm0160.kaj.pouta.csc.fi/geocubes/) - Finnish harmonized data, easy to use for ML
-* [Open spatial data](https://www.geoportti.fi/services/data/), Geoportti listin of open global and Finnish spatial datasets
-* https://github.com/sacridini/Awesome-Geospatial#data-sources
-
-
-## Models
-* [Huggingface Torchgeo models](https://huggingface.co/models?sort=downloads&search=torchgeo), use search to find other models
-
-
-
-## GeoML public code
-* https://huggingface.co/papers
-* [SpaceNet challenges](https://spacenet.ai/), [baseline and winning codes](https://github.com/SpaceNetChallenge/)
-* [FLAIR-HUB challenges](https://ignf.github.io/FLAIR/FLAIR-HUB/flairhub.html), multi-modal
-* [The Environmental Data Science book](https://edsbook.org/gallery) several GeoAI projects presented as Jupyter notebooks.
-
-
-## Links to more links
+## Link collections
 * https://github.com/satellite-image-deep-learning
-* https://github.com/deepVector/geospatial-machine-learning
-* https://github.com/robmarkcole/satellite-image-deep-learning
-* https://github.com/sacridini/Awesome-Geospatial#deep-learning
-* https://github.com/sshuair/awesome-gis#deep-learning
 * https://github.com/wenhwu/awesome-remote-sensing-change-detection
