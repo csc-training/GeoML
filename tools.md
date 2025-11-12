@@ -37,6 +37,7 @@
      * Pixel classification
      * Object classification: classify features or tiles
      * Image translation (GAN)
+  * Tool to remove overlapping object detection predictions
 * Training serious models requires Nvidia GPU
 
 Tip: See [ESRI virtual campus machine learning materials](https://www.esri.com/training/catalog/5eb18cf2a7a78b65b7e26134/deep-learning-using-arcgis/)
