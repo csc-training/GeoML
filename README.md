@@ -3,34 +3,33 @@
 ## Course goals
  * General overview of machine learning for spatial data
  * Give vocabulary to continue with own experiments
- * Show and run some practical examples
+ * Learn to train GeoAI models at practical level
 
 ## Out of scope
  * Feature engineering 
  * In depth result interpretation
- * Working with pointclouds
+ * Working with vector geometries, point clouds and time-series data.
 
 ## Content of this repository
 
 This repository contains all Jupyter Notebooks and other code used in the course. Data is not inlcuded here, data download links are provided in data preparations Notebooks. Each exercise has its own folder:
 
-* [01_clustering](01_clustering) 
-* [02_vector_data_preparation](02_vector_data_preparation)
-* [03_raster_data_preparation](03_raster_data_preparation)
-* [04_shallow_regression](04_shallow_regression)
-* [05_shallow_classification](05_shallow_classification)
-* [06_deep_regression](06_deep_regression)
-* [07_deep_classification](07_deep_classification)
+* [01_vector_data_preparation](01_vector_data_preparation)
+* [02_raster_data_preparation](02_raster_data_preparation)
+* [03_shallow_regression](03_shallow_regression)
+* [04_shallow_classification](04_shallow_classification)
+* [05_deep_regression](06_deep_regression)
+* [06_deep_classification](06_deep_classification)
+* [07_samgeo](07_samgeo)
 * [08_cnn_segmentation](08_cnn_segmentation)
+* [09_object_detection](09_object_detection)
 
 
 ## Course exercise enviroment
+During the course exercises are done in LUMI, which is EuroHPC supercomputer. Accessing LUMi requires LUMI project. Finnish users get access to LUMI via CSC. For course the course participants are added to course project.
 
-During the course exercises are done in Puhti, which is one of CSCs supercomputers providing researchers in Finland with High Performance Computing resources.
-
-
-### Puhti webinterface
-* Open https://www.puhti.csc.fi
+### LUMI webinterface
+* Open https://www.lumi.csc.fi
 * Enter [CSC username](https://docs.csc.fi/accounts/) and password 
 * For course use temporary training accounts are provided.
     
@@ -96,12 +95,10 @@ To get started:
 
 * [Links to further resources](links.md)
 * [Optional tools for machine learning with spatial data](tools.md)
-* [Hints for machine learning with point clouds; Work in progress](point_cloud.md)
-* [Hints for machine learning with time series; Work in progress](timeseries.md)
 
 
 ## Authors
-Kylli Ek, Samantha Wittke, Johannes Nyman, Ziya Yektay
+Iida Hakulinen, Kylli Ek, Samantha Wittke, Johannes Nyman, Ziya Yektay
 
 ## Acknowledgement
 
