@@ -37,7 +37,7 @@ During the course exercises are done in LUMI, which is EuroHPC supercomputer. Ac
 
 * Click "Jupyter for courses" on dashboard
 * Select:
-   * Project: project_2002044 during course, own project later
+   * Project: project_462001167 during course, own project later
    * Module: GeoML22
    * Working directory: "/scratch/project_2002044"
 * Click launch and wait until granted resources
@@ -47,20 +47,31 @@ During the course exercises are done in LUMI, which is EuroHPC supercomputer. Ac
 #### Jupyter 
 * Click "Jupyter" on dashboard
 * Select following settings:
-	* Project: project_2002044 during course, own project later 
+	* Project: project_462001167 during course, own project later 
 	* Partition: interactive
-	* CPU cores: 1
-	* Memory (Gb): 8 
+	* CPU cores: 4
 	* Local disk: 0
 	* Time: 4:00:00 (or adjust to reasonable)
-	* Python: geoconda OR tensorflow depending on the exercise
-		* Exercises 1, 2, 4 and 5: geoconda OR tensorflow
-		* Exercises 3 and 8 notebooks: geoconda
-		* Exercises 6 and 7: tensorflow
-	* Jupyter type: Lab
-	* Working directory: /scratch/project_2002044 during course, own project scratch later
+ 	* Working directory: /scratch/project_462001167 during course, own project scratch later* 
+	* Python: geoconda OR pytorch depending on the exercise
+		* Exercises 1 - 6, 8 data preparation: geoconda
+  			* No virtual environment  	
+		* Exercises 7 - 9: pytorch
+  			* With virtual environment: /projappl/project_462001167/geoml25
+       			* Enable packages under ~/.local/lib on venv start TODO
+	
 * Click launch and wait until granted resources 
-* Click "Connect to Jupyter" 
+* Click "Connect to Jupyter"
+* Open Terminal and clone exercise materials
+
+```
+cd /scratch/project_462001167/students/
+mkdir $USER
+cd $USER
+git clone https://github.com/csc-training/GeoML.git
+```
+
+* Open in JupyterLab folder `students/<your_username>/GeoML`
 
 #### QGIS
 * Click "Desktop" on dashboard
