@@ -26,12 +26,13 @@ This repository contains all Jupyter Notebooks and other code used in the course
 
 
 ## Course exercise enviroment
-During the course exercises are done in LUMI, which is EuroHPC supercomputer. Accessing LUMi requires LUMI project. Finnish users get access to LUMI via CSC. For course the course participants are added to course project.
+During the course exercises are done in LUMI, which is EuroHPC supercomputer. Accessing LUMi requires LUMI project. Finnish users get access to LUMI via CSC. For course the course participants are added to the course project.
 
 ### LUMI webinterface
 * Open https://www.lumi.csc.fi
-* Enter [CSC username](https://docs.csc.fi/accounts/) and password 
-* For course use temporary training accounts are provided.
+* Log in with:
+	* HAKA, if you have (Finnish universities and some research institutes)
+ 	* [CSC account](https://docs.csc.fi/accounts/), you need your CSC username and password 
     
 #### Jupyter for courses (only available during the course)
 
@@ -53,12 +54,12 @@ During the course exercises are done in LUMI, which is EuroHPC supercomputer. Ac
 	* Local disk: 0
 	* Time: 4:00:00 (or adjust to reasonable)
  	* Working directory: /scratch/project_462001167 during course, own project scratch later* 
-	* Python: geoconda OR pytorch depending on the exercise
+	* Python: geoconda OR custom depending on the exercise
 		* Exercises 1 - 6, 8 data preparation: geoconda
   			* No virtual environment  	
-		* Exercises 7 - 9: pytorch
-  			* With virtual environment: /projappl/project_462001167/geoml25
-       			* Enable packages under ~/.local/lib on venv start TODO
+		* Exercises 7 - 9: custom
+  			* Python: /projappl/project_462001167/geoml_tykky/bin/python
+			* (Do not select any of the check-boxes below.)
 	
 * Click launch and wait until granted resources 
 * Click "Connect to Jupyter"
@@ -76,7 +77,7 @@ git clone https://github.com/csc-training/GeoML.git
 #### QGIS
 * Click "Desktop" on dashboard
 * Select:
-   * Project: project_2002044 during course, own project later
+   * Project: project_462001167 during course, own project later
    * Partition: interactive
    * Number of CPU cores: 1
    * Memory (GB): 10
@@ -89,7 +90,7 @@ git clone https://github.com/csc-training/GeoML.git
 
 ## Exercises on own computer
 
-Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercise 8 (CNN), batch job scripts are Puhti specific as GPU resources are good to have for the exercise to run in reasonable time. However, the Python scripts can also be run on your own computer with some path adjustments.
+Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercises 8 - 9 (CNN and object detection), batch job scripts are supercomputer (LUMI, Puhti etc) specific as GPU resources are good to have for the exercise to run in reasonable time. However, the Python scripts can also be run on your own computer with some path adjustments.
 
 To get started:
 * Get the exercise material from Github
