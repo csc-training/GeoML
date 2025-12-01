@@ -58,7 +58,7 @@ git clone https://github.com/csc-training/GeoML.git
 		* Exercises 7 - 9: pytorch
   			* Before opening Jupyter the first time, you need to create virtual environment with some extra packages, see below.
       		* Check, `Enable virtual environment`
-			* Virtual environment path: /projappl/project_462001167/students/$USER/geoml
+			* Virtual environment path: `/projappl/project_462001167/students/$USER/geoml`
    			* Check, `Enable packages under ~/.local/lib on venv start`
    	* (Do not select any of the check-boxes below.)
 	
