@@ -33,18 +33,16 @@ During the course exercises are done in LUMI, which is EuroHPC supercomputer. Ac
 * Log in with:
 	* HAKA, if you have (Finnish universities and some research institutes)
  	* [CSC account](https://docs.csc.fi/accounts/), you need your CSC username and password 
-    
-#### Jupyter for courses (only available during the course)
 
-* Click "Jupyter for courses" on dashboard
-* Select:
-   * Project: project_462001167 during course, own project later
-   * Module: GeoML22
-   * Working directory: "/scratch/project_2002044"
-* Click launch and wait until granted resources
-* Click "Connect to Jupyter" 
-* ... to be continued within [Introduction notebook](intro.ipynb)
-
+### Copy exercise materials
+Open Login node shell
+```
+cd /scratch/project_462001167/students/
+mkdir $USER
+cd $USER
+git clone https://github.com/csc-training/GeoML.git
+```
+	
 #### Jupyter 
 * Click "Jupyter" on dashboard
 * Select following settings:
@@ -55,38 +53,37 @@ During the course exercises are done in LUMI, which is EuroHPC supercomputer. Ac
 	* Time: 4:00:00 (or adjust to reasonable)
  	* Working directory: /scratch/project_462001167 during course, own project scratch later* 
 	* Python: geoconda OR custom depending on the exercise
-		* Exercises 1 - 6, 8 data preparation: geoconda
+		* Exercises 1 - 6, 9 data preparation: geoconda
   			* No virtual environment  	
-		* Exercises 7 - 9: custom
-  			* Python: /projappl/project_462001167/geoml_tykky/bin/python
-			* (Do not select any of the check-boxes below.)
+		* Exercises 7 - 9: pytorch
+  			* Before opening Jupyter the first time, you need to create virtual environment with some extra packages, see below.
+      		* Check, `Enable virtual environment`
+			* Virtual environment path: `/projappl/project_462001167/students/$USER/geoml`
+   			* Check, `Enable packages under ~/.local/lib on venv start`
+   	* (Do not select any of the check-boxes below.)
 	
 * Click launch and wait until granted resources 
 * Click "Connect to Jupyter"
 * Open Terminal and clone exercise materials
-
-```
-cd /scratch/project_462001167/students/
-mkdir $USER
-cd $USER
-git clone https://github.com/csc-training/GeoML.git
-```
-
 * Open in JupyterLab folder `students/<your_username>/GeoML`
 
-#### QGIS
-* Click "Desktop" on dashboard
-* Select:
-   * Project: project_462001167 during course, own project later
-   * Partition: interactive
-   * Number of CPU cores: 1
-   * Memory (GB): 10
-   * Local disk: 0
-   * Time: 4:00:00 (or adjust to reasonable)
-   * Desktop: single application
-   * App: QGIS
-* Click launch and wait until granted resources
-* Click "Launch Desktop" 
+#### Adding deep learning librares to pytorch module
+The Pytorch module does not include all Python packages required by these exercises. To add custom packages, the best option is to use [venv](https://docs.csc.fi/support/tutorials/python-usage-guide/#using-venv) (virtual environment).
+
+Open Login node shell and add the venv to `projappl`:
+```
+cd /projappl/project_462001167/students/
+mkdir $USER
+cd $USER
+module use /appl/local/csc/modulefiles/
+ml pytorch
+python3 -m venv --system-site-packages geoml
+source geoml/bin/activate
+pip install torchgeo sahi ultralytics segment-geospatial addict yapf pycocotools supervision groundingdino-py
+```
+
+#### Optional, QGIS
+[CSC Dosc: QGIS](https://docs.csc.fi/apps/qgis/)
 
 ## Exercises on own computer
 
@@ -110,8 +107,10 @@ To get started:
 
 
 ## Authors
-Iida Hakulinen, Kylli Ek, Samantha Wittke, Johannes Nyman, Ziya Yektay
+Iida Hakulinen, Kylli Ek, Samantha Wittke, Johannes Nyman
 
 ## Acknowledgement
 
-Please acknowledge CSC and Geoportti in your publications, it is important for project continuation and funding reports. As an example, you can write "The authors wish to thank CSC - IT Center for Science, Finland (urn:nbn:fi:research-infras-2016072531) and the Open Geospatial Information Infrastructure for Research (Geoportti, urn:nbn:fi:research-infras-2016072513) for computational resources and support".
+These materials have been developed with Location Innovation Hub (LIH) and Geoportti funding.
+
+Please acknowledge CSC, Location Innovation Hub (LIH) and Geoportti in your publications, it is important for project continuation and funding reports. As an example, you can write "The authors wish to thank CSC - IT Center for Science, Finland (urn:nbn:fi:research-infras-2016072531), Location Innovation Hub and the Open Geospatial Information Infrastructure for Research (Geoportti, urn:nbn:fi:research-infras-2016072513) for computational resources and support".
