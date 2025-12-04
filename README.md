@@ -79,7 +79,9 @@ module use /appl/local/csc/modulefiles/
 ml pytorch
 python3 -m venv --system-site-packages geoml
 source geoml/bin/activate
-pip install torchgeo sahi ultralytics segment-geospatial[samgeo] addict yapf pycocotools supervision groundingdino-py folium==0.13
+pip install torchgeo # CNN exercise
+pip install sahi ultralytics folium==0.13 # Object detection exercise
+pip install segment-geospatial[samgeo] addict yapf pycocotools supervision groundingdino-py # SAM
 ```
 
 #### Optional, QGIS
