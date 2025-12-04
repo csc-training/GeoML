@@ -80,7 +80,7 @@ ml pytorch
 python3 -m venv --system-site-packages geoml
 source geoml/bin/activate
 pip install torchgeo # CNN exercise
-pip install sahi ultralytics folium==0.13 # Object detection exercise
+pip install sahi ultralytics folium==0.13 mapclassify # Object detection exercise
 pip install segment-geospatial[samgeo] addict yapf pycocotools supervision groundingdino-py # SAM
 ```
 
