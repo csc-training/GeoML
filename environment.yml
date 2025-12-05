@@ -1,18 +1,19 @@
 channels:
   - conda-forge
 dependencies:
-  - addict
+  - addict                # SAM
   - boto3 					      # S3 storage client
-  - folium
-  - gdal
+  - folium==0.13          # Interactive maps
+  - gdal                  # Spatial data input/output
   - geopandas 				    # Vector data
-  - groundingdino-py
-  - huggingface_hub
+  - groundingdino-py      # SAM
+  - huggingface_hub       # Huggingface
   - imbalanced-learn 		  # Imbalanced data handling
   - jupyterlab 
-  - mapclassify
+  - mapclassify           # Interactive maps
   - matplotlib				    
   - pip
+  - pycocotools           # SAM
   - pystac-client 			  # Search data from STAC 
   - rasterio 				      # raster data handling
   - rioxarray 				    # Save to geotiff from xarray
@@ -20,11 +21,11 @@ dependencies:
   - scikit-learn   			  # Shallow machine learning 
   - segment-geospatial[samgeo2] # Segment-anything
   - stackstac 				    # Get data from STAC
-  - supervision
-  - tokenizers
+  - supervision           # SAM
+  - tokenizers            # SAM
   - torchgeo				      # CNN geo library
   - torchinfo				      # Plot pytorch model info
-  - torchvision==0.22
+  - torchvision==0.22     
   - transformers			
   - ultralytics				    # Object detection with YOLO
   - yapf
