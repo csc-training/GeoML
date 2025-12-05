@@ -1,28 +1,24 @@
-# Object detection
+# Object detection with self-trained model
 
 (For nicer reading in Jupyter, righ-click and select `Show Markdown Preview`.) 
 
-The goal of this exercise is to detect marine vessels from the Baltic Sea, based on Sentinel-2 1C data. The model for object detection is a YOLO model. 
-
-The main libraries of this exercise are:
-* [geoml2](https://github.com/mayrajeo/geo2ml) - convert the data into YOLO compatible format.
-* [Ultralytics](https://docs.ultralytics.com) model training
-* [sahi](https://obss.github.io/sahi/) - tiled predicting
-
-This exercise heavily relies on the work of [Janne Mäyrä](https://scholar.google.com/citations?user=xAT9080AAAAJ&hl=en) from SYKE (Finnish Environmental institute). He has prepared the used training data, `geo2ml`-library and example code for model training and predicting (TODO).
-
-## Data sources
-* ESA, [Sentinel-2 1C RGB data](https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products/collection-1-level-1c), (pre-)downloaded from [CDSE](https://dataspace.copernicus.eu/) via STAC
-* Janne Mäyrä, SYKE, Dataset for marine vessel detection from Sentinel 2 images in the Finnish coast, downloaded from [Zenodo](https://doi.org/10.5281/zenodo.15019034). For keeping exercise durition reasonable, we use only part of the data.
+This exercise includes the full workflow of object detection: data preparations, model training, running object detection, saving results in GIS-format, estimating the model.
 
 Main steps:
 * Sentinel data download.
 * Training data download.
 * Data preparation for Ultralytics YOLO
 * Model training
-* Tiled prediction 
+* Tiled prediction
+* Saving the results as geo-referenced GeoPackage
+* Plotting prediction results
 * Model estimation
-* TODO
+
+The main libraries of this exercise are:
+* [geoml2](https://github.com/mayrajeo/geo2ml) - convert the data into YOLO compatible format.
+* [Ultralytics](https://docs.ultralytics.com) model training
+* [SAHI](https://obss.github.io/sahi/) - tiled predicting
+
 
 ## Workflow
 
