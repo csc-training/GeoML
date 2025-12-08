@@ -10,7 +10,7 @@ Main steps:
 * Data preparation for Ultralytics YOLO
 * Model training
 * Tiled prediction
-* Saving the results as geo-referenced GeoPackage
+* Saving the results as geo-referenced GeoJSON
 * Plotting prediction results
 * Model estimation
 
@@ -22,21 +22,21 @@ The main libraries of this exercise are:
 
 ## Workflow
 
-1.  The Sentinel-2 data downloaded. The data for this exercise is pre-loaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [09_0_download_sentinel2_data.ipynb](09_0_download_sentinel2_data.ipynb).
+1.  The Sentinel-2 data download. The data for this exercise is pre-downloaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [09_0_download_sentinel2_data.ipynb](09_0_download_sentinel2_data.ipynb).
         
-2. Prepare data for the YOLO model. The notebook creates a YOLO compatible dataset and splits the data to training, validation, and test sets. 
+2. Prepare data for the Ultralyltics YOLO model. The notebook creates Ultralyltics YOLO compatible dataset and splits the data to training, validation, and test sets. 
     * Open the Jupyter notebook: [09_1_data_preparation.ipynb](09_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](Readme.md). **Use geoconda module**
-    * The notebook creates a subdirectory `datasets` that includes the data for model training and evaluation.
+    * The notebook creates a subdirectory `yolo_data`.
       
 3. Modify the `yolo.yaml` settings file, that sets the paths to data. 
-    * Copy the `yolo.yaml` file from `datasets/test` to the `datasets` directory.
+    * Copy the `yolo.yaml` file from `yolo_data/test` to the `yolo_data` directory.
     * Modify all paths
         * Remove the last sub-folder `test` from `path`
         * Add correct folder for other three folders, note that paths are relative to `path`
         * The resulting file should look like this, but with your own username in the first row.
 
 ```
-path: /scratch/project_462001167/students/YOUR_USER_NAME/GeoML/09_object_detection/own_model_training/datasets # dataset root dir 
+path: /scratch/project_462001167/students/YOUR_USER_NAME/GeoML/09_object_detection/own_model_training/yolo_data # dataset root dir 
 train: train # train images (relative to 'path')
 val: val # val images (relative to 'path')
 test: test # test images (relative to 'path')
@@ -70,14 +70,16 @@ names:
             * Results of each epoch. 
             * This output file is also the first place to look for errors, when writing own scripts.
     * Optional, to see full output from beginning: `less slurm-1212121212.out` (this does not update, if file gets more rows).
-    * It is possible to see job's state (waiting, running, finished) and used resources with `seff 1212121212`
-    * There should be new files in the `09_object_detection/yolo_project/train` folder:
+    * It is possible to see job's state (waiting, running, finished) and used resources with
+        * `sacct -o jobid,partition,state,reqmem,maxrss,averss,elapsed`
+        * (In CSC Puhti: `seff 1212121212`)
+    * There should be new files in the `yolo_project/train` folder:
         * `weights/best.pt` - the trained model       
-        * the training log files    
+        * The training log files    
 
 5. Run inference using the trained model. The predictions are created by submitting batch job: [09_3_predict.sh](09_3_predict.sh). This script runs the Python file: [09_3_predict.py](09_3_predict.py) and predicts the vessels from the test image.
     * `sbatch 09_3_predict.sh`
-    * Similarly as before, the output of the batch job can be inspected by opening the slurm output file. The output file includes information on the detected vessels. The polygons geometry,           confidence score and the amount of detected vessels in total. 
+    * Similarly as before, the output of the batch job can be inspected by opening the slurm output file. The output file includes information on the detected vessels. The polygons geometry, confidence score and the amount of detected vessels in total. 
     * The predictions are saved to a file to the `predictions` folder.
       
 6. Evaluate model using the [09_4_evaluate.ipynb](09_4_evaluate.ipynb) Jupyter notebook. The script plots the results and computes performance metrics. 
