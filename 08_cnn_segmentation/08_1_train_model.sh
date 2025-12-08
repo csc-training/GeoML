@@ -8,10 +8,14 @@
 #SBATCH --gpus=1         # Number of GPUs (LUMI version)
 # SBATCH --gres=gpu:v100:1         # Number of GPUs (Puhti version)
 
-# Use course Python installation, inc TorchGeo
-#export PATH="/projappl/project_462001167/geoml_tykky2/bin:$PATH"
+# Load the CSC module tree into use
 module use /appl/local/csc/modulefiles/
-module load pytorch
 
-# Run the Python code, give data folder and number of classes in labels as arguments
+# Load Pytorch module
+module load pytorch/2.7
+
+# Activate virtual environment containing special packages needed for GeoAI, inc TorchGeo
+source /projappl/project_462001167/students/$USER/geoml/bin/activate
+
+# Run the Python code
 srun python3 08_1_train_model.py
