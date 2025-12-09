@@ -11,7 +11,7 @@ The used data is the same as in shallow and deep classification exercises.
 Satellite images are usually too big for CNN models as such, se we need to tile them to smaller tiles for training the model and also later for prediction. Torchgeo has very nice functionality for tiling and sampling the data for training. Unfortunatelly similar functionality does not exist for inference.
 
 This exercise includes two steps:
-* Model training, incluing data loading and tiling with torchgeo. This part is run as batch job, because GPU-resoruces are needed.
+* Model training, including data loading and tiling with torchgeo. This part is run as batch job, because GPU-resources are needed.
 * Inference and evaluation of the model visually and by calculating performance metrics.
 
 ## Data loading and CNN model training as a batch job.
