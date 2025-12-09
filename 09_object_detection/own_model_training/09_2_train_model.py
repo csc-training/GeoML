@@ -52,10 +52,10 @@ def main():
     cores = len(os.sched_getaffinity(0))
     
     # Number of epochs
-    no_of_epochs = 100
+    no_of_epochs = 200
 
     # Batch size
-    batch_size = 8
+    batch_size = 16
 
     # Image size 
     image_size = 320
@@ -66,7 +66,7 @@ def main():
 
     # Set patience as the number of epochs the model considers before stopping when validation loss doesn't decrease anymore
     # Usually a rather small amount is good so that the model doesn't overfit
-    patience = 10
+    patience = 20
 
     # Initialize YOLOv8 model from Ultralytics
     model = YOLO('yolov8n')
