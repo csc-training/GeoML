@@ -6,11 +6,13 @@
 
 
 """
-Script for training a CNN segmentation model based on GeoTiff data and labels files.
+Script for training a CNN segmentation model based on GeoTiff data and label files.
 The main Python libraries are Pytorch, PyTorch Lightning and Torchgeo.
 
 Main steps of the script:
-* 
+* Data loading
+* Augmentation
+* Model training
 
 Created on Fri Oct 3 2025
 
