@@ -48,7 +48,7 @@ This exercise includes two steps:
     *  Logs of training in `logs-<date>` folder that can be viewed using Tensorboard.
 
 ## Inference and evaluation of the model visually and by calculating performance metrics.
-* Open Jupyter as decribed in [main Readme](../Readme.md)
+* Open Jupyter as described in [main Readme](../Readme.md)
 * Open [08_2_evaluation_and_inference.ipynb](08_2_evaluation_and_inference.ipynb)
 
 
