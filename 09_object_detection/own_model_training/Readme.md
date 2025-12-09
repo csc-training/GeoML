@@ -74,8 +74,9 @@ names:
         * `sacct -o jobid,partition,state,reqmem,maxrss,averss,elapsed`
         * (In CSC Puhti: `seff 1212121212`)
     * There should be new files in the `yolo_project/train` folder:
-        * `weights/best.pt` - the trained model       
-        * The training log files    
+        * `weights/best.pt` - the YOLO model checkpoint saved during training when validation performance is at its highest.
+        * `results.png` - results of the training containing three losses: box loss (how well the trained model can locate the bounding boxes), classification loss (how well the correct classes are predicted), Distribution Focal loss (how well edge distances are predicted in the model), precision, recall and mAP50.
+        * Box curves such as the F1, precision, and recall confidence curves evaluating the bounding box prediction at different confidence thresholds.
 
 5. Run inference using the trained model. The predictions are created by submitting batch job: [09_3_predict.sh](09_3_predict.sh). This script runs the Python file: [09_3_predict.py](09_3_predict.py) and predicts the vessels from the test image.
     * `sbatch 09_3_predict.sh`
