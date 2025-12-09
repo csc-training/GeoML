@@ -1,15 +1,4 @@
 # Exercise materials for "Practical machine learning for spatial data" at CSC
-
-## Course goals
- * General overview of machine learning for spatial data
- * Give vocabulary to continue with own experiments
- * Learn to train GeoAI models at practical level
-
-## Out of scope
- * Feature engineering 
- * In depth result interpretation
- * Working with vector geometries, point clouds and time-series data.
-
 ## Content of this repository
 
 This repository contains all Jupyter Notebooks and other code used in the course. Data is not inlcuded here, data download links are provided in data preparations Notebooks. Each exercise has its own folder:
@@ -51,7 +40,7 @@ git clone https://github.com/csc-training/GeoML.git
 	* CPU cores: 4
 	* Local disk: 0
 	* Time: 4:00:00 (or adjust to reasonable)
- 	* Working directory: /scratch/project_462001167 during course, own project scratch later* 
+ 	* Working directory: /scratch/project_462001167 during course, own project's scratch later* 
 	* Python: geoconda OR custom depending on the exercise
 		* Exercises 1 - 6, 9 data preparation: geoconda
   			* No virtual environment  	
@@ -81,7 +70,8 @@ python3 -m venv --system-site-packages geoml
 source geoml/bin/activate
 pip install torchgeo # CNN exercise
 pip install sahi ultralytics folium==0.13 mapclassify # Object detection exercise
-pip install segment-geospatial[samgeo] addict yapf pycocotools supervision groundingdino-py # SAM
+pip install segment-geospatial[samgeo] addict yapf pycocotools supervision #SAM
+pip install groundingdino-py # SAM
 ```
 
 #### Optional, QGIS
