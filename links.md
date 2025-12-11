@@ -12,6 +12,7 @@
 * CSC:
 	* Fundamentals of Machine Learning
 	* [Practical Deep Learning](https://e-learn.csc.fi/course/view.php?id=14)
+ 		* [PDL, exercsises](https://github.com/csc-training/intro-to-dl/) 
 	* [Geocomputing on supercomputers](https://csc-training.github.io/geocomputing_course/index.html)
 	* [Introduction to Python GIS](https://e-learn.csc.fi/course/view.php?id=122)
 	* [Spatial data analysis with R](https://e-learn.csc.fi/course/view.php?id=120)
