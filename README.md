@@ -74,6 +74,18 @@ pip install segment-geospatial[samgeo] addict yapf pycocotools supervision #SAM
 pip install groundingdino-py # SAM
 ```
 
+```
+cd /scratch/project_462001167/students/$USER
+module use /appl/local/csc/modulefiles/
+ml pytorch
+python3 -m venv --system-site-packages geoml
+source geoml/bin/activate
+pip install torchgeo # CNN exercise
+pip install sahi ultralytics folium==0.13 mapclassify # Object detection exercise
+pip install segment-geospatial[samgeo] addict yapf pycocotools supervision #SAM
+pip install groundingdino-py # SAM
+```
+
 #### Optional, QGIS
 [CSC Dosc: QGIS](https://docs.csc.fi/apps/qgis/)
 
