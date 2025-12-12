@@ -64,7 +64,7 @@ def create_union_dataset(images, labels):
 
 class GeoDataModule(LightningDataModule):
     """
-    A TorchGeo GeoDataModule for loading imagery and labels, and creating an iterabel Torch Dataloader over the training data. The module first loads the training and validation datasets and creates a TorchGeo UnionDataset that combines both the imagery and label rasters. Training data is sampled randomly to in crease the amount of the samples. A collate function is used to batch the data and stack the right objects inside the dataset. Finally, a Dataloader is created. 
+    A TorchGeo GeoDataModule for loading imagery and labels, and creating an iterable Torch Dataloader over the training data. The module first loads the training and validation datasets and creates a TorchGeo UnionDataset that combines both the imagery and label rasters. Training data is sampled randomly to in crease the amount of the samples. A collate function is used to batch the data and stack the right objects inside the dataset. Finally, a Dataloader is created. 
     Attributes:
     ----------
     train_image: list[str] - List of .tif files containing training imagery
@@ -73,7 +73,7 @@ class GeoDataModule(LightningDataModule):
     val_mask: list[str] - List of .tif files containg the validation imagery
     tile_size: a float - tile size used for the sampling
     batch_size: an integer - number of samples per batch
-    num_workers: an integer - 
+    num_workers: an integer - number of subprocesses the dataloader creates
 
     Methods: 
     setup: Set up datasets and samplers.
@@ -128,42 +128,42 @@ class GeoDataModule(LightningDataModule):
 
 # LightningModule wrapper for SemanticSegmentationTask
 class MySegmentationTask(SemanticSegmentationTask):
-    """Kornia Augmentation is run using a LightningModule wrapper for TorchGeo's SemanticSegmentationTask to run the augmentation on GPU. 
+    """Kornia Augmentation is ran using a LightningModule wrapper for TorchGeo's SemanticSegmentationTask to run the augmentation on GPU. 
     """    
     def __init__(self, *args, aug_config: dict | None = None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.augment_training_data = None
+        self.aug = None
         
-        def augment_training_data(self):
-            aug = K.AugmentationSequential( 
-                K.RandomHorizontalFlip(p=0.5), 
-                K.RandomVerticalFlip(p=0.5), 
-                K.RandomRotation(degrees=90, resample="nearest"), 
-                data_keys=["image", "mask"], 
-                keepdim=True
-            )
-            return aug
+    def augment_training_data(self):
+        aug = K.AugmentationSequential( 
+            K.RandomHorizontalFlip(p=0.5), 
+            K.RandomVerticalFlip(p=0.5), 
+            K.RandomRotation(degrees=90, resample="nearest"), 
+            data_keys=["image", "mask"], 
+            keepdim=True
+        )
+        return aug
         
         
-        def on_after_batch_transfer(self, batch: Dict[str, torch.Tensor], dataloader_idx: int) -> Dict[str, torch.Tensor]:
-            # Called after Lightning moves the batch to the device
-            if self.trainer.training:
-                if self.augment_training_data is None:
-                    self.augment_training_data = self.augment_training_data()
+    def on_after_batch_transfer(self, batch: Dict[str, torch.Tensor], dataloader_idx: int) -> Dict[str, torch.Tensor]:
+        # Called after Lightning moves the batch to the device
+        if self.trainer.training:
+            if self.aug is None:
+                self.aug = self.augment_training_data()
+                
+            # Ensure augmentation module is on correct device
+            self.aug.to("cuda")
 
-                # Ensure augmentation module is on correct device and dtype
-                self.augment_training_data.to(device)
-
-                # Kornia expects floats for images; masks should remain integers.
-                images = batch["image"].float()
-                masks = batch["mask"].long()
-                 
-                images_aug, masks_aug = self.augment_training_data(images, masks)
-                      
-                # Ensure mask dtype is integer for loss functions
-                batch["image"] = images_aug
-                batch["mask"] = masks_aug.long()
-            return batch        
+            # Kornia expects floats for images; masks should remain integers.
+            images = batch["image"].float()
+            masks = batch["mask"].long()
+             
+            images_aug, masks_aug = self.aug(images, masks)
+                  
+            # Ensure mask dtype is integer for loss functions
+            batch["image"] = images_aug
+            batch["mask"] = masks_aug.long()
+        return batch   
 
 #  # Define Pytorch lightning Trainer and train the model
 def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, checkpoints_dir):
