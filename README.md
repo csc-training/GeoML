@@ -47,7 +47,7 @@ git clone https://github.com/csc-training/GeoML.git
 		* Exercises 7 - 9: pytorch
   			* Before opening Jupyter the first time, you need to create virtual environment with some extra packages, see below.
       		* Check, `Enable virtual environment`
-			* Virtual environment path: `/projappl/project_462001167/students/$USER/geoml`
+			* Virtual environment path: `/scratch/project_462001167/students/$USER/geoml`
    			* Check, `Enable packages under ~/.local/lib on venv start`
    	* (Do not select any of the check-boxes below.)
 	
@@ -59,21 +59,7 @@ git clone https://github.com/csc-training/GeoML.git
 #### Adding deep learning librares to pytorch module
 The Pytorch module does not include all Python packages required by these exercises. To add custom packages, the best option is to use [venv](https://docs.csc.fi/support/tutorials/python-usage-guide/#using-venv) (virtual environment).
 
-Open Login node shell and add the venv to `projappl`:
-```
-cd /projappl/project_462001167/students/
-mkdir $USER
-cd $USER
-module use /appl/local/csc/modulefiles/
-ml pytorch
-python3 -m venv --system-site-packages geoml
-source geoml/bin/activate
-pip install torchgeo # CNN exercise
-pip install sahi ultralytics folium==0.13 mapclassify # Object detection exercise
-pip install segment-geospatial[samgeo] addict yapf pycocotools supervision #SAM
-pip install groundingdino-py # SAM
-```
-
+Open Login node shell and add the venv to `scratch`:
 ```
 cd /scratch/project_462001167/students/$USER
 module use /appl/local/csc/modulefiles/
