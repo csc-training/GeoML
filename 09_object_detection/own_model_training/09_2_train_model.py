@@ -48,7 +48,6 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Number of workers, based on available cores
-    # Max recommended for Ultralytics YOLO is 8
     cores = len(os.sched_getaffinity(0))
     
     # Number of epochs
