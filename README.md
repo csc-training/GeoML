@@ -84,9 +84,8 @@ To get started:
 	* Clone this Github repository: `git clone https://github.com/csc-training/GeoML.git` 
 	* OR download the repository as a [zip-file](https://github.com/csc-training/GeoML/archive/refs/heads/main.zip)
 * Install all needed packages for running the notebooks:
-	* For pip use the [requirements.txt](requirements.txt) with `pip install -e requirements.txt`
-	* OR for conda, use the [environment.yml](environment.yml) with `conda create --name geoml --file environment.yml` which also creates a conda environment; see [conda homepage](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) on how to use it). 
-	* Package versions in comments in these files are versions used for GeoML course 2022 on Puhti.
+	* Install [mini-conda](https://conda-forge.org/download/) or some other tool supporting conda .yml files.
+  	* Use the [environment.yml](environment.yml) with `conda create --name geoml --file environment.yml` which also creates a conda environment; see [conda homepage](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) on how to use it). 
 * Adapt the main path in beginning of each notebook to your environment.
 * Have fun going through the notebooks and add an issue to this repository if something is not working.
 
