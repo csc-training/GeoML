@@ -77,15 +77,23 @@ pip install groundingdino-py # SAM
 
 ## Exercises on own computer
 
-Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercises 8 - 9 (CNN and object detection), batch job scripts are supercomputer (LUMI, Puhti etc) specific as GPU resources are good to have for the exercise to run in reasonable time. However, the Python scripts can also be run on your own computer with some path adjustments.
+Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercises 8 - 9 (CNN and object detection) require GPU availability for execution in reasonable time. 
 
 To get started:
-* Get the exercise material from Github
-	* Clone this Github repository: `git clone https://github.com/csc-training/GeoML.git` 
+* Get the exercise materials from Github
+	* If you have `git` intalled: `git clone https://github.com/csc-training/GeoML.git` 
 	* OR download the repository as a [zip-file](https://github.com/csc-training/GeoML/archive/refs/heads/main.zip)
 * Install all needed packages for running the notebooks:
 	* Install [mini-conda](https://conda-forge.org/download/) or some other tool supporting conda .yml files.
-  	* Use the [environment.yml](environment.yml) with `conda create --name geoml --file environment.yml` which also creates a conda environment; see [conda homepage](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) on how to use it). 
+ 	* Open Miniforge promt
+  	* Go to the folder where you saved the downloaded Github materials
+  	* Create new conda environment based on the `environmet.yml`
+  		* `conda env create --name geo-ml --file environment.yml` 
+		* See [conda docs, envs](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) for more information.
+* Activete created environment:
+	* `conda activate geo-ml`
+* Launch JupyterLab:
+	* `jupyter lab` 
 * Adapt the main path in beginning of each notebook to your environment.
 * Have fun going through the notebooks and add an issue to this repository if something is not working.
 
