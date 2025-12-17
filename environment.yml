@@ -1,33 +1,40 @@
 channels:
   - conda-forge
 dependencies:
-  - addict                # SAM
-  - boto3 					      # S3 storage client
-  - folium==0.13          # Interactive maps
+  - boto3                                             # S3 storage client
+  - folium          # Interactive maps
   - gdal                  # Spatial data input/output
-  - geopandas 				    # Vector data
-  - groundingdino-py      # SAM
-  - huggingface_hub       # Huggingface
-  - imbalanced-learn 		  # Imbalanced data handling
-  - jupyterlab 
-  - mapclassify           # Interactive maps
-  - matplotlib				    
+  - geopandas                               # Vector data
+  - git
   - pip
-  - pycocotools           # SAM
-  - pystac-client 			  # Search data from STAC 
-  - rasterio 				      # raster data handling
-  - rioxarray 				    # Save to geotiff from xarray
-  - sahi 					        # Tiled object detection
-  - scikit-learn   			  # Shallow machine learning 
-  - segment-geospatial[samgeo2] # Segment-anything
-  - stackstac 				    # Get data from STAC
-  - supervision           # SAM
-  - tokenizers            # SAM
-  - torchgeo				      # CNN geo library
-  - torchinfo				      # Plot pytorch model info
-  - torchvision==0.22     
-  - transformers			
-  - ultralytics				    # Object detection with YOLO
-  - yapf
+  - stackstac                               # Get data from STAC
+  - pystac-client                         # Search data from STAC
+  - python=3.12
+  - rasterio                                  # raster data handling
+  - libgdal-jp2openjpeg
+  - rioxarray                               # Save to geotiff from xarray
+  - jupyterlab
+  - jupyterlab-git
+  - jupyter-resource-usage
+  - ipywidgets
+  - mapclassify           # Interactive maps
+  - matplotlib
+  - seaborn
   - pip:
+    - addict                # SAM
+    - groundingdino-py      # SAM
+    - huggingface_hub       # Huggingface
+    - imbalanced-learn              # Imbalanced data handling
+    - pycocotools           # SAM
+    - sahi                                                # Tiled object detection
+    - scikit-learn                          # Shallow machine learning
+    - segment-geospatial[samgeo2] # Segment-anything
+    - supervision           # SAM
+    - tokenizers            # SAM
+    - torchgeo                                  # CNN geo library
+    - torchinfo                                 # Plot pytorch model info
+    - torchvision
+    - transformers
+    - ultralytics                             # Object detection with YOLO
+    - yapf
     - git+https://github.com/mayrajeo/geo2ml.git # Prepare data for YOLO
