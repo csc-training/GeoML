@@ -1,3 +1,4 @@
+name: geo-ml
 channels:
   - conda-forge
 dependencies:
