@@ -90,11 +90,12 @@ To get started:
   	* Create new conda environment based on the `environmet.yml`
   		* `conda env create --name geo-ml --file environment.yml` 
 		* See [conda docs, envs](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs) for more information.
-* Activete created environment:
+* Activate the created environment:
 	* `conda activate geo-ml`
 * Launch JupyterLab:
 	* `jupyter lab` 
 * Adapt the main path in beginning of each notebook to your environment.
+	* On Windows, it would look something like: `base_directory= os.path.join('C:\\temp\\geoml-course','GeoML')`
 * Have fun going through the notebooks and add an issue to this repository if something is not working.
 
 ## Extra material
