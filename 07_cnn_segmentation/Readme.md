@@ -16,20 +16,20 @@ This exercise includes two steps:
 
 ## Data loading and CNN model training as a batch job.
 * Open these files, we will go through it in details.
-    * Python file with PyTorch code: [08_1_train.py](08_1_train.py)
-    * HPC batch job file: [08_1_train_model.sh](08_1_train_model.sh)
+    * Python file with PyTorch code: [07_1_train.py](07_1_train.py)
+    * HPC batch job file: [07_1_train_model.sh](07_1_train_model.sh)
     * No modifications are needed to the files.
 * Submit Python script as SLURM batch job in a supercomputer:
     * Open Terminal to login-node: Open Apps -> Login node shell
     * A black window with SSH connection to Puhti opens, now Linux commands should be used.
     * The shell opens in home directory, to access the files, change working 
     directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/08_cnn_segmentation`
+        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter File panel.
     * Submit a batch job:
-        * `sbatch 08_1_train_model.sh`
+        * `sbatch 07_1_train_model.sh`
     * It outputs the job number, for example: `Submitted batch job 1212121212`
 * To see the Python output file, open it with `tail`, the exact file name depends on the number printed previosly:
     * `tail -f slurm-1212121212.out`.
@@ -43,13 +43,13 @@ This exercise includes two steps:
     * It is possible to see job's state (waiting, running, finished) and used resources with
         * `sacct -o jobid,partition,state,reqmem,maxrss,averss,elapsed`
         * (In CSC Puhti: `seff 1212121212`)
-* There should be new files in the `08_cnn_segmentation` folder:
+* There should be new files in the `07_cnn_segmentation` folder:
     * `best_model.ckpt` - the trained model in `checkpoints` folder. The best model has highest number. 
     *  Logs of training in `logs-<date>` folder that can be viewed using Tensorboard.
 
 ## Inference and evaluation of the model visually and by calculating performance metrics.
 * Open Jupyter as described in [main Readme](../Readme.md)
-* Open [08_2_evaluation_and_inference.ipynb](08_2_evaluation_and_inference.ipynb)
+* Open [07_2_evaluation_and_inference.ipynb](07_2_evaluation_and_inference.ipynb)
 
 
     

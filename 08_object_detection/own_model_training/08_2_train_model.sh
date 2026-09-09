@@ -18,4 +18,4 @@ module load pytorch/2.7
 source /projappl/project_462001167/students/$USER/geoml/bin/activate
 
 # Run the Python code and give path to the exercise directory
-srun python3 09_2_train_model.py /scratch/project_462001167/students/$USER/GeoML/09_object_detection/own_model_training/
+srun python3 08_2_train_model.py /scratch/project_462001167/students/$USER/GeoML/08_object_detection/own_model_training/

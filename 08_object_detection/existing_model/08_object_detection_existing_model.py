@@ -18,8 +18,8 @@ from sahi.predict import get_sliced_prediction
 def main():
     # Set path to the exercise directory
     exercise_folder = os.path.join(os.sep, 'scratch', 'project_462001167', 'students', \
-                                   os.environ.get('USER'), 'GeoML', '09_object_detection', 'existing_model') 
-    sentinel_image_pre_downloaded = '/scratch/project_462001167/09_sentinel_images/T34VEN_20210714T100029_TCI.tif'
+                                   os.environ.get('USER'), 'GeoML', '08_object_detection', 'existing_model') 
+    sentinel_image_pre_downloaded = '/scratch/project_462001167/08_sentinel_images/T34VEN_20210714T100029_TCI.tif'
     sentinel_image = os.path.join(exercise_folder, 'T34VEN_20210714T100029_TCI.tif')
     
     # Set image size used for inference

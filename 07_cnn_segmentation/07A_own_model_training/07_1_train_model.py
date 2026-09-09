@@ -195,7 +195,7 @@ def main():
     # With small adjustments instead of files, these could be also folders.
     # See: https://torchgeo.readthedocs.io/en/stable/tutorials/earth_surface_water.html
     base_folder = os.path.join(os.sep, 'scratch', 'project_462001167', 'students', os.environ.get('USER'), 'GeoML')
-    exercise_folder = os.path.join(base_folder, '08_cnn_segmentation') 
+    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation') 
     data_folder = os.path.join(base_folder,'data', 'raster')
     logs_dir= os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     checkpoints_dir= os.path.join(exercise_folder, 'checkpoints')

@@ -22,10 +22,10 @@ The main libraries of this exercise are:
 
 ## Workflow
 
-1.  The Sentinel-2 data download. The data for this exercise is pre-downloaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [09_0_download_sentinel2_data.ipynb](09_0_download_sentinel2_data.ipynb).
+1.  The Sentinel-2 data download. The data for this exercise is pre-downloaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [08_0_download_sentinel2_data.ipynb](08_0_download_sentinel2_data.ipynb).
         
 2. Prepare data for the Ultralyltics YOLO model. The notebook creates Ultralyltics YOLO compatible dataset and splits the data to training, validation, and test sets. 
-    * Open the Jupyter notebook: [09_1_data_preparation.ipynb](09_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](Readme.md). **Use geoconda module**
+    * Open the Jupyter notebook: [08_1_data_preparation.ipynb](08_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](Readme.md). **Use geoconda module**
     * The notebook creates a subdirectory `yolo_data`.
       
 3. Modify the `yolo.yaml` settings file, that sets the paths to data. 
@@ -36,7 +36,7 @@ The main libraries of this exercise are:
         * The resulting file should look like this, but with your own username in the first row.
 
 ```
-path: /scratch/project_462001167/students/YOUR_USER_NAME/GeoML/09_object_detection/own_model_training/yolo_data # dataset root dir 
+path: /scratch/project_462001167/students/YOUR_USER_NAME/GeoML/08_object_detection/own_model_training/yolo_data # dataset root dir 
 train: train # train images (relative to 'path')
 val: val # val images (relative to 'path')
 test: test # test images (relative to 'path')
@@ -48,19 +48,19 @@ names:
    
 4. Train the YOLO model for object detection using the data prepared in the earlier steps. We are using a YOLO model from Ultralytics.
     * Open these files, we will go through it in details.
-        * Python file: [09_2_train_model.py](09_2_train_model.py)
-        * HPC batch job file: [09_2_train_model.sh](09_2_train_model.sh)
+        * Python file: [08_2_train_model.py](08_2_train_model.py)
+        * HPC batch job file: [08_2_train_model.sh](08_2_train_model.sh)
     * No modifications are needed to the files.
     * Open in another tab of web-browser in the supercomputer web interface -> Login node shell
     * A black window with SSH connection to the supercomputer opens, now Linux commands must be used.
     * The shell opens in everybody's home directory, to access the files, change working 
       directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/09_object_detection/own_model_training`
+        * `cd /scratch/project_462001167/students/$USER/GeoML/08_object_detection/own_model_training`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter file panel.
     * Submit a batch job:
-        * `sbatch 09_2_train_model.sh`
+        * `sbatch 08_2_train_model.sh`
     * It prints back something like, exact number will be different: `Submitted batch job 1212121212`
     * To see the Python output file, open it with tail, the exact file name depends on the number printed previosly:
         * `tail -f slurm-1212121212.out`.
@@ -78,11 +78,11 @@ names:
         * `results.png` - results of the training containing three losses: box loss (how well the trained model can locate the bounding boxes), classification loss (how well the correct classes are predicted), Distribution Focal loss (how well edge distances are predicted in the model), precision, recall and mAP50.
         * Box curves such as the F1, precision, and recall confidence curves evaluating the bounding box prediction at different confidence thresholds.
 
-5. Run inference using the trained model. The predictions are created by submitting batch job: [09_3_predict.sh](09_3_predict.sh). This script runs the Python file: [09_3_predict.py](09_3_predict.py) and predicts the vessels from the test image.
-    * `sbatch 09_3_predict.sh`
+5. Run inference using the trained model. The predictions are created by submitting batch job: [08_3_predict.sh](08_3_predict.sh). This script runs the Python file: [08_3_predict.py](08_3_predict.py) and predicts the vessels from the test image.
+    * `sbatch 08_3_predict.sh`
     * Similarly as before, the output of the batch job can be inspected by opening the slurm output file. The output file includes information on the detected vessels. The polygons geometry, confidence score and the amount of detected vessels in total. 
     * The predictions are saved to a file to the `predictions` folder.
       
-6. Evaluate model using the [09_4_evaluate.ipynb](09_4_evaluate.ipynb) Jupyter notebook. The script plots the results and computes performance metrics. 
+6. Evaluate model using the [08_4_evaluate.ipynb](08_4_evaluate.ipynb) Jupyter notebook. The script plots the results and computes performance metrics. 
     
 

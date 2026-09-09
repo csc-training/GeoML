@@ -1,6 +1,6 @@
 """
 Script for training a YOLO model from Ultralytics for detecting marine vessels from Sentinel-2 imagery.
-Training data for the model is created using the 09_1_data_preparation notebook. The created YOLO compatible training data is can be found from the yolo_data folder. In this script we train the model and save the output containing the log files and weights to the yolo_project folder. 
+Training data for the model is created using the 08_1_data_preparation notebook. The created YOLO compatible training data is can be found from the yolo_data folder. In this script we train the model and save the output containing the log files and weights to the yolo_project folder. 
 
 Created on Fri Oct 10 2025
 
