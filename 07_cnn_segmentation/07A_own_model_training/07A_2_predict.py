@@ -28,10 +28,9 @@ from typing import Optional, Any, Tuple
 import rasterio
 # Torchgeo model
 import torch
-#from torchgeo.trainers import SemanticSegmentationTask CHANGED
-from terratorch.tasks import SemanticSegmentationTask
-# Model plotting; CHANGED
-# from torchinfo import summary
+from torchgeo.trainers import SemanticSegmentationTask
+# Model plotting
+from torchinfo import summary
 
 
 
@@ -146,7 +145,7 @@ def inference_on_geotiff(
                 batch_inputs_tensor = torch.stack(batch_inputs)
                 # Forward pass, give model a batch of data.
                 with torch.no_grad():
-                    outputs = model(batch_inputs_tensor).output #CHANGED from 7A from outputs = model(batch_inputs_tensor)
+                    outputs = model(batch_inputs_tensor) #CHANGED from outputs = model(batch_inputs_tensor)
                 # Process each output in the batch.
                 for idx, output in enumerate(outputs):
                     y_pos, x_pos, = batch_positions[idx]
@@ -170,14 +169,14 @@ def main():
     # ## Settings
     # Define folders and files.
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML') 
-    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07B_using_foundation_model') 
+    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07A_own_model_training') 
     cnn_test_data_folder = os.path.join(base_folder,'data', 'raster', 'pixel-wise')
     data_test = os.path.join(cnn_test_data_folder, 'data_sentinel2.tif')
     labels_test = os.path.join(cnn_test_data_folder, 'labels.tif')
     results_folder = os.path.join(base_folder, 'classification_results')
-    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_fm.tif') 
-    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_fm_all_classes.tif') 
-    model_description_file = os.path.join(exercise_folder, 'cnn_fm_model_description.txt') 
+    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_own.tif') 
+    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_own_all_classes.tif') 
+    model_description_file = os.path.join(exercise_folder, 'cnn_own_model_description.txt') 
     
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
@@ -188,7 +187,7 @@ def main():
     
     # Settings for prediction
     num_classes = 4
-    TILE_SIZE = 256 # Use the same as for model training, must be smaller than data height/width.
+    TILE_SIZE = 512 # Use the same as for model training, must be smaller than data height/width.
     BATCH_SIZE = 8
     OVERLAP = 20
     NO_OF_BANDS = 10 #ToDo, remove if torchgeo summary not used
@@ -204,6 +203,7 @@ def main():
     
     # See the model architecture.
     with open(model_description_file, "w") as f:
+        print(summary(model, input_size=(BATCH_SIZE, NO_OF_BANDS, TILE_SIZE, TILE_SIZE)), file=f) # CHANGED        
         print(model, file=f) # CHANGED NEW
 
     # Read test data from file, calculate predicted classes and save as GeoTiff, save also probabilities of all classes for each pixel (might be interesting to check).

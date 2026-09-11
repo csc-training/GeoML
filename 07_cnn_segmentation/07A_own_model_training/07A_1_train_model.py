@@ -1,26 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
-# %%
-
-# %%
 
 
 """
-Script for training a CNN segmentation model based on GeoTiff data and label files.
+Script for training a new CNN segmentation model based on GeoTiff data and label files.
 The main Python libraries are Pytorch, PyTorch Lightning and Torchgeo.
 
-Main steps of the script:
-* Data loading
-* Augmentation
-* Model training
+Classes: fields, forest, sea, urban (4 classes)
+Input bands (10, in this exact order): B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
 
-Created on Fri Oct 3 2025
+The main Python libraries are PyTorch, PyTorch Lightning, TorchGeo, and TerraTorch.
+Main steps of the script:
+* Data loading (TorchGeo, RandomGeoSampler / GridGeoSampler over large untiled scenes)
+* Augmentation (Kornia, GPU-side)
+* Model training (Clay backbone + UNet decoder, via TerraTorch's SemanticSegmentationTask)
 
 @author: ihakulin, kylliek
 Ideas and codesnippets from: 
 * https://lightning.ai/docs/pytorch/LTS/common/lightning_module.html
 * https://medium.com/@geografif/geospatial-deep-learning-using-torchgeo-and-custom-datasets-2adae17f2df4
-
 """
 
 import os, sys, time, datetime
@@ -38,7 +36,7 @@ from lightning.pytorch.loggers import TensorBoardLogger
 from lightning.pytorch import LightningDataModule
 
 # TorchGeo
-from torchgeo.datasets import RasterDataset, BoundingBox, UnionDataset
+from torchgeo.datasets import RasterDataset, BoundingBox, IntersectionDataset
 from torchgeo.samplers import GridGeoSampler, RandomGeoSampler
 from torchgeo.trainers import SemanticSegmentationTask
 
@@ -48,42 +46,37 @@ import kornia.augmentation as K
 
 
 # The data contains both imagery and ground truth masks. We want to load both of these rasters and combine  them into a one dataset that can be fed to the neural network. 
-# We will first create a TorchGeo RasterDataset of both rasters and then combine them with UnionDataset from TorchGeo. 
+# We will first create a TorchGeo RasterDataset of both rasters and then combine them with IntersectionDataset from TorchGeo. 
 # The is_image attribute is used to control how the data stored in the dataset is handled. 
-def create_union_dataset(images, labels):
+def create_intersection_dataset(image_dir, mask_dir):
+    """
+    Build a combined image+mask TorchGeo dataset.
+
+    Input GeoTIFFs are expected to already contain exactly these 10 bands,
+    in this exact order: B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
+    """
     class Image(RasterDataset):
-        filename_glob = images
+        filename_glob = "*.tif" 
         is_image = True
-        
+        all_bands = ("B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B11", "B12")
+
     class Mask(RasterDataset):
-        filename_glob = labels
+        filename_glob = "*.tif" 
         is_image = False
-        
-    return UnionDataset(Image("."), Mask("."))
+
+    return IntersectionDataset( 
+        Image(paths=image_dir),   
+        Mask(paths=mask_dir)     
+    )
 
 
 class GeoDataModule(LightningDataModule):
     """
-    A TorchGeo GeoDataModule for loading imagery and labels, and creating an iterable Torch Dataloader over the training data. The module first loads the training and validation datasets and creates a TorchGeo UnionDataset that combines both the imagery and label rasters. Training data is sampled randomly to in crease the amount of the samples. A collate function is used to batch the data and stack the right objects inside the dataset. Finally, a Dataloader is created. 
-    Attributes:
-    ----------
-    train_image: list[str] - List of .tif files containing training imagery
-    train_mask: list[str] - List of .tif files containing training imagery
-    val_image: list[str] - List of .tif files containg the validation imagery
-    val_mask: list[str] - List of .tif files containg the validation imagery
-    tile_size: a float - tile size used for the sampling
-    batch_size: an integer - number of samples per batch
-    num_workers: an integer - number of subprocesses the dataloader creates
+    A TorchGeo GeoDataModule for loading imagery and labels, and creating an
+    iterable Torch Dataloader over the training data.
 
-    Methods: 
-    setup: Set up datasets and samplers.
-    collate_fn: stack objects to form batches.
-    train_dataloader: Implement Pytorch Dataloader for training.
-    val_dataloader: Implement Pytorch Dataloader for validation.
-
-    Returns:
-    --------
-    A DataLoader
+    Uses RandomGeoSampler for training (random crops, refreshed each epoch)
+    and GridGeoSampler for validation (deterministic, non-overlapping coverage).
     """
     def __init__(self, train_images, train_masks, val_images, val_masks, tile_size, batch_size, num_workers, sampler_length):
         super().__init__()
@@ -97,15 +90,18 @@ class GeoDataModule(LightningDataModule):
         self.sampler_length = sampler_length
 
     def setup(self, stage=None):
-        self.train_dataset = create_union_dataset(self.train_images, self.train_masks)
-        self.val_dataset = create_union_dataset(self.val_images, self.val_masks)
+        self.train_dataset = create_intersection_dataset(self.train_images, self.train_masks)
+        self.val_dataset = create_intersection_dataset(self.val_images, self.val_masks)
     
         self.train_sampler = RandomGeoSampler(self.train_dataset, size=self.tile_size, length=self.sampler_length)
         self.val_sampler = GridGeoSampler(self.val_dataset, size=self.tile_size, stride=self.tile_size//2)
     
     def collate_fn(self, batch):
+        # Keep only image/mask — TerraTorch's task forwards every other batch key
+        # straight into the model as a kwarg, so geo metadata (bounds/crs/transform)
+        # must not be included here.        
         images = torch.stack([item["image"] for item in batch])
-        masks  = torch.stack([item["mask"] for item in batch])                                                        
+        masks  = torch.stack([item["mask"] for item in batch])               
         return {"image": images, "mask": masks.long()}
     
     def train_dataloader(self):
@@ -130,7 +126,7 @@ class GeoDataModule(LightningDataModule):
 class MySegmentationTask(SemanticSegmentationTask):
     """Kornia Augmentation is ran using a LightningModule wrapper for TorchGeo's SemanticSegmentationTask to run the augmentation on GPU. 
     """    
-    def __init__(self, *args, aug_config: dict | None = None, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.aug = None
         
@@ -147,34 +143,41 @@ class MySegmentationTask(SemanticSegmentationTask):
         
     def on_after_batch_transfer(self, batch: Dict[str, torch.Tensor], dataloader_idx: int) -> Dict[str, torch.Tensor]:
         # Called after Lightning moves the batch to the device
+        # Kornia expects floats for images; masks should remain integers.
+        images = batch["image"].float() #CHANGED, this and next and end out of trainging section, so that would be applied also to validation data
+        masks = batch["mask"].long()
+        
         if self.trainer.training:
             if self.aug is None:
                 self.aug = self.augment_training_data()
-                
             # Ensure augmentation module is on correct device
-            self.aug.to("cuda")
+            self.aug.to(self.device)
+            images, masks = self.aug(images, masks)
 
-            # Kornia expects floats for images; masks should remain integers.
-            images = batch["image"].float()
-            masks = batch["mask"].long()
-             
-            images_aug, masks_aug = self.aug(images, masks)
-                  
-            # Ensure mask dtype is integer for loss functions
-            batch["image"] = images_aug
-            batch["mask"] = masks_aug.long()
-        return batch   
+        
+        batch["image"] = images
+        batch["mask"] = masks.long()
+        return batch  
 
-#  # Define Pytorch lightning Trainer and train the model
+# Define Pytorch lightning Trainer and train the model
 def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, checkpoints_dir):
-    # Add checkpoints to the training, only save the best model based on the minimum validation loss
-    checkpoint_cb = ModelCheckpoint(dirpath=checkpoints_dir, filename="best_model", monitor="val_loss", save_top_k=1, mode="min")
+    # Add checkpoints to the training, only save the best model based on the minimum validation loss    
+    checkpoint_cb = ModelCheckpoint(
+        dirpath=checkpoints_dir, filename="best_model",
+        monitor="val_AverageJaccardIndex",   # CHANGED: was "val_loss"
+        save_top_k=1, 
+        mode="max" # CHANGED: was "min"
+    )
 
     # Add earlystopping to prevent model from overfitting by stopping the training 
-    # if validation loss doesn't decrease in patience number of epochs
-    earlystop_cb = EarlyStopping(monitor="val_loss", patience=patience, mode="min")
-
-    # Enable writing of log files for Tensorboard
+    # if validation loss doesn't decrease in patience number of epochs    
+    earlystop_cb = EarlyStopping(
+        monitor="val_AverageJaccardIndex",   # CHANGED: was "val_loss"
+        patience=patience, 
+        mode="max" # CHANGED: was "min"
+    )  
+    
+    # Enable writing of log files for Tensorboard    
     tb_logger = TensorBoardLogger(save_dir=logs_dir, name="segmentation")
 
     # Define Lightning trainer using callbacks and logger
@@ -183,7 +186,9 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
         max_epochs=no_of_epochs, 
         accelerator="auto",
         devices="auto",
+        precision="bf16-mixed", 
         callbacks=[checkpoint_cb, earlystop_cb],
+        logger=tb_logger,
         log_every_n_steps=10,)
 
     # Train model
@@ -194,62 +199,50 @@ def main():
     # Set path to data and labels files
     # With small adjustments instead of files, these could be also folders.
     # See: https://torchgeo.readthedocs.io/en/stable/tutorials/earth_surface_water.html
-    base_folder = os.path.join(os.sep, 'scratch', 'project_462001167', 'students', os.environ.get('USER'), 'GeoML')
-    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation') 
-    data_folder = os.path.join(base_folder,'data', 'raster')
+    base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML')
+    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07A_own_model_training')
+    cnn_data_folder = os.path.join(base_folder, 'data', 'raster', 'cnn')
     logs_dir= os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     checkpoints_dir= os.path.join(exercise_folder, 'checkpoints')
 
-    data_deep = os.path.join(data_folder, 'data_deep.tif')
-    data_validation = os.path.join(data_folder, 'data_validation.tif')
-    data_deep
-
-    labels_deep = os.path.join(data_folder, 'labels_deep.tif')
-    labels_validation = os.path.join(data_folder, 'labels_validation.tif')
+    data_train_folder = os.path.join(cnn_data_folder, 'train', 'data')
+    data_validation_folder = os.path.join(cnn_data_folder, 'validation', 'data')
+    labels_train_folder = os.path.join(cnn_data_folder, 'train', 'labels')
+    labels_validation_folder = os.path.join(cnn_data_folder, 'validation', 'labels')
 
     # Training settings:
     # SemanticSegmentationTask
     # See: https://torchgeo.readthedocs.io/en/stable/api/trainers.html#torchgeo.trainers.SemanticSegmentationTask
-    segmentation_model = "unet"
-    backbone = "resnet34" # 
-    in_channels = 8 # Number of bands in data image 
-    num_classes = 4 # Number of classes in the labels data
-    loss = 'ce' 
-    learning_rate = 1e-3 #
-    patience = 20 # How many epochs model training is continued, if loss does not improve any more.
-
-    # Datamodule
-    batch_size = 8 #16 or 32 might be better for bigger datasets
-    num_cpus = len(os.sched_getaffinity(0))
-    tile_size = 512 # Could be also different, for example: 256
-    sampler_length = 1600
-    num_epochs = 40 # We use a low number on the course, should be higher in actual projects
-
+    patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
+    num_epochs = 200    
+    tile_size=224    
+    
     # Create GeoDataModule with our data
     datamodule = GeoDataModule(
-        train_images=data_deep,
-        train_masks=labels_deep,
-        val_images=data_validation,
-        val_masks=labels_validation,
-        tile_size=tile_size,
-        batch_size=batch_size,
-        num_workers=num_cpus,
-        sampler_length=sampler_length
+        train_images=data_train_folder,
+        train_masks=labels_train_folder,
+        val_images=data_validation_folder,
+        val_masks=labels_validation_folder,
+        tile_size=tile_size,                   # Could be also different, for example: 256
+        batch_size = 8,                        #16 or 32 might be better for bigger datasets,
+        num_workers=len(os.sched_getaffinity(0)), # Match with number of CPU:s available
+        sampler_length=1600
     )
 
     # Create SegmentationTask
     model = MySegmentationTask(
-        model = segmentation_model,
-        backbone = backbone,
+        model = "unet",
+        backbone = "resnet34",
         weights = None, 
-        in_channels = in_channels,
-        num_classes = num_classes,
-        loss = loss,
-        ignore_index = None,
-        lr = learning_rate,
-        patience = patience, 
+        in_channels = 10,                     # Number of bands in data image 
+        num_classes = 4,                      # Number of classes in the labels data
+        loss = 'ce',                          # Torchgeo currently supports ‘ce’, ‘bce’, ‘jaccard’, ‘focal’, and ‘dice’ loss.
+        ignore_index = -100,                  # Nodata value for labels
+        lr = 1e-3                             # Learning rate
     )
 
+    print("Training logs are in: " + logs_dir)
+ 
     # Train the model. This is the part of code, that can a long time.
     train_model(model, datamodule, num_epochs, patience, logs_dir, checkpoints_dir)
 

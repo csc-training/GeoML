@@ -1,55 +1,53 @@
-# CNN semantic segmentation exercise
+# Semantic segmentation exercise
 
 (For nicer reading in Jupyter, righ-click and select `Show Markdown Preview`.) 
 
-In this exercise, the land use classes are predicted with CNN semantic segmentation using [torchgeo](https://torchgeo.readthedocs.io/) and [Lightning](https://lightning.ai/docs/overview/getting-started) libraries.
+In this exercise, the land use classes are predicted with semantic segmentation using 2 models:
 
-The used data is the same as in shallow and deep classification exercises. 
+* 7A: own CNN model from scratch. 
+* 7B: fine-tuning of [Clay foundation](https://clay-foundation.github.io/model/) model. 
 
-**Before starting with this exercise, the general [raster data preparations exercise](../02_raster_data_preparation) must be done.**
+Main libraries are: [torchgeo](https://torchgeo.readthedocs.io/), [PyTorch](https://pytorch.org/) and [Lightning](https://lightning.ai/docs/overview/getting-started), for fine-tuning exercise also [Terratorch](https://torchgeo.org/terratorch/stable/).
+
+## Input data
+
+The used data is similar to the data in shallow and deep classification exercises, but the files are different. For these exercise there is separate files for training, validation and test and the covered area is bigger than for previous exercises. The test file is the same as for 
+
+6 raster files (3 for labels and 3 for data) with:
+
+* Coordinate system: Finnish ETRS-TM35FIN, EPSG:3067
+* Resolution: 20m
+
+### Labels
+
+Multiclass classification raster: 
+* 1 - forest
+* 2 - fields
+* 3 - water
+* 0 - everything else
+
+### Data 
+
+**Sentinel2 mosaic**
+* Date: 2021-05-22- 2021-05-31
+* 10 bands: 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b8a', 'b11', 'b12'.
+* The reflection values scaled to [0 ... 1].
+
+If you do this exercise outside CSC course, the general [raster data preparations exercise](../02_raster_data_preparation) must be done.
+
+### Tiling
 
 Satellite images are usually too big for CNN models as such, se we need to tile them to smaller tiles for training the model and also later for prediction. Torchgeo has very nice functionality for tiling and sampling the data for training. Unfortunatelly similar functionality does not exist for inference.
 
-This exercise includes two steps:
-* Model training, including data loading and tiling with torchgeo. This part is run as batch job, because GPU-resources are needed.
-* Inference and evaluation of the model visually and by calculating performance metrics.
+## Main steps
 
-## Data loading and CNN model training as a batch job.
-* Open these files, we will go through it in details.
-    * Python file with PyTorch code: [07_1_train.py](07_1_train.py)
-    * HPC batch job file: [07_1_train_model.sh](07_1_train_model.sh)
-    * No modifications are needed to the files.
-* Submit Python script as SLURM batch job in a supercomputer:
-    * Open Terminal to login-node: Open Apps -> Login node shell
-    * A black window with SSH connection to Puhti opens, now Linux commands should be used.
-    * The shell opens in home directory, to access the files, change working 
-    directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation`
-    * See that you are in the right folder:
-        * `ls -l`.
-        * It should list the files that you see also in Jupyter File panel.
-    * Submit a batch job:
-        * `sbatch 07_1_train_model.sh`
-    * It outputs the job number, for example: `Submitted batch job 1212121212`
-* To see the Python output file, open it with `tail`, the exact file name depends on the number printed previosly:
-    * `tail -f slurm-1212121212.out`.
-    * The output file includes:
-        * Printout of used folders, just to double-check
-        * Results of each epoch. 
-        * This output file is also the first place to look for errors, when writing own scripts.
-    * Optional, to see full output from beginning:
-        * `less slurm-1212121212.out`
-        * This does not update, if file gets more rows.
-    * It is possible to see job's state (waiting, running, finished) and used resources with
-        * `sacct -o jobid,partition,state,reqmem,maxrss,averss,elapsed`
-        * (In CSC Puhti: `seff 1212121212`)
-* There should be new files in the `07_cnn_segmentation` folder:
-    * `best_model.ckpt` - the trained model in `checkpoints` folder. The best model has highest number. 
-    *  Logs of training in `logs-<date>` folder that can be viewed using Tensorboard.
+Both 7A and 7B exercises include three steps:
+* Model training, including data loading and tiling with torchgeo. 
+* Predicting the classification and class-wise probabilites.
+* Evaluation of the model visually and by calculating performance metrics.
 
-## Inference and evaluation of the model visually and by calculating performance metrics.
-* Open Jupyter as described in [main Readme](../Readme.md)
-* Open [07_2_evaluation_and_inference.ipynb](07_2_evaluation_and_inference.ipynb)
+The first 2 steps are run as batch job, because GPU-resources are needed.
+Read the `Readme`-files in both sub-directories for detailed instructions how to run the exercises.
 
 
     
