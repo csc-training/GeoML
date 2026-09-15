@@ -5,13 +5,13 @@
 In this exercise, the land use classes are predicted with semantic segmentation using 2 models:
 
 * 7A: own CNN model from scratch. 
-* 7B: fine-tuning of [Clay foundation](https://clay-foundation.github.io/model/) model. 
+* 7B: fine-tuning the [Clay foundation](https://clay-foundation.github.io/model/) model. 
 
-Main libraries are: [torchgeo](https://torchgeo.readthedocs.io/), [PyTorch](https://pytorch.org/) and [Lightning](https://lightning.ai/docs/overview/getting-started), for fine-tuning exercise also [Terratorch](https://torchgeo.org/terratorch/stable/).
+Main libraries are: [torchgeo](https://torchgeo.readthedocs.io/), [PyTorch](https://pytorch.org/) and [Lightning](https://lightning.ai/docs/overview/getting-started), for fine-tuning also [Terratorch](https://torchgeo.org/terratorch/stable/).
 
 ## Input data
 
-The used data is similar to the data in shallow and deep classification exercises, but the files are different. For these exercise there is separate files for training, validation and test and the covered area is bigger than for previous exercises. The test file is the same as for 
+The used data is similar to the data in shallow and deep classification exercises, but the files are different. For these exercise there is separate files for training, validation and test and the covered area is bigger than for previous exercises. The test file is the same as files used for shallow learning (to enable comparable map plotting).
 
 6 raster files (3 for labels and 3 for data) with:
 
@@ -33,7 +33,7 @@ Multiclass classification raster:
 * 10 bands: 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b8a', 'b11', 'b12'.
 * The reflection values scaled to [0 ... 1].
 
-If you do this exercise outside CSC course, the general [raster data preparations exercise](../02_raster_data_preparation) must be done.
+If you do this exercise outside CSC course, the general [raster data preparations exercise](../02_raster_data_preparation) must be done before.
 
 ### Tiling
 
