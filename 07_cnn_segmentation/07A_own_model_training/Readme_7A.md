@@ -1,23 +1,23 @@
-## Training own CNN model
+## 7A Training own CNN model
 
 In this exercise own CNN model is trained from scratch.
 
 ## Main steps
 
-* Model training, including data loading and tiling with torchgeo. 
-* Predicting the classification and class-wise probabilites.
-* Evaluation of the model visually and by calculating performance metrics.
+1) Model training, including data loading and tiling with torchgeo. 
+2) Predicting the classification and class-wise probabilites.
+3) Evaluation of the model visually and by calculating performance metrics.
 
 The first 2 steps are run as batch job, because GPU-resources are needed.
-Read the `Readme`-files in both sub-directories for detailed instructions how to run the exercises.
+Below are the detailed instructions how to run the exercise.
 
 ## Model architecture
 
 ![model architecture](resnet_unet_segmentation_architecture.png)
 
-## Data loading and CNN model training as a batch job.
+## 7A.1 Data loading and CNN model training as a batch job.
 * Open these files, we will go through it in details.
-    * Python file with PyTorch code: [07A_1_train_model.py](07A_1_train_model.py)
+    * Python code: [07A_1_train_model.py](07A_1_train_model.py)
     * HPC batch job file: [07A_1_train_model.sh](07A_1_train_model.sh)
     * No modifications are needed to the files.
 * Submit Python script as SLURM batch job in a supercomputer:
@@ -48,9 +48,9 @@ Read the `Readme`-files in both sub-directories for detailed instructions how to
         *  It might be that Jupyter does not let to access the checkpoints folder, use Jupyter Terminal, Login-node shell or Files section in web interface to access it.
     *  Logs of training in `logs` folder that can be viewed using Tensorboard.
 
-## Predict the classification and class-wise probabilites 
+## 7A.2 Predict the classification and class-wise probabilites 
 * Open these files, we will go through it in details.
-    * Python file with PyTorch code: [07A_2_predict.py](07A_2_predict.py)
+    * Python file: [07A_2_predict.py](07A_2_predict.py)
     * HPC batch job file: [07A_2_predict.sh](07A_2_predict.sh)
     * No modifications are needed to the files.
 * Submit Python script as SLURM batch job in a supercomputer:
@@ -60,6 +60,6 @@ Read the `Readme`-files in both sub-directories for detailed instructions how to
     * The predicted classification and class probabilities .tif files to [../../classification_results](../../classification_results)-folder
     * `cnn_own_model_description.txt`-file to the exercise folder, that shows the model architecture.
 
-## Evaluate th model visually and by calculate performance metrics.
+## 7A.3 Evaluate th model visually and by calculate performance metrics.
 * Open Jupyter as described in [main Readme](../../Readme.md)
 * Open [../07_3_segmentation_evaluation.ipynb](../07_3_segmentation_evaluation.ipynb) from the main folder of exerice 7.
