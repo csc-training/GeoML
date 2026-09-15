@@ -4,16 +4,14 @@
 
 """
 Script for training a new CNN segmentation model based on GeoTiff data and label files.
-The main Python libraries are Pytorch, PyTorch Lightning and Torchgeo.
 
 Classes: fields, forest, sea, urban (4 classes)
 Input bands (10, in this exact order): B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
 
-The main Python libraries are PyTorch, PyTorch Lightning, TorchGeo, and TerraTorch.
 Main steps of the script:
 * Data loading (TorchGeo, RandomGeoSampler / GridGeoSampler over large untiled scenes)
 * Augmentation (Kornia, GPU-side)
-* Model training (Clay backbone + UNet decoder, via TerraTorch's SemanticSegmentationTask)
+* Model training (Torchgeo's SemanticSegmentationTask)
 
 @author: ihakulin, kylliek
 Ideas and codesnippets from: 
@@ -46,7 +44,7 @@ import kornia.augmentation as K
 
 
 # The data contains both imagery and ground truth masks. We want to load both of these rasters and combine  them into a one dataset that can be fed to the neural network. 
-# We will first create a TorchGeo RasterDataset of both rasters and then combine them with IntersectionDataset from TorchGeo. 
+# We will first create a TorchGeo RasterDataset of both rasters and then combine them with TorchGeo IntersectionDataset. 
 # The is_image attribute is used to control how the data stored in the dataset is handled. 
 def create_intersection_dataset(image_dir, mask_dir):
     """
@@ -214,8 +212,8 @@ def main():
     # SemanticSegmentationTask
     # See: https://torchgeo.readthedocs.io/en/stable/api/trainers.html#torchgeo.trainers.SemanticSegmentationTask
     patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
-    num_epochs = 200    
-    tile_size=224    
+    num_epochs = 200               # Maximum number of epochs, early stopping likely ends the training before
+    tile_size=512                  # Tile size for data samplers, could be also different, for example: 256
     
     # Create GeoDataModule with our data
     datamodule = GeoDataModule(
@@ -223,17 +221,17 @@ def main():
         train_masks=labels_train_folder,
         val_images=data_validation_folder,
         val_masks=labels_validation_folder,
-        tile_size=tile_size,                   # Could be also different, for example: 256
-        batch_size = 8,                        #16 or 32 might be better for bigger datasets,
-        num_workers=len(os.sched_getaffinity(0)), # Match with number of CPU:s available
+        tile_size=tile_size,                      
+        batch_size = 8,                           # 16 or 32 might be better for bigger datasets,
+        num_workers=len(os.sched_getaffinity(0)), # Match with number of CPU:s available in the batch job
         sampler_length=1600
     )
 
     # Create SegmentationTask
     model = MySegmentationTask(
-        model = "unet",
-        backbone = "resnet34",
-        weights = None, 
+        model = "unet",                       # Name of the smp model, for example: 'unet', 'deeplabv3+', 'fcn', 'upernet', 'segformer', 'dpt'
+        backbone = "resnet34",                # Name of the timm or smp backbone to use
+        weights = None,                       # Initial model weights
         in_channels = 10,                     # Number of bands in data image 
         num_classes = 4,                      # Number of classes in the labels data
         loss = 'ce',                          # Torchgeo currently supports ‘ce’, ‘bce’, ‘jaccard’, ‘focal’, and ‘dice’ loss.
