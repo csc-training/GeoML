@@ -94,15 +94,17 @@ def inference_on_geotiff(
             dist_from_bottom,
         ]
     )
-    # Convert to weight (higher weight for center pixels)
-    # Scale to [-5, 0]
-    edge_distance = np.minimum(edge_distance, overlap / 2)
-    importance = edge_distance * (5 / edge_distance.max()) - 5
-    
-    # Set same importances to all bands
-    #importances = torch.from_numpy(np.repeat(importance[np.newaxis, :, :], num_classes, axis=0))
-    importances = torch.from_numpy(np.repeat(importance[np.newaxis, :, :], num_classes, axis=0)).to(device)  # CHANGED: move to same device as model/data
 
+    # Do not touch the pixel in the middle the tile, only the ones that are overlapped with the other tile.
+    edge_distance = np.minimum(edge_distance, overlap)
+
+    # Convert to penalty (higher penalty for pixels closer to edge)
+    # Scale to [-5, 0]
+    penalty = np.interp(edge_distance, (edge_distance.min(), edge_distance.max()), (-5, 0))
+    
+    # Set same penalties to all classes 
+    penalty = torch.from_numpy(np.repeat(penalty[np.newaxis, :, :], num_classes, axis=0)).to(device)  
+    
     # Put model in evaluation mode
     model.to(device)
     model.eval()
@@ -145,25 +147,25 @@ def inference_on_geotiff(
                 batch_inputs_tensor = torch.stack(batch_inputs)
                 # Forward pass, give model a batch of data.
                 with torch.no_grad():
-                    outputs = model(batch_inputs_tensor) #CHANGED from outputs = model(batch_inputs_tensor)
+                    outputs = model(batch_inputs_tensor)
                 # Process each output in the batch.
                 for idx, output in enumerate(outputs):
                     y_pos, x_pos, = batch_positions[idx]
-                    # Multiply with the importances based on pixel's distance to tile edge.
-                    weighted_scores = output + importances #output #+ importances #TODO 
+                    # Subtract the penalties based on pixel's distance to tile edge.
+                    weighted_scores = output + penalty  
                     # Save predictions for the pixels/classes that have heigher score than previously saved.
                     pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size] = torch.max(pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size], weighted_scores)
                 # Reset batch
                 batch_inputs = []
                 batch_positions = []
                 batch_count = 0
+                
     # Calculate most probable class for each pixel
-    #class_predictions = pixel_predictions.argmax(dim=0).numpy().astype(np.uint8)
+    # Move this to CPU/numpy before returning
+    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)   
+    pixel_probabilities = pixel_predictions.cpu().numpy()   
 
-    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)   # CHANGED
-    pixel_predictions = pixel_predictions.cpu().numpy()   # NEW: also move this to CPU/numpy before returning
-
-    return pixel_predictions, class_predictions
+    return class_predictions, pixel_probabilities
 
 def main():
     # ## Settings
@@ -197,7 +199,7 @@ def main():
     
     # Set working directory.
     os.chdir(exercise_folder)
-    # ## Model
+
     # Load the trained model from checkpoint.
     model = SemanticSegmentationTask.load_from_checkpoint(checkpoint_path, strict=False)
     
@@ -209,11 +211,12 @@ def main():
     # Read test data from file, calculate predicted classes and save as GeoTiff, save also probabilities of all classes for each pixel (might be interesting to check).
     with rasterio.open(data_test) as src:
         data = src.read()
-        pixel_predictions, class_predictions = inference_on_geotiff(model, data, TILE_SIZE, OVERLAP, BATCH_SIZE, num_classes, device)
+        class_predictions, pixel_probabilities = inference_on_geotiff(model, data, TILE_SIZE, OVERLAP, BATCH_SIZE, num_classes, device)
+        
         # Save predition raster with most likely class
         out_meta = src.meta.copy()
         out_meta.update(
-            {"count": 1, "dtype": "uint8"}  # Single band for mask  # Binary mask
+            {"count": 1, "dtype": "uint8"}  # Single band
         )
         with rasterio.open(prediction_output, "w", **out_meta) as dst:
             dst.write(class_predictions, 1)
@@ -221,10 +224,10 @@ def main():
         # Save predition raster with with probabilities for all classes
         out_meta2 = src.meta.copy()
         out_meta2.update(
-            {"count": num_classes} 
+            {"count": num_classes}  # One band per class
         )   
         with rasterio.open(prediction_output_all_classes, "w", **out_meta2) as dst:
-            dst.write(pixel_predictions)
+            dst.write(pixel_probabilities)
         print(f"Saved prediction to {prediction_output}")
 
 if __name__ == '__main__':
