@@ -10,7 +10,7 @@ The foundation model is used as backbone, the decoder part is U-net CNN model tr
 * Evaluation of the model visually and by calculating performance metrics.
 
 The first 2 steps are run as batch job, because GPU-resources are needed.
-Read the `Readme`-files in both sub-directories for detailed instructions how to run the exercises.
+Below are detailed instructions how to run the exercises.
 
 ## Model architecture
 
@@ -18,7 +18,7 @@ Read the `Readme`-files in both sub-directories for detailed instructions how to
 
 ## Data loading and fine-tuning the model as a batch job.
 * Open these files, we will go through it in details.
-    * Python file with PyTorch code: [07B_1_train_model.py](07B_1_train_model.py)
+    * Python file: [07B_1_train_model.py](07B_1_train_model.py)
     * HPC batch job file: [07B_1_train_model.sh](07B_1_train_model.sh)
     * No modifications are needed to the files.
 * Submit Python script as SLURM batch job in a supercomputer:
@@ -26,7 +26,7 @@ Read the `Readme`-files in both sub-directories for detailed instructions how to
     * A black window with SSH connection to Roihu opens, now Linux commands should be used.
     * The shell opens in home directory, to access the files, change working 
     directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation/07A_own_model_training`
+        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation/07B_using_foundation_model`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter File panel.
@@ -44,14 +44,14 @@ Read the `Readme`-files in both sub-directories for detailed instructions how to
     * It is possible to see job's state (waiting, running, finished) and used resources with
         * `seff 1212121212`)
 * Training takes about 10 minutes in Roihu.
-* There should be new files in the `07A_own_model_training` folder:
+* There should be new files in the `07B_using_foundation_model` folder:
     * `best_model.ckpt` - the trained model in `checkpoints` folder. The best model has highest number.
         *  It might be that Jupyter does not let to access the checkpoints folder, use Jupyter Terminal, Login-node shell or Files section in web interface to access it.
     *  Logs of training in `logs` folder that can be viewed using Tensorboard.
 
 ## Predict the classification and class-wise probabilites 
 * Open these files, we will go through it in details.
-    * Python file with PyTorch code: [07B_2_predict.py](07B_2_predict.py)
+    * Python file: [07B_2_predict.py](07B_2_predict.py)
     * HPC batch job file: [07B_2_predict.sh](07B_2_predict.sh)
     * No modifications are needed to the files.
 * Submit Python script as SLURM batch job in a supercomputer:
