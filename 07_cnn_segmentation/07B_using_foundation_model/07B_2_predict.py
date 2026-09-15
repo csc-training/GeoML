@@ -19,6 +19,12 @@
 # 3 - water
 # 0 - everything else
 # ```
+# 
+# Differences compared to prediction in 7A (own model)
+# * Tile size is 256 
+# * SemanticSegmentationTask is from Terratorch library, not Torchgeo, therefore
+#       * Torchinfo model summary can not be used for printing model architecture
+#       * Getting prediction results from model has slightly different syntax
 
 import os
 import numpy as np
@@ -28,13 +34,8 @@ from typing import Optional, Any, Tuple
 import rasterio
 # Torchgeo model
 import torch
-#from torchgeo.trainers import SemanticSegmentationTask CHANGED
+
 from terratorch.tasks import SemanticSegmentationTask
-# Model plotting; CHANGED
-# from torchinfo import summary
-
-
-
 
 # ## Tiled inference to predict the classes
 # 
@@ -47,10 +48,38 @@ from terratorch.tasks import SemanticSegmentationTask
 #     * Inference is practically run in batches, because so the GPU can be better utilized and the total time of prediction is smaller. 
 # * Merge the tiles, keep the estimation with highest probability, counting also with importance (distance to tile edge).
 # 
-# 
-# Calculate importances for each pixel in the tile, the pixels on the edge get lower importance, because usually there the model makes more mistakes. Pixels in the center of the tile have higher importance. This helps with smooth blending at boundaries. Practically only pixels that overlap get reduced importance. 
-# 
 # Code modified from: https://github.com/opengeos/geoai/blob/main/geoai/train.py
+
+# Calculate penalty for each pixel in the tile, the pixels on the edge get lower importance, 
+# because usually there the model makes more mistakes. Pixels in the center of the tile have higher importance. 
+# This helps with smooth blending at boundaries. Practically only pixels that overlap get reduced importance. 
+def get_penalty_array(tile_size, overlap):
+    # Create importance matrix for each predicted tile
+    h = tile_size
+    w = tile_size
+    y_grid, x_grid = np.mgrid[0:h, 0:w]
+    # Calculate distance from each edge
+    dist_from_left = x_grid
+    dist_from_right = w - x_grid - 1
+    dist_from_top = y_grid
+    dist_from_bottom = h - y_grid - 1
+    # Combine distances (minimum distance to any edge)
+    edge_distance = np.minimum.reduce(
+        [
+            dist_from_left,
+            dist_from_right,
+            dist_from_top,
+            dist_from_bottom,
+        ]
+    )
+
+    # Do not touch the pixel in the middle the tile, only the ones that are overlapped with the other tile.
+    edge_distance = np.minimum(edge_distance, overlap/2)
+
+    # Convert to penalty (higher penalty for pixels closer to edge)
+    # Scale to [-5, 0]
+    penalty = np.interp(edge_distance, (edge_distance.min(), edge_distance.max()), (-5, 0))
+    return penalty
 
 def inference_on_geotiff(
     model: torch.nn.Module,
@@ -78,31 +107,9 @@ def inference_on_geotiff(
     """
 
     # Create importance matrix for each predicted tile
-    h = tile_size
-    w = tile_size
-    y_grid, x_grid = np.mgrid[0:h, 0:w]
-    # Calculate distance from each edge
-    dist_from_left = x_grid
-    dist_from_right = w - x_grid - 1
-    dist_from_top = y_grid
-    dist_from_bottom = h - y_grid - 1
-    # Combine distances (minimum distance to any edge)
-    edge_distance = np.minimum.reduce(
-        [
-            dist_from_left,
-            dist_from_right,
-            dist_from_top,
-            dist_from_bottom,
-        ]
-    )
-    # Convert to weight (higher weight for center pixels)
-    # Scale to [-5, 0]
-    edge_distance = np.minimum(edge_distance, overlap / 2)
-    importance = edge_distance * (5 / edge_distance.max()) - 5
-    
-    # Set same importances to all bands
-    #importances = torch.from_numpy(np.repeat(importance[np.newaxis, :, :], num_classes, axis=0))
-    importances = torch.from_numpy(np.repeat(importance[np.newaxis, :, :], num_classes, axis=0)).to(device)  # CHANGED: move to same device as model/data
+    penalty = get_penalty_array(tile_size, overlap)
+    # Set same penalties to all classes 
+    penalty = torch.from_numpy(np.repeat(penalty[np.newaxis, :, :], num_classes, axis=0)).to(device)  
 
     # Put model in evaluation mode
     model.to(device)
@@ -150,8 +157,8 @@ def inference_on_geotiff(
                 # Process each output in the batch.
                 for idx, output in enumerate(outputs):
                     y_pos, x_pos, = batch_positions[idx]
-                    # Multiply with the importances based on pixel's distance to tile edge.
-                    weighted_scores = output + importances #output #+ importances #TODO 
+                    # Subtract the penalties based on pixel's distance to tile edge.
+                    weighted_scores = output + penalty
                     # Save predictions for the pixels/classes that have heigher score than previously saved.
                     pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size] = torch.max(pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size], weighted_scores)
                 # Reset batch
@@ -159,12 +166,11 @@ def inference_on_geotiff(
                 batch_positions = []
                 batch_count = 0
     # Calculate most probable class for each pixel
-    #class_predictions = pixel_predictions.argmax(dim=0).numpy().astype(np.uint8)
+    # Move this to CPU/numpy before returning
+    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)
+    pixel_probabilities = pixel_predictions.cpu().numpy()   
 
-    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)   # CHANGED
-    pixel_predictions = pixel_predictions.cpu().numpy()   # NEW: also move this to CPU/numpy before returning
-
-    return pixel_predictions, class_predictions
+    return class_predictions, pixel_probabilities
 
 def main():
     # ## Settings
@@ -191,14 +197,14 @@ def main():
     TILE_SIZE = 256 # Use the same as for model training, must be smaller than data height/width.
     BATCH_SIZE = 8
     OVERLAP = 20
-    NO_OF_BANDS = 10 #ToDo, remove if torchgeo summary not used
+    NO_OF_BANDS = 10
     
     # Set computing device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # Set working directory.
     os.chdir(exercise_folder)
-    # ## Model
+
     # Load the trained model from checkpoint.
     model = SemanticSegmentationTask.load_from_checkpoint(checkpoint_path, strict=False)
     
@@ -209,11 +215,11 @@ def main():
     # Read test data from file, calculate predicted classes and save as GeoTiff, save also probabilities of all classes for each pixel (might be interesting to check).
     with rasterio.open(data_test) as src:
         data = src.read()
-        pixel_predictions, class_predictions = inference_on_geotiff(model, data, TILE_SIZE, OVERLAP, BATCH_SIZE, num_classes, device)
+        class_predictions, pixel_probabilities = inference_on_geotiff(model, data, TILE_SIZE, OVERLAP, BATCH_SIZE, num_classes, device)
         # Save predition raster with most likely class
         out_meta = src.meta.copy()
         out_meta.update(
-            {"count": 1, "dtype": "uint8"}  # Single band for mask  # Binary mask
+            {"count": 1, "dtype": "uint8"}  # Single band
         )
         with rasterio.open(prediction_output, "w", **out_meta) as dst:
             dst.write(class_predictions, 1)
@@ -221,10 +227,10 @@ def main():
         # Save predition raster with with probabilities for all classes
         out_meta2 = src.meta.copy()
         out_meta2.update(
-            {"count": num_classes} 
+            {"count": num_classes}  # One band per class
         )   
         with rasterio.open(prediction_output_all_classes, "w", **out_meta2) as dst:
-            dst.write(pixel_predictions)
+            dst.write(pixel_probabilities)
         print(f"Saved prediction to {prediction_output}")
 
 if __name__ == '__main__':

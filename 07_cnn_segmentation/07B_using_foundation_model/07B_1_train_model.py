@@ -227,17 +227,17 @@ def main():
         val_images=data_validation_folder,
         val_masks=labels_validation_folder,
         tile_size=tile_size,                       # must match backbone_img_size
-        batch_size=8,                        #16 or 32 might be better for bigger datasets
-        num_workers=len(os.sched_getaffinity(0)), # Match with number of CPU:s available
+        batch_size=8,                              #16 or 32 might be better for bigger datasets
+        num_workers=len(os.sched_getaffinity(0)),  # Match with number of CPU:s available
         sampler_length=1600
     )
-
+   
     model = MySegmentationTask(
-        model_factory="EncoderDecoderFactory",
+        model_factory="EncoderDecoderFactory",                        # Terratorch factory that assembles backbone + necks + decoder into one model
         model_args={
-            "backbone": "clay_v1_base",
-            "backbone_pretrained": True,
-            "backbone_img_size": tile_size,   # required — Clay defaults to 256 internally otherwise
+            "backbone": "clay_v1_base",                               # Pretrained foundation model backbone to use (Clay v1, base size)
+            "backbone_pretrained": True,                              # Load pretrained weights for the backbone instead of random init
+            "backbone_img_size": tile_size,   
             "backbone_bands": [
                 "BLUE", "GREEN", "RED",
                 "RED_EDGE_1", "RED_EDGE_2", "RED_EDGE_3",
@@ -245,20 +245,20 @@ def main():
                 "SWIR_1", "SWIR_2",
             ],  # must match the band order in create_intersection_dataset exactly
             "necks": [
-                {"name": "SelectIndices", "indices": [2, 5, 8, 11]},  # Clay has 12 transformer layers (0-11)
-                {"name": "ReshapeTokensToImage"},
-                {"name": "LearnedInterpolateToPyramidal"},
+                {"name": "SelectIndices", "indices": [2, 5, 8, 11]},  # Clay has 12 transformer layers (0-11); selects intermediate + final layer outputs for base-size model
+                {"name": "ReshapeTokensToImage"},                     # Reshapes 1D token sequence back into a 2D spatial feature map
+                {"name": "LearnedInterpolateToPyramidal"},            # Learns upsampling to build multi-scale pyramidal features for the UNet decoder
             ],
-            "decoder": "UNetDecoder",
-            "decoder_channels": [512, 256, 128, 64],
-            "num_classes": 4,                 # Number of classes in the labels data
+            "decoder": "UNetDecoder",                                 # Decoder architecture that upsamples features back to full resolution
+            "decoder_channels": [512, 256, 128, 64],                  # Number of channels at each decoder stage, coarse to fine
+            "num_classes": 4,                                         # Number of classes in the labels data
         },
-        loss = 'ce',                          # Torchgeo currently supports ‘ce’, ‘bce’, ‘jaccard’, ‘focal’, and ‘dice’ loss.
-        optimizer="AdamW",
+        loss = 'ce',                          # Terratorch currently supports 'ce', 'jaccard', 'dice', 'lovasz', or 'focal' loss.
+        optimizer="AdamW",                    # Name of optimizer class from torch.optim to be used.
         lr=1e-3,                              # Learning rate
         ignore_index=-100,                    # Nodata value for lables
-        freeze_backbone=True,                 # set True to only fine-tune the decoder (useful with limited labeled data)
-        plot_on_val=False,   # NEW — disables datamodule.plot() calls, which your custom GeoDataModule doesn't implement        
+        freeze_backbone=True,                 # Do not modify backbone weights
+        plot_on_val=False,                    # Disables datamodule.plot() calls, which your custom GeoDataModule doesn't implement        
     )
 
     print("Training logs are in: " + logs_dir)

@@ -1,17 +1,17 @@
-#!/bin/bash
-#SBATCH --account=project_2000599 # Choose the project to be billed. Change to own project, if used outside of the course
-#SBATCH --partition=gputest         # Which queue to use. Defines maximum time, memory, tasks, nodes and local storage for job
+#!/bin/bash 
+#SBATCH --account=project_2000599   # Choose the project to be billed. Change to own project, if used outside of the course
+#SBATCH --partition=gpumedium       # Which queue to use. Defines maximum time, memory, tasks, nodes and local storage for job
 #SBATCH --ntasks=1                  # Number of tasks. Upper limit depends on partition.
+#SBATCH --cpus-per-task=8           # How many processors work on one task. Upper limit depends on number of CPUs per GPU. In LUMI there are 7 CPU cores per one GPU. 
 #SBATCH --time=00:10:00             # Maximum duration of the job. Upper limit depends on partition.
 #SBATCH --gres=gpu:gh200:1          # Number of GPUs (Puhti version)
-#SBATCH --cpus-per-task=10           # How many processors work on one task. Upper limit depends on number of CPUs per GPU. In LUMI there are 7 CPU cores per one GPU. 
 
 # Load Pytorch module
-module load python-pytorch/2.10
+module load python-pytorch/2.13
 
-# Add paths for extra packages needed: terratorch and sahi
-export PYTHONUSERBASE=/projappl/project_2019932/geoml
-export PATH=/projappl/project_2019932/geoml/bin:$PATH
+# Copy the input data from Roihu
+# If you do this exercise outside of CSC course, remove next to lines and run Exercise 2.
+test -f /scratch/project_2019932/students/$USER/GeoML/data/raster/pixel-wise/labels.tif || cp -R /scratch/project_2019932/raster_data/pixel-wise /scratch/project_2019932/students/$USER/GeoML/data/raster/
 
 # Set cache directory for Huggingface
 export HF_HOME=/projappl/project_2019932/huggingface
