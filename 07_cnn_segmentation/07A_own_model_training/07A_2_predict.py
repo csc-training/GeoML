@@ -46,10 +46,38 @@ from torchinfo import summary
 #     * Inference is practically run in batches, because so the GPU can be better utilized and the total time of prediction is smaller. 
 # * Merge the tiles, keep the estimation with highest probability, counting also with importance (distance to tile edge).
 # 
-# 
-# Calculate importances for each pixel in the tile, the pixels on the edge get lower importance, because usually there the model makes more mistakes. Pixels in the center of the tile have higher importance. This helps with smooth blending at boundaries. Practically only pixels that overlap get reduced importance. 
-# 
 # Code modified from: https://github.com/opengeos/geoai/blob/main/geoai/train.py
+
+# Calculate penalty for each pixel in the tile, the pixels on the edge get lower importance, 
+# because usually there the model makes more mistakes. Pixels in the center of the tile have higher importance. 
+# This helps with smooth blending at boundaries. Practically only pixels that overlap get reduced importance. 
+def get_penalty_array(tile_size, overlap):
+    # Create importance matrix for each predicted tile
+    h = tile_size
+    w = tile_size
+    y_grid, x_grid = np.mgrid[0:h, 0:w]
+    # Calculate distance from each edge
+    dist_from_left = x_grid
+    dist_from_right = w - x_grid - 1
+    dist_from_top = y_grid
+    dist_from_bottom = h - y_grid - 1
+    # Combine distances (minimum distance to any edge)
+    edge_distance = np.minimum.reduce(
+        [
+            dist_from_left,
+            dist_from_right,
+            dist_from_top,
+            dist_from_bottom,
+        ]
+    )
+
+    # Do not touch the pixel in the middle the tile, only the ones that are overlapped with the other tile.
+    edge_distance = np.minimum(edge_distance, overlap/2)
+
+    # Convert to penalty (higher penalty for pixels closer to edge)
+    # Scale to [-5, 0]
+    penalty = np.interp(edge_distance, (edge_distance.min(), edge_distance.max()), (-5, 0))
+    return penalty
 
 def inference_on_geotiff(
     model: torch.nn.Module,
@@ -76,32 +104,7 @@ def inference_on_geotiff(
         tuple: Tuple containing output path and inference time in seconds.
     """
 
-    # Create importance matrix for each predicted tile
-    h = tile_size
-    w = tile_size
-    y_grid, x_grid = np.mgrid[0:h, 0:w]
-    # Calculate distance from each edge
-    dist_from_left = x_grid
-    dist_from_right = w - x_grid - 1
-    dist_from_top = y_grid
-    dist_from_bottom = h - y_grid - 1
-    # Combine distances (minimum distance to any edge)
-    edge_distance = np.minimum.reduce(
-        [
-            dist_from_left,
-            dist_from_right,
-            dist_from_top,
-            dist_from_bottom,
-        ]
-    )
-
-    # Do not touch the pixel in the middle the tile, only the ones that are overlapped with the other tile.
-    edge_distance = np.minimum(edge_distance, overlap)
-
-    # Convert to penalty (higher penalty for pixels closer to edge)
-    # Scale to [-5, 0]
-    penalty = np.interp(edge_distance, (edge_distance.min(), edge_distance.max()), (-5, 0))
-    
+    penalty = get_penalty_array(tile_size, overlap)
     # Set same penalties to all classes 
     penalty = torch.from_numpy(np.repeat(penalty[np.newaxis, :, :], num_classes, axis=0)).to(device)  
     
