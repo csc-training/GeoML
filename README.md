@@ -9,75 +9,51 @@ This repository contains all Jupyter Notebooks and other code used in the course
 * [04_shallow_classification](04_shallow_classification)
 * [05_deep_regression](06_deep_regression)
 * [06_deep_classification](06_deep_classification)
-* [07_samgeo](07_samgeo)
-* [08_cnn_segmentation](08_cnn_segmentation)
-* [09_object_detection](09_object_detection)
+* [07_cnn_segmentation](07_cnn_segmentation)
+* [08_object_detection](08_object_detection)
 
 
 ## Course exercise enviroment
-During the course exercises are done in LUMI, which is EuroHPC supercomputer. Accessing LUMi requires LUMI project. Finnish users get access to LUMI via CSC. For course the course participants are added to the course project.
+During the course exercises are done in Roihu, which is CSC supercomputer. Accessing Roihu requires CSC project with Roihu service enabled. Finnish academic users get access to Roihu via CSC. For course the course participants are added to the course project.
 
-### LUMI webinterface
-* Open https://www.lumi.csc.fi
-* Log in with:
-	* HAKA, if you have (Finnish universities and some research institutes)
+### Roihu webinterface
+* Open https://roihu.csc.fi
+* Log in with any of the following:
  	* [CSC account](https://docs.csc.fi/accounts/), you need your CSC username and password 
-
-### Copy exercise materials
-Open Login node shell
-```
-cd /scratch/project_462001167/students/
-mkdir $USER
-cd $USER
-git clone https://github.com/csc-training/GeoML.git
-```
+	* HAKA (Finnish universities and some research institutes)
+ 	* Virtu (Finnish governmental organizatons)
+* You need to use MFA (a code from phone to log in)   
 	
 #### Jupyter 
 * Click "Jupyter" on dashboard
 * Select following settings:
-	* Project: project_462001167 during course, own project later 
+	* Project: project_2019932 during course, own project later 
 	* Partition: interactive
-	* CPU cores: 4
-	* Local disk: 0
+	* CPU cores: 1
+ 	* Memory: 8 GiB
 	* Time: 4:00:00 (or adjust to reasonable)
- 	* Working directory: /scratch/project_462001167 during course, own project's scratch later* 
-	* Python: geoconda OR custom depending on the exercise
-		* Exercises 1 - 6, 9 data preparation: geoconda
-  			* No virtual environment  	
-		* Exercises 7 - 9: pytorch
-  			* Before opening Jupyter the first time, you need to create virtual environment with some extra packages, see below.
-      		* Check, `Enable virtual environment`
-			* Virtual environment path: `/scratch/project_462001167/students/$USER/geoml`
-   			* Check, `Enable packages under ~/.local/lib on venv start`
+	* Python: `python-geo`
+ 		* `python-pytorch` for Exercise 8, object detection 
+ 	* Working directory: /scratch/project_2019932 during course, own project's scratch later* 
    	* (Do not select any of the check-boxes below.)
 	
 * Click launch and wait until granted resources 
 * Click "Connect to Jupyter"
 * Open Terminal and clone exercise materials
+```
+cd /scratch/project_2019932/students/
+mkdir $USER
+cd $USER
+git clone https://github.com/csc-training/GeoML.git
+```
 * Open in JupyterLab folder `students/<your_username>/GeoML`
-
-#### Adding deep learning librares to pytorch module
-The Pytorch module does not include all Python packages required by these exercises. To add custom packages, the best option is to use [venv](https://docs.csc.fi/support/tutorials/python-usage-guide/#using-venv) (virtual environment).
-
-Open Login node shell and add the venv to `scratch`:
-```
-cd /scratch/project_462001167/students/$USER
-module use /appl/local/csc/modulefiles/
-ml pytorch
-python3 -m venv --system-site-packages geoml
-source geoml/bin/activate
-pip install torchgeo # CNN exercise
-pip install sahi ultralytics folium==0.13 mapclassify # Object detection exercise
-pip install segment-geospatial[samgeo] addict yapf pycocotools supervision #SAM
-pip install groundingdino-py # SAM
-```
 
 #### Optional, QGIS
 [CSC Dosc: QGIS](https://docs.csc.fi/apps/qgis/)
 
 ## Exercises on own computer
 
-Exercises 1-7 Jupyter notebooks can be run as is on any computer. Exercises 8 - 9 (CNN and object detection) require GPU availability for execution in reasonable time. 
+Exercises 1-6 Jupyter notebooks can be run as is on any computer. Exercises 7- 8 (CNN and object detection) require GPU availability for execution in reasonable time. 
 
 To get started:
 * Get the exercise materials from Github
