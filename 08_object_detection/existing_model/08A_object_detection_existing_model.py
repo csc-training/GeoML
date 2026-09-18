@@ -17,10 +17,10 @@ from sahi.predict import get_sliced_prediction
 
 def main():
     # Set path to the exercise directory
-    exercise_folder = os.path.join(os.sep, 'scratch', 'project_462001167', 'students', \
-                                   os.environ.get('USER'), 'GeoML', '08_object_detection', 'existing_model') 
-    sentinel_image_pre_downloaded = '/scratch/project_462001167/08_sentinel_images/T34VEN_20210714T100029_TCI.tif'
-    sentinel_image = os.path.join(exercise_folder, 'T34VEN_20210714T100029_TCI.tif')
+    object_detection_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', \
+                                   os.environ.get('USER'), 'GeoML', '08_object_detection')
+    exercise_folder =  os.path.join(object_detection_folder, '08A_existing_model') 
+    sentinel_image = os.path.join(object_detection_folder, 'sentinel2-object-detection', 'T34VEN_20210714T100029_TCI.tif')
     
     # Set image size used for inference
     image_size = 320
@@ -37,10 +37,6 @@ def main():
     # Set computing device: GPU or CPU
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f'Using {device} for predictions...')
-
-    # Copy Sentinel-2 image to your own folder
-    if not os.path.exists(sentinel_image):
-        shutil.copy(sentinel_image_pre_downloaded, sentinel_image)
     
     # Copy model weights from HuggingFace.
     urllib.request.urlretrieve(model_url, model_path)
@@ -75,4 +71,4 @@ if __name__ == '__main__':
     start = time.time()
     main()
     end = time.time()
-    print("Script completed in " + str(round(((end - start)/60),0)) + " minutes") 
+    print("Script completed in " + str(round(((end - start)),0)) + " seconds") 
