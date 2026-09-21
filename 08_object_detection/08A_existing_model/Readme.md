@@ -5,10 +5,10 @@
 The goal of this exercise is to use pre-trained model from Huggingface to predict boats based on an Sentinel-2 1C RGB image. 
 
 Main steps:
-* Sentinel data download.
+* Sentinel data download (`08_0_download_sentinel2_data.ipynb`)
 * Pre-trained model download.
 * Ultralytics YOLO11 model creation from pre-trained weights
-* Tiled prediction of Sentinel-2 1C RGB image.
+* Tiled prediction based on Sentinel-2 1C RGB image.
 
 We will use GPU for running the inference. In order to utilize GPUs we will run the script as a batch job. 
 
@@ -22,16 +22,16 @@ The main libraries of this exercise are:
     * Python file: [08_object_detection_existing_model.py](08_object_detection_existing_model.py)
     * SLURM batch job file: [08_object_detection_batch_job.sh](08_object_detection_batch_job.sh)
     * No modifications are needed to the files.
-    * Open in another tab of web-browser in the supercomputer web interface -> Login node shell
+    * Open in another tab of web-browser in the supercomputer web interface: `Tools` -> `Login node shell (Roihu-GPU)`
     * A black window with SSH connection to the supercomputer opens, now Linux commands must be used.
     * The shell opens in everybody's home directory, to access the files, change working 
       directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/08_object_detection/existing_model`
+        * `cd /scratch/project_2019932/students/$USER/GeoML/08_object_detection/08A_existing_model`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter file panel.
     * Submit a batch job:
-        * `sbatch 08_object_detection_batch_job.sh`
+        * `sbatch 08A_object_detection_existing_model.sh`
     * It prints back something like, exact number will be different:
         * `Submitted batch job 1212121212`
     * To see the Python output file, open it with `tail`, the exact file name depends on the previosly printed job number:
@@ -43,11 +43,10 @@ The main libraries of this exercise are:
     * Optional, to see full output from beginning:
         * `less slurm-1212121212.out` (this does not update, if file gets more rows).
     * It is possible to see job's state (waiting, running, finished) and used resources with
-        * `sacct -o jobid,partition,state,reqmem,maxrss,averss,elapsed`
-        * (In CSC Puhti: `seff 1212121212`)
+        * `seff 1212121212`
     * The produced annotated image is saved as a file to `preds/prediction_visual.png`
     * It is a rather big file, so opening it with Jupyter works not so well. To open the file, use rather `Files` section of the web interface:
         * Select `/scratch/project_462001167`
-        * Navigate to exercise's folder, something like `/scratch/project_462001167/students/ekkylli/GeoML/08_object_detection/existing_model/preds`
+        * Navigate to exercise's folder, something like `/scratch/project_2019932/students/ekkylli/GeoML/08_object_detection/08A_existing_model/preds`
         * Click the file name: `prediction_visual.png`
         * Alternatively, you can download the file to your local machine and see it with some local tool.
