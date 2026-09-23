@@ -44,7 +44,7 @@ During the course exercises are done in Roihu, which is CSC supercomputer. Acces
 cd /scratch/project_2019932/students/
 mkdir $USER
 cd $USER
-git clone https://github.com/csc-training/GeoML.git
+git clone -b 2026-update https://github.com/csc-training/GeoML.git 
 ```
 * Open in JupyterLab folder `students/<your_username>/GeoML`
 
