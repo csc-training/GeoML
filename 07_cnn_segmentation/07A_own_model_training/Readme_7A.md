@@ -60,6 +60,6 @@ Below are the detailed instructions how to run the exercise.
     * The predicted classification and class probabilities .tif files to [../../classification_results](../../classification_results)-folder
     * `cnn_own_model_description.txt`-file to the exercise folder, that shows the model architecture.
 
-## 7A.3 Evaluate th model visually and by calculate performance metrics.
+## 7A.3 Evaluate the model visually and by calculating performance metrics.
 * Open Jupyter as described in [main Readme](../../Readme.md)
 * Open [../07_3_segmentation_evaluation.ipynb](../07_3_segmentation_evaluation.ipynb) from the main folder of exerice 7.
