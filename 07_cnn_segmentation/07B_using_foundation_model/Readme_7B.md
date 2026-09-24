@@ -26,7 +26,7 @@ Below are detailed instructions how to run the exercises.
     * A black window with SSH connection to Roihu opens, now Linux commands should be used.
     * The shell opens in home directory, to access the files, change working 
     directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation/07B_using_foundation_model`
+        * `cd /scratch/project_2019932/students/$USER/GeoML/07_cnn_segmentation/07B_using_foundation_model`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter File panel.
