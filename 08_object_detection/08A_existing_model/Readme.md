@@ -19,8 +19,8 @@ The main libraries of this exercise are:
 ## Workflow
 
 1. Open these files, we will go through it in details.
-    * Python file: [08_object_detection_existing_model.py](08A_object_detection_existing_model.py)
-    * SLURM batch job file: [08_object_detection_batch_job.sh](08A_object_detection_existing_model.sh)
+    * Python file: [08A_object_detection_existing_model.py](08A_object_detection_existing_model.py)
+    * SLURM batch job file: [08A_object_detection_existing_model.sh](08A_object_detection_existing_model.sh)
     * No modifications are needed to the files.
     * Open in another tab of web-browser in the supercomputer web interface: `Tools` -> `Login node shell (Roihu-GPU)`
     * A black window with SSH connection to the supercomputer opens, now Linux commands must be used.
