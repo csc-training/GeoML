@@ -36,7 +36,7 @@ The main libraries of this exercise are:
         * The resulting file should look like this, but with your own username in the first row.
 
 ```
-path: /scratch/project_2019932/students/YOUR_USER_NAME/GeoML/08_object_detection/own_model_training/yolo_data # dataset root dir 
+path: /scratch/project_2019932/students/YOUR_USER_NAME/GeoML/08_object_detection/08B_own_model_training/yolo_data # dataset root dir 
 train: train # train images (relative to 'path')
 val: val # val images (relative to 'path')
 test: test # test images (relative to 'path')
