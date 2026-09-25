@@ -46,7 +46,7 @@ The main libraries of this exercise are:
         * `seff 1212121212`
     * The produced annotated image is saved as a file to `preds/prediction_visual.png`
     * It is a rather big file, so opening it with Jupyter works not so well. To open the file, use rather `Files` section of the web interface:
-        * Select `/scratch/project_462001167`
+        * Select `/scratch/project_2019932`
         * Navigate to exercise's folder, something like `/scratch/project_2019932/students/ekkylli/GeoML/08_object_detection/08A_existing_model/preds`
         * Click the file name: `prediction_visual.png`
         * Alternatively, you can download the file to your local machine and see it with some local tool.
