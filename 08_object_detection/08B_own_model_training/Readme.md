@@ -25,7 +25,7 @@ The main libraries of this exercise are:
 1.  The Sentinel-2 data download. The data for this exercise is pre-downloaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [08_0_download_sentinel2_data.ipynb](08_0_download_sentinel2_data.ipynb).
         
 2. Prepare data for the Ultralytics YOLO model. The notebook creates Ultralytics YOLO compatible dataset and splits the data to training, validation, and test sets. 
-    * Open the Jupyter notebook: [08B_1_data_preparation.ipynb](08B_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](Readme.md). **Use python-geo module**
+    * Open the Jupyter notebook: [08B_1_data_preparation.ipynb](08B_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](https://github.com/csc-training/GeoML/blob/2026-update/README.md). **Use python-pytorch module**
     * The notebook creates a subdirectory `yolo_data`.
       
 3. Modify the `yolo.yaml` settings file, that sets the paths to data. 
