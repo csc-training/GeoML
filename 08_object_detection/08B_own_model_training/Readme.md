@@ -24,8 +24,8 @@ The main libraries of this exercise are:
 
 1.  The Sentinel-2 data download. The data for this exercise is pre-downloaded, because it would require CDSE credentials. You can get familiarized with the downloading by going through the notebook: [08_0_download_sentinel2_data.ipynb](08_0_download_sentinel2_data.ipynb).
         
-2. Prepare data for the Ultralyltics YOLO model. The notebook creates Ultralyltics YOLO compatible dataset and splits the data to training, validation, and test sets. 
-    * Open the Jupyter notebook: [08B_1_data_preparation.ipynb](08B_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](Readme.md). **Use python-geo module**
+2. Prepare data for the Ultralytics YOLO model. The notebook creates Ultralytics YOLO compatible dataset and splits the data to training, validation, and test sets. 
+    * Open the Jupyter notebook: [08B_1_data_preparation.ipynb](08B_1_data_preparation.ipynb) in the web interface. The instructions and specific settings on creating an interactive session are listed in the course Readme: [Readme.md](https://github.com/csc-training/GeoML/blob/2026-update/README.md). **Use python-geo module**
     * The notebook creates a subdirectory `yolo_data`.
       
 3. Modify the `yolo.yaml` settings file, that sets the paths to data. 
@@ -36,7 +36,7 @@ The main libraries of this exercise are:
         * The resulting file should look like this, but with your own username in the first row.
 
 ```
-path: /scratch/project_2019932/students/YOUR_USER_NAME/GeoML/08_object_detection/own_model_training/yolo_data # dataset root dir 
+path: /scratch/project_2019932/students/YOUR_USER_NAME/GeoML/08_object_detection/08B_own_model_training/yolo_data # dataset root dir 
 train: train # train images (relative to 'path')
 val: val # val images (relative to 'path')
 test: test # test images (relative to 'path')

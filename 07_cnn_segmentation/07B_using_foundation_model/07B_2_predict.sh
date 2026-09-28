@@ -1,5 +1,5 @@
 #!/bin/bash 
-#SBATCH --account=project_2000599   # Choose the project to be billed. Change to own project, if used outside of the course
+#SBATCH --account=project_2019932   # Choose the project to be billed. Change to own project, if used outside of the course
 #SBATCH --partition=gpumedium       # Which queue to use. Defines maximum time, memory, tasks, nodes and local storage for job
 #SBATCH --ntasks=1                  # Number of tasks. Upper limit depends on partition.
 #SBATCH --cpus-per-task=8           # How many processors work on one task. Upper limit depends on number of CPUs per GPU. In LUMI there are 7 CPU cores per one GPU. 

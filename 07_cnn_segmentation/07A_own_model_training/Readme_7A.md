@@ -25,7 +25,7 @@ Below are the detailed instructions how to run the exercise.
     * A black window with SSH connection to Roihu opens, now Linux commands should be used.
     * The shell opens in home directory, to access the files, change working 
     directory:
-        * `cd /scratch/project_462001167/students/$USER/GeoML/07_cnn_segmentation/07A_own_model_training`
+        * `cd /scratch/project_2019932/students/$USER/GeoML/07_cnn_segmentation/07A_own_model_training`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter File panel.
@@ -60,6 +60,6 @@ Below are the detailed instructions how to run the exercise.
     * The predicted classification and class probabilities .tif files to [../../classification_results](../../classification_results)-folder
     * `cnn_own_model_description.txt`-file to the exercise folder, that shows the model architecture.
 
-## 7A.3 Evaluate th model visually and by calculate performance metrics.
+## 7A.3 Evaluate the model visually and by calculating performance metrics.
 * Open Jupyter as described in [main Readme](../../Readme.md)
 * Open [../07_3_segmentation_evaluation.ipynb](../07_3_segmentation_evaluation.ipynb) from the main folder of exerice 7.
