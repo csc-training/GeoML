@@ -79,8 +79,8 @@ def create_intersection_dataset(image_dir, mask_dir):
 
 class GeoDataModule(LightningDataModule):
     """
-    A TorchGeo GeoDataModule for loading imagery and labels, and creating an
-    iterable Torch Dataloader over the training data.
+    A Lightning DataModule that uses TorchGeo datasets and samplers to load
+    imagery and labels and create an iterable dataloader over the training data.
 
     Uses RandomGeoSampler for training (random crops, refreshed each epoch)
     and GridGeoSampler for validation (deterministic, non-overlapping coverage).
@@ -104,10 +104,8 @@ class GeoDataModule(LightningDataModule):
         self.train_sampler = RandomGeoSampler(self.train_dataset, size=self.tile_size, length=self.sampler_length)
         self.val_sampler = GridGeoSampler(self.val_dataset, size=self.tile_size, stride=self.tile_size // 2)
 
+    # Stack image and mask into batches
     def collate_fn(self, batch):
-        # Keep only image/mask — TerraTorch's task forwards every other batch key
-        # straight into the model as a kwarg, so geo metadata (bounds/crs/transform)
-        # must not be included here.
         images = torch.stack([item["image"] for item in batch])
         masks = torch.stack([item["mask"] for item in batch])
         return {"image": images, "mask": masks.long()}
