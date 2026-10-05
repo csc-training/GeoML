@@ -108,7 +108,11 @@ class GeoDataModule(LightningDataModule):
     def collate_fn(self, batch):
         images = torch.stack([item["image"] for item in batch])
         masks = torch.stack([item["mask"] for item in batch])
-        return {"image": images, "mask": masks.long()}
+        return {
+            "image": images, 
+            "mask": masks.long(),
+            "gsd": 20.0
+        }
 
     def train_dataloader(self):
         return DataLoader(
@@ -253,7 +257,7 @@ def main():
         },
         loss = 'ce',                          # Terratorch currently supports 'ce', 'jaccard', 'dice', 'lovasz', or 'focal' loss.
         optimizer="AdamW",                    # Name of optimizer class from torch.optim to be used.
-        lr=1e-3,                              # Learning rate
+        lr=1e-4,                              # Learning rate
         ignore_index=-100,                    # Nodata value for lables
         freeze_backbone=True,                 # Do not modify backbone weights
         plot_on_val=False,                    # Disables datamodule.plot() calls, which your custom GeoDataModule doesn't implement        
