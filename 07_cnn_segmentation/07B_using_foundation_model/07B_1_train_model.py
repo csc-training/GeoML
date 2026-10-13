@@ -2,17 +2,17 @@
 # coding: utf-8
 
 """
-Script for training a CNN segmentation model based on GeoTiff data and label files,
-using the Clay v1 geospatial foundation model (via TerraTorch) as a pretrained backbone.
+Script for training a segmentation model based on GeoTiff data and label files,
+using the Clay v1 geospatial foundation model (a vision transformer, via TerraTorch) as a pretrained backbone.
 
-Classes: fields, forest, sea, urban (4 classes)
-Input bands (10, in this exact order): B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
+Classes: 0 = other, 1 = forest, 2 = fields, 3 = water
+Input bands: B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12 (10 bands)
 
 The main Python libraries are PyTorch, PyTorch Lightning, TorchGeo, and TerraTorch.
 Main steps of the script:
 * Data loading (TorchGeo, RandomGeoSampler / GridGeoSampler over large untiled scenes)
-* Augmentation (Kornia, GPU-side)
-* Model training (Clay backbone + UNet decoder, via TerraTorch's SemanticSegmentationTask)
+* Augmentation (Kornia)
+* Model training (Clay backbone + UNet decoder from TerraTorch's SemanticSegmentationTask)
 
 Compared to the own model training CNN code the differences are:
 * Terratorch SemanticSegmentationTask is used, not Torchgeo's
@@ -82,8 +82,8 @@ class GeoDataModule(LightningDataModule):
     A Lightning DataModule that uses TorchGeo datasets and samplers to load
     imagery and labels and create an iterable dataloader over the training data.
 
-    Uses RandomGeoSampler for training (random crops, refreshed each epoch)
-    and GridGeoSampler for validation (deterministic, non-overlapping coverage).
+    Uses RandomGeoSampler for training (random crops on each epoch)
+    and GridGeoSampler for validation (same tiles on every epoch).
     """
 
     def __init__(self, train_images, train_masks, val_images, val_masks,
@@ -153,10 +153,10 @@ class MySegmentationTask(SemanticSegmentationTask):
         )
         return aug
 
-    def on_after_batch_transfer(self, batch: Dict[str, torch.Tensor], dataloader_idx: int) -> Dict[str, torch.Tensor]:
+    def on_after_batch_transfer(self, batch, dataloader_idx):
         # Called after Lightning moves the batch to the device
         # Kornia expects floats for images; masks should remain integers.
-        images = batch["image"].float() #CHANGED, this and next and end out of trainging section, so that would be applied also to validation data
+        images = batch["image"].float()
         masks = batch["mask"].long()
         
         if self.trainer.training:
@@ -165,7 +165,6 @@ class MySegmentationTask(SemanticSegmentationTask):
             # Ensure augmentation module is on correct device
             self.aug.to(self.device)
             images, masks = self.aug(images, masks)
-
         
         batch["image"] = images
         batch["mask"] = masks.long()
@@ -176,17 +175,17 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
     # Add checkpoints to the training, only save the best model based on the minimum validation loss    
     checkpoint_cb = ModelCheckpoint(
         dirpath=checkpoints_dir, filename="best_model",
-        monitor="val/mIoU",   # CHANGED: was "val_loss"
+        monitor="val/mIoU", 
         save_top_k=1, 
-        mode="max" # CHANGED: was "min"
+        mode="max"  # higher mIoU is better
     )
 
     # Add earlystopping to prevent model from overfitting by stopping the training 
-    # if validation loss doesn't decrease in patience number of epochs    
+    # if validation mIoU doesn't improve during a set number of epochs (patience) 
     earlystop_cb = EarlyStopping(
-        monitor="val/mIoU",   # CHANGED: was "val_loss"
+        monitor="val/mIoU",  
         patience=patience, 
-        mode="max" # CHANGED: was "min"
+        mode="max"
     )  
     
     # Enable writing of log files for Tensorboard    
@@ -229,7 +228,7 @@ def main():
         val_images=data_validation_folder,
         val_masks=labels_validation_folder,
         tile_size=tile_size,                       # must match backbone_img_size
-        batch_size=8,                              #16 or 32 might be better for bigger datasets
+        batch_size=8,                              # 16 or 32 might be better for bigger datasets
         num_workers=len(os.sched_getaffinity(0)),  # Match with number of CPU:s available
         sampler_length=1600
     )
