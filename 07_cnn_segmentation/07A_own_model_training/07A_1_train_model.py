@@ -73,8 +73,8 @@ class GeoDataModule(LightningDataModule):
     A Lightning DataModule that uses TorchGeo datasets and samplers to load
     imagery and labels and create an iterable dataloader over the training data.
 
-    Uses RandomGeoSampler for training (random crops, refreshed each epoch)
-    and GridGeoSampler for validation (deterministic, non-overlapping coverage).
+    Uses RandomGeoSampler for training (random crops on each epoch)
+    and GridGeoSampler for validation (same tiles on every epoch).
     """
     def __init__(self, train_images, train_masks, val_images, val_masks, tile_size, batch_size, num_workers, sampler_length):
         super().__init__()
@@ -137,10 +137,10 @@ class MySegmentationTask(SemanticSegmentationTask):
         return aug
         
         
-    def on_after_batch_transfer(self, batch: Dict[str, torch.Tensor], dataloader_idx: int) -> Dict[str, torch.Tensor]:
+    def on_after_batch_transfer(self, batch, dataloader_idx):
         # Called after Lightning moves the batch to the device
         # Kornia expects floats for images; masks should remain integers.
-        images = batch["image"].float() #CHANGED, this and next and end out of trainging section, so that would be applied also to validation data
+        images = batch["image"].float()
         masks = batch["mask"].long()
         
         if self.trainer.training:
@@ -160,17 +160,17 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
     # Add checkpoints to the training, only save the best model based on the minimum validation loss    
     checkpoint_cb = ModelCheckpoint(
         dirpath=checkpoints_dir, filename="best_model",
-        monitor="val_AverageJaccardIndex",   # CHANGED: was "val_loss"
+        monitor="val_AverageJaccardIndex",
         save_top_k=1, 
-        mode="max" # CHANGED: was "min"
+        mode="max"
     )
 
     # Add earlystopping to prevent model from overfitting by stopping the training 
     # if validation loss doesn't decrease in patience number of epochs    
     earlystop_cb = EarlyStopping(
-        monitor="val_AverageJaccardIndex",   # CHANGED: was "val_loss"
+        monitor="val_AverageJaccardIndex",
         patience=patience, 
-        mode="max" # CHANGED: was "min"
+        mode="max" 
     )  
     
     # Enable writing of log files for Tensorboard    
