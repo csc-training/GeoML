@@ -130,7 +130,7 @@ class MySegmentationTask(SemanticSegmentationTask):
         aug = K.AugmentationSequential( 
             K.RandomHorizontalFlip(p=0.5), 
             K.RandomVerticalFlip(p=0.5), 
-            K.RandomRotation(degrees=90, resample="nearest"), 
+            K.RandomRotation90(times=(0, 3), p=1.0, resample="nearest"),
             data_keys=["image", "mask"], 
             keepdim=True
         )
@@ -150,7 +150,6 @@ class MySegmentationTask(SemanticSegmentationTask):
             self.aug.to(self.device)
             images, masks = self.aug(images, masks)
 
-        
         batch["image"] = images
         batch["mask"] = masks.long()
         return batch  
