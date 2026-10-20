@@ -217,6 +217,8 @@ def main():
     labels_train_folder = os.path.join(cnn_data_folder, 'train', 'labels')
     labels_validation_folder = os.path.join(cnn_data_folder, 'validation', 'labels')
 
+    pl.seed_everything(30, workers=True)
+ 
     # --- Model / training settings ---
     patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
     num_epochs = 200
