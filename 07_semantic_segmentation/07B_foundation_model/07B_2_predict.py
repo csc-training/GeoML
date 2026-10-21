@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-# # CNN inference
+# # FM-based model inference
 # 
 # This script:
-# * Predicts classes based on test data and the trained CNN model.
+# * Predicts classes based on test data and the trained FM-based model.
 #     * For prediction the test data is tiled with overlap to overcome edge-effects
 #     * Data is fed to GPU in batches for optimal performance
 #     * Tile edge predictions get lower importance in the mosaicing, so less model errors are visible in the result.
@@ -177,13 +177,11 @@ def main():
     # Define folders and files.
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML') 
     exercise_folder = os.path.join(base_folder, '07_semantic_segmentation', '07B_foundation_model') 
-    cnn_test_data_folder = os.path.join(base_folder,'data', 'raster', 'pixel-wise')
-    data_test = os.path.join(cnn_test_data_folder, 'data_sentinel2.tif')
-    labels_test = os.path.join(cnn_test_data_folder, 'labels.tif')
+    data_test = os.path.join(base_folder,'data', 'raster', 'pixel-wise', 'data_sentinel2.tif')
     results_folder = os.path.join(base_folder, 'classification_results')
-    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_fm.tif') 
-    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_fm_all_classes.tif') 
-    model_description_file = os.path.join(exercise_folder, 'cnn_fm_model_description.txt') 
+    prediction_output = os.path.join(results_folder, 'classification_sentinel2_fm.tif') 
+    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_fm_all_classes.tif') 
+    model_description_file = os.path.join(exercise_folder, 'fm_model_description.txt') 
     
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)

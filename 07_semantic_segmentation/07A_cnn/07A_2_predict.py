@@ -179,9 +179,9 @@ def main():
     data_test = os.path.join(cnn_test_data_folder, 'data_sentinel2.tif')
     labels_test = os.path.join(cnn_test_data_folder, 'labels.tif')
     results_folder = os.path.join(base_folder, 'classification_results')
-    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_own.tif') 
-    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_own_all_classes.tif') 
-    model_description_file = os.path.join(exercise_folder, 'cnn_own_model_description.txt') 
+    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn.tif') 
+    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_all_classes.tif') 
+    model_description_file = os.path.join(exercise_folder, 'cnn_model_description.txt') 
     
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
