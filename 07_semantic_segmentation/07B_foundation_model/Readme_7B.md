@@ -1,7 +1,8 @@
 ## Fine-tuning of Clay foundation model
 
 In this exercise [Clay foundation](https://clay-foundation.github.io/model/) model is fine-tuned for our task. 
-The foundation model is used as backbone, the decoder part is U-net CNN model trained from scratch. 
+The foundation model, pretrained on large amount of satellite imagery, is used as the backbone. 
+On top of it, a U-Net decoder and a segmentation head are added and trained from scratch.
 
 ## Main steps
 
