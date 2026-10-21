@@ -147,7 +147,7 @@ class MySegmentationTask(SemanticSegmentationTask):
         aug = K.AugmentationSequential(
             K.RandomHorizontalFlip(p=0.5),
             K.RandomVerticalFlip(p=0.5),
-            K.RandomRotation(degrees=90, p=1.0, resample="nearest"), #Good, also with default p=0.5
+            K.RandomRotation(degrees=90, p=1.0, resample="nearest"),
             data_keys=["image", "mask"],
             keepdim=True
         )
@@ -208,7 +208,7 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
 
 def main():
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML')
-    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07B_using_foundation_model')
+    exercise_folder = os.path.join(base_folder, '07_semantic_segmentation', '07B_foundation_model')
     cnn_data_folder = os.path.join(base_folder, 'data', 'raster', 'cnn')
     logs_dir = os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S") ) 
     checkpoints_dir = os.path.join(exercise_folder, 'checkpoints')
@@ -223,7 +223,7 @@ def main():
     # --- Model / training settings ---
     patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
     num_epochs = 200
-    tile_size=256
+    tile_size=256                  # Clay preferred tile size is 256
 
     datamodule = GeoDataModule(
         train_images=data_train_folder,

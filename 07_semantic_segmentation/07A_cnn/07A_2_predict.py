@@ -19,12 +19,6 @@
 # 3 - water
 # 0 - everything else
 # ```
-# 
-# Differences compared to prediction in 7A (own model)
-# * Tile size is 256 
-# * SemanticSegmentationTask is from Terratorch library, not Torchgeo, therefore
-#       * Torchinfo model summary can not be used for printing model architecture
-#       * Getting prediction results from model has slightly different syntax
 
 import os
 import numpy as np
@@ -34,8 +28,12 @@ from typing import Optional, Any, Tuple
 import rasterio
 # Torchgeo model
 import torch
+from torchgeo.trainers import SemanticSegmentationTask
+# Model plotting
+from torchinfo import summary
 
-from terratorch.tasks import SemanticSegmentationTask
+
+
 
 # ## Tiled inference to predict the classes
 # 
@@ -106,11 +104,10 @@ def inference_on_geotiff(
         tuple: Tuple containing output path and inference time in seconds.
     """
 
-    # Create importance matrix for each predicted tile
     penalty = get_penalty_array(tile_size, overlap)
     # Set same penalties to all classes 
     penalty = torch.from_numpy(np.repeat(penalty[np.newaxis, :, :], num_classes, axis=0)).to(device)  
-
+    
     # Put model in evaluation mode
     model.to(device)
     model.eval()
@@ -153,21 +150,22 @@ def inference_on_geotiff(
                 batch_inputs_tensor = torch.stack(batch_inputs)
                 # Forward pass, give model a batch of data.
                 with torch.no_grad():
-                    outputs = model(batch_inputs_tensor).output #CHANGED from 7A from outputs = model(batch_inputs_tensor)
+                    outputs = model(batch_inputs_tensor)
                 # Process each output in the batch.
                 for idx, output in enumerate(outputs):
                     y_pos, x_pos, = batch_positions[idx]
                     # Subtract the penalties based on pixel's distance to tile edge.
-                    weighted_scores = output + penalty
+                    weighted_scores = output + penalty  
                     # Save predictions for the pixels/classes that have heigher score than previously saved.
                     pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size] = torch.max(pixel_predictions[:, y_pos:y_pos+tile_size, x_pos:x_pos+tile_size], weighted_scores)
                 # Reset batch
                 batch_inputs = []
                 batch_positions = []
                 batch_count = 0
+                
     # Calculate most probable class for each pixel
     # Move this to CPU/numpy before returning
-    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)
+    class_predictions = pixel_predictions.argmax(dim=0).cpu().numpy().astype(np.uint8)   
     pixel_probabilities = pixel_predictions.cpu().numpy()   
 
     return class_predictions, pixel_probabilities
@@ -176,14 +174,14 @@ def main():
     # ## Settings
     # Define folders and files.
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML') 
-    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07B_using_foundation_model') 
+    exercise_folder = os.path.join(base_folder, '07_semantic_segmentation', '07A_cnn') 
     cnn_test_data_folder = os.path.join(base_folder,'data', 'raster', 'pixel-wise')
     data_test = os.path.join(cnn_test_data_folder, 'data_sentinel2.tif')
     labels_test = os.path.join(cnn_test_data_folder, 'labels.tif')
     results_folder = os.path.join(base_folder, 'classification_results')
-    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_fm.tif') 
-    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_fm_all_classes.tif') 
-    model_description_file = os.path.join(exercise_folder, 'cnn_fm_model_description.txt') 
+    prediction_output = os.path.join(results_folder, 'classification_sentinel2_cnn_own.tif') 
+    prediction_output_all_classes = os.path.join(results_folder, 'class_probabilities_sentinel2_cnn_own_all_classes.tif') 
+    model_description_file = os.path.join(exercise_folder, 'cnn_own_model_description.txt') 
     
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
@@ -194,10 +192,10 @@ def main():
     
     # Settings for prediction
     num_classes = 4
-    TILE_SIZE = 256 # Use the same as for model training, must be smaller than data height/width.
+    TILE_SIZE = 512 # Use the same as for model training, must be smaller than data height/width.
     BATCH_SIZE = 8
     OVERLAP = 20
-    NO_OF_BANDS = 10
+    NO_OF_BANDS = 10 #ToDo, remove if torchgeo summary not used
     
     # Set computing device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -210,12 +208,14 @@ def main():
     
     # See the model architecture.
     with open(model_description_file, "w") as f:
+        print(summary(model, input_size=(BATCH_SIZE, NO_OF_BANDS, TILE_SIZE, TILE_SIZE)), file=f) # CHANGED        
         print(model, file=f) # CHANGED NEW
 
     # Read test data from file, calculate predicted classes and save as GeoTiff, save also probabilities of all classes for each pixel (might be interesting to check).
     with rasterio.open(data_test) as src:
         data = src.read()
         class_predictions, pixel_probabilities = inference_on_geotiff(model, data, TILE_SIZE, OVERLAP, BATCH_SIZE, num_classes, device)
+        
         # Save predition raster with most likely class
         out_meta = src.meta.copy()
         out_meta.update(

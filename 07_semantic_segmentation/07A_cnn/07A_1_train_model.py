@@ -130,7 +130,7 @@ class MySegmentationTask(SemanticSegmentationTask):
         aug = K.AugmentationSequential( 
             K.RandomHorizontalFlip(p=0.5), 
             K.RandomVerticalFlip(p=0.5), 
-            K.RandomRotation90(times=(0, 3), p=1.0, resample="nearest"),
+            K.RandomRotation(degrees=90, p=1.0, resample="nearest"), 
             data_keys=["image", "mask"], 
             keepdim=True
         )
@@ -195,7 +195,7 @@ def main():
     # With small adjustments instead of files, these could be also folders.
     # See: https://torchgeo.readthedocs.io/en/stable/tutorials/earth_surface_water.html
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML')
-    exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07A_own_model_training')
+    exercise_folder = os.path.join(base_folder, '07_semantic_segmentation', '07A_cnn')
     cnn_data_folder = os.path.join(base_folder, 'data', 'raster', 'cnn')
     logs_dir= os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     checkpoints_dir= os.path.join(exercise_folder, 'checkpoints')
@@ -205,12 +205,14 @@ def main():
     labels_train_folder = os.path.join(cnn_data_folder, 'train', 'labels')
     labels_validation_folder = os.path.join(cnn_data_folder, 'validation', 'labels')
 
+    pl.seed_everything(1, workers=True)
+
     # Training settings:
     # SemanticSegmentationTask
     # See: https://torchgeo.readthedocs.io/en/stable/api/trainers.html#torchgeo.trainers.SemanticSegmentationTask
     patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
     num_epochs = 200               # Maximum number of epochs, early stopping likely ends the training before
-    tile_size=512                  # Tile size for data samplers, could be also different, for example: 256
+    tile_size=512                  # Tile size for data samplers, 512 is often good in relation to available memory. Could be also different, for example: 256
     
     # Create GeoDataModule with our data
     datamodule = GeoDataModule(
@@ -226,8 +228,8 @@ def main():
 
     # Create SegmentationTask
     model = MySegmentationTask(
-        model = "unet",                       # Name of the smp model, for example: 'unet', 'deeplabv3+', 'fcn', 'upernet', 'segformer', 'dpt'
-        backbone = "resnet34",                # Name of the timm or smp backbone to use
+        model = "unet",                       # Name of the smp model, for example: 'unet', 'deeplabv3+', 'fcn', 'upernet', 'segformer', 'dpt' https://smp.readthedocs.io/en/latest/models.html
+        backbone = "resnet34",                # Name of the timm or smp backbone to use https://timm.fast.ai/
         weights = None,                       # Initial model weights
         in_channels = 10,                     # Number of bands in data image 
         num_classes = 4,                      # Number of classes in the labels data

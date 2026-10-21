@@ -9,7 +9,7 @@ This repository contains all Jupyter Notebooks and other code used in the course
 * [04_shallow_classification](04_shallow_classification)
 * [05_deep_regression](06_deep_regression)
 * [06_deep_classification](06_deep_classification)
-* [07_cnn_segmentation](07_cnn_segmentation)
+* [07_semantic_segmentation](07_semantic_segmentation)
 * [08_object_detection](08_object_detection)
 
 

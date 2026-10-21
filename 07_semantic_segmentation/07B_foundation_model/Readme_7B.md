@@ -26,7 +26,7 @@ Below are detailed instructions how to run the exercises.
     * A black window with SSH connection to Roihu opens, now Linux commands should be used.
     * The shell opens in home directory, to access the files, change working 
     directory:
-        * `cd /scratch/project_2019932/students/$USER/GeoML/07_cnn_segmentation/07B_using_foundation_model`
+        * `cd /scratch/project_2019932/students/$USER/GeoML/07_semantic_segmentation/07B_foundation_model`
     * See that you are in the right folder:
         * `ls -l`.
         * It should list the files that you see also in Jupyter File panel.
@@ -44,7 +44,7 @@ Below are detailed instructions how to run the exercises.
     * It is possible to see job's state (waiting, running, finished) and used resources with
         * `seff 1212121212`)
 * Training takes about 10 minutes in Roihu.
-* There should be new files in the `07B_using_foundation_model` folder:
+* There should be new files in the `07B_foundation_model` folder:
     * `best_model.ckpt` - the trained model in `checkpoints` folder. The best model has highest number.
         *  It might be that Jupyter does not let to access the checkpoints folder, use Jupyter Terminal, Login-node shell or Files section in web interface to access it.
     *  Logs of training in `logs` folder that can be viewed using Tensorboard.
