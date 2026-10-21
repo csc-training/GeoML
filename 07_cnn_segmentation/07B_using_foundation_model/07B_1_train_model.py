@@ -147,7 +147,7 @@ class MySegmentationTask(SemanticSegmentationTask):
         aug = K.AugmentationSequential(
             K.RandomHorizontalFlip(p=0.5),
             K.RandomVerticalFlip(p=0.5),
-            K.RandomRotation90(times=(0, 3), p=1.0, resample="nearest"),
+            K.RandomRotation(degrees=90, p=1.0, resample="nearest"), #Good, also with default p=0.5
             data_keys=["image", "mask"],
             keepdim=True
         )
@@ -169,7 +169,7 @@ class MySegmentationTask(SemanticSegmentationTask):
         batch["image"] = images
         batch["mask"] = masks.long()
         return batch
-
+    
 # Define Pytorch lightning Trainer and train the model
 def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, checkpoints_dir):
     # Add checkpoints to the training, only save the best model based on the minimum validation loss    
@@ -187,7 +187,7 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
         patience=patience, 
         mode="max"
     )  
-    
+
     # Enable writing of log files for Tensorboard    
     tb_logger = TensorBoardLogger(save_dir=logs_dir, name="segmentation")
 
@@ -195,6 +195,7 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
     # In case a checkpoint exists, training can be continued with resume_from_checkpoint="checkpoints/last.ckpt"    
     trainer = pl.Trainer(
         max_epochs=no_of_epochs,
+        min_epochs=30,        
         accelerator="auto",
         devices="auto",
         precision="bf16-mixed", 
@@ -209,7 +210,7 @@ def main():
     base_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', os.environ.get('USER'), 'GeoML')
     exercise_folder = os.path.join(base_folder, '07_cnn_segmentation', '07B_using_foundation_model')
     cnn_data_folder = os.path.join(base_folder, 'data', 'raster', 'cnn')
-    logs_dir = os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+    logs_dir = os.path.join(exercise_folder, 'logs', datetime.datetime.now().strftime("%Y%m%d-%H%M%S") ) 
     checkpoints_dir = os.path.join(exercise_folder, 'checkpoints')
 
     data_train_folder = os.path.join(cnn_data_folder, 'train', 'data')
@@ -217,7 +218,7 @@ def main():
     labels_train_folder = os.path.join(cnn_data_folder, 'train', 'labels')
     labels_validation_folder = os.path.join(cnn_data_folder, 'validation', 'labels')
 
-    pl.seed_everything(30, workers=True)
+    pl.seed_everything(1, workers=True)
  
     # --- Model / training settings ---
     patience = 10                  # How many epochs model training is continued, if loss does not improve any more.
@@ -258,9 +259,10 @@ def main():
         },
         loss = 'ce',                          # Terratorch currently supports 'ce', 'jaccard', 'dice', 'lovasz', or 'focal' loss.
         optimizer="AdamW",                    # Name of optimizer class from torch.optim to be used.
-        lr=1e-4,                              # Learning rate
+        lr=1e-3,                              # Learning rate
+        lr_overrides={"encoder": 1e-5},       # Backbone learning rate: 100x lower
         ignore_index=-100,                    # Nodata value for lables
-        freeze_backbone=True,                 # Do not modify backbone weights
+        freeze_backbone=False,                 # Do not modify backbone weights
         plot_on_val=False,                    # Disables datamodule.plot() calls, which your custom GeoDataModule doesn't implement        
     )
 
