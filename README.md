@@ -31,7 +31,7 @@ During the course exercises are done in Roihu, which is CSC supercomputer. Acces
 	* Project: project_2019932 during course, own project later 
 	* Partition: interactive
 	* CPU cores: 1
- 	* Memory: 8 GiB
+ 	* Memory: 10 GiB
 	* Time: 4:00:00 (or adjust to reasonable)
 	* Python: `python-geo`
  		* `python-pytorch` for Exercise 8, object detection 
