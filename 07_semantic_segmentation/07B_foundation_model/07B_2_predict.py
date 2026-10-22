@@ -190,6 +190,11 @@ def main():
     # Check to correct name from `checkpoints` folder, the biggest number is the best checkpoint.
     checkpoint_path = os.path.join(exercise_folder, 'checkpoints', 'best_model.ckpt') 
     
+    # EXTRA, try if you want. 
+    # The training is capped at 12 minutes during the course because of time consraints.
+    # Uncomment next line, if you want to see the results of a model trained for 20 minutes.
+    # checkpoint_path = '/scratch/project_2019932/fm_model/best_model.ckpt'
+    
     # Settings for prediction
     num_classes = 4
     TILE_SIZE = 256 # Use the same as for model training, must be smaller than data height/width.
