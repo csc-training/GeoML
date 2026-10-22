@@ -15,18 +15,13 @@ Ideas and codesnippets from:
 # General libraries
 import os, sys, time
 
-# Torch
-import torch
-
 # Pandas
 import geopandas as gpd
-import pandas as pd
 
 # Rasterio
 import rasterio as rio
 import rasterio.plot as rioplot
 from rasterio.plot import show
-from rasterio.windows import from_bounds
  
 # Coordinates script from mayrajeo/geo2ml for converting predictions to a GeoDataFrame
 from coordinates import * 
@@ -47,43 +42,26 @@ from sahi.predict import get_sliced_prediction
 # Json
 import json
 
+def main():
 
-def get_args():
-    #SETTINGS
-    # Check that Python is given exactly two arguments:
-    #  - first is script name, has index 0
-    #  - second is the path to training data, has index 1
-    if len(sys.argv) != 2:
-        print('Please give the exercise directory')
-        sys.exit()
+    object_detection_folder = os.path.join(os.sep, 'scratch', 'project_2019932', 'students', \
+                                   os.environ.get('USER'), 'GeoML', '08_object_detection')
 
-    # Set data directory
-    exercise_dir=sys.argv[1]
-    print("Exercise directory is:", exercise_dir)
+    exercise_folder = os.path.join(object_detection_folder, '08B_own_model_training')       
 
     # Set path to test image for interference
-    image = os.path.join(exercise_dir, 'sentinel2', 'T34VEN_20210714T100029_TCI.tif')
+    image = os.path.join(object_detection_folder, 'sentinel2-object-detection', 'T34VEN_20210714T100029_TCI.tif')
 
     # Set path to the trained model
     # Note, if you train model several times, Ultralytics creates new folders each time.
-    model_path = os.path.join(exercise_dir, 'yolo_project', 'train', 'weights', 'best.pt')
+    model_path = os.path.join(exercise_folder, 'yolo_project', 'train', 'weights', 'best.pt')
 
     # yolo.yml settings file location
-    yolo_yml = os.path.join(exercise_dir, 'yolo_data', 'yolo.yaml')
+    yolo_yml = os.path.join(exercise_folder, 'yolo_data', 'yolo.yaml')
 
     # Set path for the outputs
-    outpath = os.path.join(exercise_dir, 'predictions')
+    outpath = os.path.join(exercise_folder, 'predictions')
     os.makedirs(outpath, exist_ok=True)
-    return image, model_path, outpath, yolo_yml
-
-
-def main():
-    # Parse args
-    image, model_path, outpath, data_path = get_args()
-    
-    # Set computing device: GPU or CPU
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    print(f'Using {device} for predictions...')
     
     # Set confidence threshold for a prediction to be considered (the probability of a predicted bounding box containing the predicted object)
     # This is rather row threshold. In other project higher could be better.
@@ -94,14 +72,14 @@ def main():
     
     # Load trained model using UltralyticsDetectionModel from SAHI for sliced interference
     model = UltralyticsDetectionModel(model_path=model_path,
-                                            device=device,
                                             confidence_threshold=confidence,
                                             image_size=image_size)
+
+    print(f'Using {model.device} for predictions...')
     
     # Use half precision (FP16) to run inference faster and with less memory
-    model.model.overrides.update({
-        'half': True
-    })
+    if model.device.type == 'cuda':
+        model.model.overrides.update({'half': True})
         
     # SAHI automatically tiles the data, and merges the predictions. 
     # Run inference on tiles with a size of 320 and overlap of 0.2.    
@@ -110,8 +88,8 @@ def main():
     # to increase large object detection accuracy. Here set to false, to predict only the tiles. 
     sliced_pred_results = get_sliced_prediction(image, 
                                                 model, 
-                                                slice_width=320,
-                                                slice_height=320,
+                                                slice_width=image_size,
+                                                slice_height=image_size,
                                                 overlap_height_ratio=0.2,
                                                 overlap_width_ratio=0.2,
                                                 perform_standard_pred=False,
@@ -178,10 +156,10 @@ def main():
     
     ##
     # Compute perfomance metrics and save as a JSON for later inspection
-    results = model.model.val(data=data_path, split='test')
+    results = model.model.val(data=yolo_yml, split='test')
     metrics = results.results_dict
     
-    with open("metrics.json", "w") as f:
+    with open(os.path.join(exercise_folder, "metrics.json"), "w") as f:
      json.dump(metrics, f, indent=4)
 
 

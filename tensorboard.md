@@ -1,6 +1,6 @@
 # TensorBoard
 
-1. Log in via web interface: [LUMI](https://www.lumi.csc.fi/public/) or [Puhti](https://puhti.csc.fi)
+1. Log in via web interface: [LUMI](https://www.lumi.csc.fi/public/) or  [Roihu](https://roihu.csc.fi)
 3. Select menu item: Apps → TensorBoard
 4. In the form:
    - Select your project

@@ -26,12 +26,12 @@
    * ArcGIS Pro, training and used ML/DL modesls, very easy to use (toolboxes, no coding) 
    * ArcGIS Python API, ArcGIS Notebooks, model training, more advanced options.
    * ArcGIS Image server, using trained models at scale in production
-* [Segmentation and Classification toolset for shallow learning](https://pro.arcgis.com/en/pro-app/tool-reference/spatial-analyst/an-overview-of-the-segmentation-and-classification-tools.htm ): K-means, SVM, random forest, maximum likelihood  classifications and ISO clustering
-* [Deep Learning geoprocessing functions[(https://pro.arcgis.com/en/pro-app/3.3/arcpy/image-analyst/deep-learning-geoprocessing-functions.htm)
+* [Segmentation and Classification toolset for shallow learning](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/spatial-analyst/an-overview-of-the-segmentation-and-classification-tools.html): K-means, SVM, random forest, maximum likelihood classifications and ISO clustering
+* [Deep Learning geoprocessing functions](https://doc.esri.com/en/arcgis-pro/latest/arcpy/image-analyst/deep-learning-geoprocessing-functions.html)
   * Tools for classifying pixels and objects, detecting objects.
   * Compute Accuracy
-  * [Export Training Data For Deep Learning](https://pro.arcgis.com/en/pro-app/3.3/tool-reference/image-analyst/export-training-data-for-deep-learning.htm), for many different models. 
-  * [Train Deep Learning Model](https://pro.arcgis.com/en/pro-app/latest/tool-reference/image-analyst/train-deep-learning-model.htm)
+  * [Export Training Data For Deep Learning](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/export-training-data-for-deep-learning.html), for many different models. 
+  * [Train Deep Learning Model](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/train-deep-learning-model.html)
      * Object detection: find bbox of the objects
      * Object tracking from videos
      * Pixel classification
