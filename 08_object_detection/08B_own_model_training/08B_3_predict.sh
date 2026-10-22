@@ -10,5 +10,8 @@
 # Load Pytorch module
 module load python-pytorch/2.13
 
+# Hide OpenCV warnings about GeoTiff tags (which does not understand)
+export OPENCV_LOG_LEVEL=ERROR
+
 # Run the Python code
 srun python3 08B_3_predict.py
