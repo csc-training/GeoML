@@ -7,20 +7,21 @@ dependencies:
   - gdal                            # Spatial data input/output
   - geopandas                       # Vector data
   - git
+  - libgdal-jp2openjpeg  
+  - mapclassify                     # Interactive maps
+  - matplotlib  
   - pip
   - odc-stac                        # Get data from STAC
   - pystac-client                   # Search data from STAC
   - python=3.13
   - rasterio                        # raster data handling
-  - libgdal-jp2openjpeg
   - rioxarray                       # Save to geotiff from xarray
+  - seaborn                         # visualization
+  - shap                            # feature improtances
   - jupyterlab
   - jupyterlab-git
   - jupyter-resource-usage
   - ipywidgets
-  - mapclassify                     # Interactive maps
-  - matplotlib
-  - seaborn
   - pip:
     - huggingface_hub               # Huggingface
     - imbalanced-learn              # Imbalanced data handling
