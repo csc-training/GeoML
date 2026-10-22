@@ -62,6 +62,7 @@ names:
     * Submit a batch job:
         * `sbatch 08B_2_train_model.sh`
     * It prints back something like, exact number will be different: `Submitted batch job 1212121212`
+    * This training takes ~11 minutes.
     * To see the Python output file, open it with tail, the exact file name depends on the number printed previosly:
         * `tail -f slurm-1212121212.out`.
         * The output file includes:
@@ -78,9 +79,10 @@ names:
         * Box curves such as the F1, precision, and recall confidence curves evaluating the bounding box prediction at different confidence thresholds.
 
 5. Run inference using the trained model. The predictions are created by submitting batch job: [08B_3_predict.sh](0B8_3_predict.sh). This script runs the Python file: [08B_3_predict.py](08B_3_predict.py) and predicts the vessels from the test image.
-    * `sbatch 08_3_predict.sh`
+    * `sbatch 08B_3_predict.sh`
     * Similarly as before, the output of the batch job can be inspected by opening the slurm output file. The output file includes information on the detected vessels. The polygons geometry, confidence score and the amount of detected vessels in total. 
     * The predictions are saved to a file to the `predictions` folder.
+    * The prediction takes ~1 minute.
       
 6. Evaluate model using the [08B_4_evaluate.ipynb](08B_4_evaluate.ipynb) notebook. The script plots the results and computes performance metrics. 
     
