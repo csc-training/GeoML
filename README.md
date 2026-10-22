@@ -27,6 +27,7 @@ During the course exercises are done in Roihu, which is CSC supercomputer. Acces
 #### Jupyter 
 * Click "Jupyter" on dashboard
 * Select following settings:
+	* Reservation: select the reservation during the course 
 	* Project: project_2019932 during course, own project later 
 	* Partition: interactive
 	* CPU cores: 1
@@ -44,7 +45,7 @@ During the course exercises are done in Roihu, which is CSC supercomputer. Acces
 cd /scratch/project_2019932/students/
 mkdir $USER
 cd $USER
-git clone -b 2026-update https://github.com/csc-training/GeoML.git 
+git clone https://github.com/csc-training/GeoML.git 
 ```
 * Open in JupyterLab folder `students/<your_username>/GeoML`
 
