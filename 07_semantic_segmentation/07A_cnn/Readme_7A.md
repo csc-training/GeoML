@@ -42,7 +42,7 @@ Below are the detailed instructions how to run the exercise.
         * This does not update, if file gets more rows.
     * It is possible to see job's state (waiting, running, finished) and used resources with
         * `seff 1212121212`)
-* Training takes about 5 minutes in Roihu.
+* Training takes about 10 minutes in Roihu.
 * There should be new files in the `07A_cnn` folder:
     * `best_model.ckpt` - the trained model in `checkpoints` folder. The best model has highest number.
         *  It might be that Jupyter does not let to access the checkpoints folder, use Jupyter Terminal, Login-node shell or Files section in web interface to access it.
