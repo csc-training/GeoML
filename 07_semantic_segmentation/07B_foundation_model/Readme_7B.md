@@ -65,3 +65,10 @@ Below are detailed instructions how to run the exercises.
 ## Evaluate th model visually and by calculate performance metrics.
 * Open Jupyter as described in [main Readme](../../Readme.md)
 * Open [../07_3_segmentation_evaluation.ipynb](../07_3_segmentation_evaluation.ipynb) from the main folder of exerice 7.
+
+## Extra. Check the results of longer trained model
+During the course model training is stopped after 12 minutes, because of the timetable limits. If you want, you can check the results of a longer trained model (20 min).
+    * Open batch job file: [07B_2_predict.sh](07B_2_predict.sh)
+    * Look for EXTRA and change the checkpoint path.
+    * Rerun the batch job and the last Jupyter notebook.
+
