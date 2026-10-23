@@ -6,10 +6,7 @@
 
 ## Spatial data specific ML tools
 ### Python
-* [geoai](https://github.com/opengeos/geoai) - very nice documentation, nice short examples, but some settings are hard-coded and can not be adjusted
-* Tree segmentation:
-  * [Detectree2](https://github.com/PatBall1/detectree2)
-  * [SegmentAnyTree](https://github.com/SmartForest-no/SegmentAnyTree)
+* [geoai](https://opengeoai.org/) - very nice documentation, nice short examples, but some settings are hard-coded and can not be adjusted
 * Listings of with more options:
   * [Torchgeo related libraries table](https://torchgeo.readthedocs.io/en/stable/user/alternatives.html)
   * [Awesome-Geospatial listing](https://github.com/sacridini/Awesome-Geospatial#deep-learning)
@@ -45,29 +42,29 @@ Tip: See [ESRI virtual campus machine learning materials](https://www.esri.com/t
 ### QGIS
 Plugins:
 * [Semi-Automatic Classification Plugin](https://fromgistors.blogspot.com/p/semi-automatic-classification-plugin.html), allows for the supervised classification of remote sensing images, providing tools for the download, the preprocessing and postprocessing of images. Mainly shallow learning models, but also MLP.
+* [samgeo](https://github.com/opengeos/qgis-samgeo-plugin) - Segment Anything for spatial data
 * A few new / little used ones, also for data preparation:
   * [machine-learning](https://plugins.qgis.org/plugins/tags/machine-learning/)
   * [deep-learning](https://plugins.qgis.org/plugins/tags/deep-learning/)
 
 
-## GIS ML tools in CSC Puhti supercomputer
+## GIS ML tools in CSC Roihu supercomputer
 
-* [geoconda module](https://docs.csc.fi/apps/geoconda/): scikit-learn, dask-ml, ArcGIS Python API + a lot of Python GIS packages
+* [python-geo module](https://docs.csc.fi/apps/python-geo/): scikit-learn, dask-ml, xgboost + a lot of Python GIS packages
 * [pytorch module](https://docs.csc.fi/apps/pytorch/): pytorch, geopandas, rasterio
-* [tensorflow module](https://docs.csc.fi/apps/tensorflow/): keras, tensorflow, geopandas, rasterio
 * [r-env module](https://docs.csc.fi/apps/r-env/): caret, CAST + a lot of R GIS packages
-* Not available in CSC provided modules, but tested/used as user-installations in Puhti:
+* Not available in CSC provided modules, but tested/used as user-installations in Puhti (the previous CSC supercomputer):
   * Detectree2
   * SegmentAnyTree
   * SITS: r-sits and pysits
-  * ArcGIS Python API with deep learning libraries
   * If interested in using these, ask for help via CSC Servicedesk. All of these had some challenges with installation.
 * Not possible:
    * ArcGIS Pro, only for Windows
+   * ArcGIS Python API, not suitable for Roihu GPUs, possible on CPU side
  
-Puhti documentation: 
-* [Machine-learning tools](https://docs.csc.fi/apps/#data-analytics-and-machine-learning)
-* [Spatial data analysis tools](https://docs.csc.fi/apps/#geosciences), inc QGIS
+Roihu documentation: 
+* [Machine-learning tools](https://docs.csc.fi/apps/by_discipline/#data-analytics-and-machine-learning)
+* [Spatial data analysis tools](https://docs.csc.fi/apps/by_discipline/#geosciences), inc QGIS
 
 
 
