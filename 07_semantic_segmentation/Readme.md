@@ -29,7 +29,7 @@ Multiclass classification raster:
 ### Data 
 
 **Sentinel2 mosaic**
-* Date: 2021-05-22- 2021-05-31
+* Date: 2025-07-15
 * 10 bands: 'b02', 'b03', 'b04', 'b05', 'b06', 'b07', 'b08', 'b8a', 'b11', 'b12'.
 * The reflection values scaled to [0 ... 1].
 
