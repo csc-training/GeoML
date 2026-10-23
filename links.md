@@ -17,7 +17,7 @@
 	* [Introduction to Python GIS](https://e-learn.csc.fi/course/view.php?id=122)
 	* [Spatial data analysis with R](https://e-learn.csc.fi/course/view.php?id=120)
  	* To get infor about CSC instructor-led intensive courses:
-  		* Follow [CSC training calendar]
+  		* Follow [CSC training calendar](https://csc.fi/en/trainings/training-calendar/)
     	* Subscribe to [CSC Customer Training newsletter](https://csc.fi/en/subscribe-to-newsletters/)
      	* Subscribe to [CSC gis-hpc mailing list](https://postit.csc.fi/sympa/subscribe/gis-hpc)
 * Location Innovation Hub (LIH) courses in [OGC academy](https://academy.ogc.org/)
@@ -26,7 +26,8 @@
 * University of Helsinki:
 	* [Elements of AI](https://www.elementsofai.com/)
 	* [Advanced remote sensing of environment](https://studies.helsinki.fi/courses/course-implementation/hy-opt-cur-2526-fed2206d-989a-4124-95fc-d2666df33db7/GEOG-322)
-* [SYKE, ML course](https://github.com/esiivola/syke-machine-learning-course)
+* Aalto university: [Hands-on Geographical Artificial Intelligence (GeoAI)](https://handson-geoai.readthedocs.io/en/latest/#)
+* SYKE, [ML course](https://github.com/esiivola/syke-machine-learning-course)
 
 ## Data
 ### Labeled spatial ML data
