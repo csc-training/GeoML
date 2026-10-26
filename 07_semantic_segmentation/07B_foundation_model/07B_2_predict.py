@@ -87,7 +87,7 @@ def inference_on_geotiff(
     tile_size: int = 512,
     overlap: int = 0,
     batch_size: int = 4,
-    num_classes: int = 3,
+    num_classes: int = 4,
     device: [torch.device] = "cpu",
     **kwargs: Any,
 ) -> Tuple[np.ndarray, np.ndarray]:
@@ -116,6 +116,17 @@ def inference_on_geotiff(
     model.eval()
     height = data.shape[1]
     width = data.shape[2]
+
+    image_tensor = torch.tensor(data.astype(np.float32), device=device)
+
+    # Apply normalization to the test data.
+    mean = torch.tensor([0.1105, 0.1355, 0.1552, 0.1887, 0.2422, 0.2630, 0.2743, 0.2785, 0.2388, 0.1835],
+        device=image_tensor.device).view(-1, 1, 1)
+    std = torch.tensor([0.1809, 0.1757, 0.1888, 0.1870, 0.1732, 0.1697, 0.1742, 0.1648, 0.1470, 0.1379],
+        device=image_tensor.device).view(-1, 1, 1)
+        
+    image_tensor = (image_tensor - mean) / std
+
     # Initialize predictions array with very small numbers
     pixel_predictions = torch.full((num_classes, height, width), -float('inf'), device=device)
     # Calculate the number of windows needed to cover the entire image

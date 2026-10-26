@@ -108,6 +108,13 @@ class GeoDataModule(LightningDataModule):
     def collate_fn(self, batch):
         images = torch.stack([item["image"] for item in batch])
         masks = torch.stack([item["mask"] for item in batch])
+        #Apply Clay-specific normalisation from Clay's documentation: https://github.com/Clayfoundation/model/blob/main/configs/metadata.yaml.
+        mean = torch.tensor([0.1105, 0.1355, 0.1552, 0.1887, 0.2422, 0.2630, 0.2743, 0.2785, 0.2388, 0.1835],
+            device=images.device).view(1, -1, 1, 1)
+        std = torch.tensor([0.1809, 0.1757, 0.1888, 0.1870, 0.1732, 0.1697, 0.1742, 0.1648, 0.1470, 0.1379],
+            device=images.device).view(1, -1, 1, 1)
+        
+        images = (images - mean) / std
         return {
             "image": images, 
             "mask": masks.long(),
@@ -260,10 +267,10 @@ def main():
         loss = 'ce',                          # Terratorch currently supports 'ce', 'jaccard', 'dice', 'lovasz', or 'focal' loss.
         optimizer="AdamW",                    # Name of optimizer class from torch.optim to be used.
         lr=1e-3,                              # Learning rate
-        lr_overrides={"encoder": 1e-5},       # Backbone learning rate: 100x lower
+        lr_overrides={"encoder": 1e-4},       # Backbone learning rate
         ignore_index=-100,                    # Nodata value for lables
         freeze_backbone=False,                 # Do not modify backbone weights
-        plot_on_val=False,                    # Disables datamodule.plot() calls, which your custom GeoDataModule doesn't implement        
+        plot_on_val=False,    
     )
 
     print("Training logs are in: " + logs_dir)
