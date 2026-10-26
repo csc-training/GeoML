@@ -143,10 +143,7 @@ def inference_on_geotiff(
     batch_inputs = []
     batch_positions = []
     batch_count = 0
-    # Change data type to Float as required by the model.
-    image = data.astype(np.float32) 
-    # Convert to tensor
-    image_tensor = torch.tensor(image, device=device)
+    
     # Slide window over the image - make sure we cover the entire image
     for i in range(steps_y + 1):  # +1 to ensure we reach the edge
         y = i * (tile_size - overlap)
