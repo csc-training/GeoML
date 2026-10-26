@@ -18,11 +18,6 @@ During the course exercises are done in Roihu, which is CSC supercomputer. Acces
 
 ### Roihu webinterface
 * Open https://roihu.csc.fi
-* Log in with any of the following:
- 	* [CSC account](https://docs.csc.fi/accounts/), you need your CSC username and password 
-	* HAKA (Finnish universities and some research institutes)
- 	* Virtu (Finnish governmental organizatons)
-* You need to use MFA (a code from phone to log in)   
 	
 #### Jupyter 
 * Click "Jupyter" on dashboard
