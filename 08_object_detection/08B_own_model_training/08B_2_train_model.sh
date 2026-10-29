@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --reservation=geoml_gpu_day3 # Only available during the course
 #SBATCH --account=project_2019932   # Choose the project to be billed. Change to own project, if used outside of the course.
 #SBATCH --partition=gpumedium       # Which queue to use. Defines maximum time, memory, tasks, nodes and local storage for job.             
 #SBATCH --ntasks=1                  # Number of tasks. Upper limit depends on partition.
