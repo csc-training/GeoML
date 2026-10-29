@@ -156,7 +156,7 @@ class MySegmentationTask(SemanticSegmentationTask):
 
 # Define Pytorch lightning Trainer and train the model
 def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, checkpoints_dir):
-    # Add checkpoints to the training, only save the best model based on the minimum validation loss    
+    # Add checkpoints to the training, only save the best model based on the maximum IoU.   
     checkpoint_cb = ModelCheckpoint(
         dirpath=checkpoints_dir, filename="best_model",
         monitor="val_AverageJaccardIndex",
@@ -165,7 +165,7 @@ def train_model(lightning_model, datamodule, no_of_epochs, patience, logs_dir, c
     )
 
     # Add earlystopping to prevent model from overfitting by stopping the training 
-    # if validation loss doesn't decrease in patience number of epochs    
+    # if validation IoU doesn't improve in patience number of epochs    
     earlystop_cb = EarlyStopping(
         monitor="val_AverageJaccardIndex",
         patience=patience, 
