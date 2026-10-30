@@ -269,7 +269,7 @@ def main():
         lr=1e-3,                              # Learning rate
         lr_overrides={"encoder": 1e-4},       # Backbone learning rate
         ignore_index=-100,                    # Nodata value for lables
-        freeze_backbone=False,                 # Do not modify backbone weights
+        freeze_backbone=False,                # Train encoder weights with smaller learning rate
         plot_on_val=False,    
     )
 
