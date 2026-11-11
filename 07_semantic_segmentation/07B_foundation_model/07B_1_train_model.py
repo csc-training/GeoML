@@ -11,6 +11,7 @@ Input bands: B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12 (10 bands)
 The main Python libraries are PyTorch, PyTorch Lightning, TorchGeo, and TerraTorch.
 Main steps of the script:
 * Data loading (TorchGeo, RandomGeoSampler / GridGeoSampler over large untiled scenes)
+* Data normalisation
 * Augmentation (Kornia)
 * Model training (Clay backbone + UNet decoder from TerraTorch's SemanticSegmentationTask)
 
@@ -269,7 +270,7 @@ def main():
         lr=1e-3,                              # Learning rate
         lr_overrides={"encoder": 1e-4},       # Backbone learning rate
         ignore_index=-100,                    # Nodata value for lables
-        freeze_backbone=False,                # Train encoder weights with smaller learning rate
+        freeze_backbone=False,                # Train also backbone
         plot_on_val=False,    
     )
 
