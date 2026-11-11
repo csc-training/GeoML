@@ -5,7 +5,7 @@
 """
 Script for training a new CNN segmentation model based on GeoTiff data and label files.
 
-Classes: fields, forest, sea, urban (4 classes)
+Classes: fields, forest, sea, other (4 classes)
 Input bands (10, in this exact order): B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
 
 Main steps of the script:
